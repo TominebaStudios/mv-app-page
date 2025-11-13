@@ -130,6 +130,9 @@ img {
 
 .primary-nav {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .primary-nav ul {
@@ -159,8 +162,43 @@ img {
 }
 
 .primary-nav a:hover::after,
-.primary-nav a:focus::after {
+.primary-nav a:focus::after,
+.primary-nav a.is-active::after,
+.primary-nav a[aria-current="true"]::after {
   transform: scaleX(1);
+}
+
+.primary-nav a.is-active,
+.primary-nav a[aria-current="true"] {
+  color: var(--accent);
+  text-shadow: 0 0 0.75rem rgba(56, 189, 248, 0.45);
+}
+
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(15, 25, 45, 0.55);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.language-toggle:hover,
+.language-toggle:focus {
+  background: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 1.2rem rgba(56, 189, 248, 0.35);
+}
+
+.language-toggle:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
 }
 
 .nav-toggle {
@@ -188,46 +226,6 @@ img {
   margin: 0.3rem 0;
   background: var(--text-primary);
   transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.lang {
-  display: var(--lang-display, block);
-}
-
-.lang[data-display="inline"] {
-  --lang-display: inline;
-}
-
-body[data-language] .lang {
-  display: none;
-}
-
-body[data-language="en"] .lang[data-lang="en"],
-body[data-language="pl"] .lang[data-lang="pl"] {
-  display: var(--lang-display, block);
-}
-
-.lang[data-display="inline-flex"] {
-  --lang-display: inline-flex;
-}
-
-body:not([data-language]) .lang {
-  display: var(--lang-display, block);
-}
-
-body:not([data-language]) .lang + .lang {
-  margin-top: 0.35rem;
-  opacity: 0.85;
-}
-
-body:not([data-language]) .lang[data-display="inline"] + .lang[data-display="inline"] {
-  margin-top: 0;
-}
-
-body:not([data-language]) .lang[data-display="inline"] + .lang[data-display="inline"]::before {
-  content: " / ";
-  color: var(--text-muted);
-  font-weight: 400;
 }
 
 .glass-panel {
@@ -508,7 +506,7 @@ textarea:focus,
 .submit-button:focus,
 .nav-toggle:focus,
 .carousel-button:focus,
-.language-button:focus {
+.language-toggle:focus {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -658,6 +656,16 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .primary-nav {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .language-toggle {
+    margin-left: auto;
+  }
+
   .primary-nav ul {
     position: absolute;
     top: 100%;

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="privacy">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Moventa Privacy Notice | Informacja o prywatności Moventa</title>
-  <meta name="description" content="Learn how Moventa handles personal information and privacy commitments. Poznaj sposób, w jaki Moventa chroni dane osobowe i realizuje zobowiązania dotyczące prywatności.">
+  <title data-i18n="meta.privacy.title">Moventa Privacy Notice</title>
+  <meta name="description" data-i18n="meta.privacy.description" data-i18n-attr="content" content="Learn how Moventa handles personal information and privacy commitments.">
   <link rel="canonical" href="https://moventa.app/privacy">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Moventa Privacy Notice">
-  <meta property="og:description" content="Transparency about how Moventa collects, uses, and protects your personal data. Przejrzystość w zakresie gromadzenia, wykorzystywania i ochrony danych przez Moventę.">
+  <meta property="og:title" data-i18n="meta.privacy.ogTitle" data-i18n-attr="content" content="Moventa Privacy Notice">
+  <meta property="og:description" data-i18n="meta.privacy.ogDescription" data-i18n-attr="content" content="Transparency about how Moventa collects, uses, and protects your personal data.">
   <meta property="og:url" content="https://moventa.app/privacy">
+  <meta property="og:locale" data-i18n="meta.privacy.ogLocale" data-i18n-attr="content" content="en_US">
+  <meta name="language" data-i18n="meta.language" data-i18n-attr="content" content="en">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="privacy-body">
@@ -24,8 +26,7 @@
       <div class="container nav-container">
         <a class="brand" href="index.html" aria-label="Moventa home">
           <span aria-hidden="true">💠</span>
-          <span class="brand-name lang" data-lang="en" data-display="inline">Moventa</span>
-          <span class="brand-name lang" data-lang="pl" data-display="inline">Moventa</span>
+          <span class="brand-name">Moventa</span>
         </a>
         <nav class="primary-nav" aria-label="Primary">
           <button class="nav-toggle" aria-expanded="false" aria-controls="privacy-menu">
@@ -36,30 +37,21 @@
           </button>
           <ul id="privacy-menu">
             <li>
-              <a href="index.html#features">
-                <span class="lang" data-lang="en" data-display="inline">Features</span>
-                <span class="lang" data-lang="pl" data-display="inline">Funkcje</span>
-              </a>
+              <a href="index.html#features" data-i18n="nav.features">Features</a>
             </li>
             <li>
-              <a href="index.html#showcase">
-                <span class="lang" data-lang="en" data-display="inline">Showcase</span>
-                <span class="lang" data-lang="pl" data-display="inline">Prezentacja</span>
-              </a>
+              <a href="index.html#showcase" data-i18n="nav.showcase">Showcase</a>
             </li>
             <li>
-              <a href="index.html#contact">
-                <span class="lang" data-lang="en" data-display="inline">Contact</span>
-                <span class="lang" data-lang="pl" data-display="inline">Kontakt</span>
-              </a>
+              <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
             </li>
             <li>
-              <a href="privacy.html" aria-current="page">
-                <span class="lang" data-lang="en" data-display="inline">Privacy</span>
-                <span class="lang" data-lang="pl" data-display="inline">Prywatność</span>
-              </a>
+              <a href="privacy.html" data-i18n="nav.privacy" aria-current="page">Privacy</a>
             </li>
           </ul>
+          <button type="button" class="language-toggle" data-language-toggle aria-label="Change language">
+            <span data-i18n="nav.languageToggleLabel">Polski</span>
+          </button>
         </nav>
       </div>
     </header>
@@ -67,84 +59,39 @@
     <main class="privacy-main">
       <section class="container glass-panel privacy-content">
         <header>
-          <h1>
-            <span class="lang" data-lang="en">Privacy notice</span>
-            <span class="lang" data-lang="pl">Informacja o prywatności</span>
-          </h1>
-          <p class="lead">
-            <span class="lang" data-lang="en">We built Moventa with security and transparency at the core. This overview shares our commitments to your privacy.</span>
-            <span class="lang" data-lang="pl">Moventę stworzyliśmy z myślą o bezpieczeństwie i przejrzystości. Ten skrót przedstawia nasze zobowiązania dotyczące prywatności.</span>
-          </p>
+          <h1 data-i18n="privacy.heading">Privacy notice</h1>
+          <p class="lead" data-i18n="privacy.intro">We built Moventa with security and transparency at the core. This overview shares our commitments to your privacy.</p>
         </header>
 
         <article>
-          <h2>
-            <span class="lang" data-lang="en">What this page covers</span>
-            <span class="lang" data-lang="pl">Co znajdziesz na tej stronie</span>
-          </h2>
-          <p>
-            <span class="lang" data-lang="en">We’re preparing the full documentation explaining how we collect, use, and safeguard your information. Here’s what you can expect from the finished policy:</span>
-            <span class="lang" data-lang="pl">Przygotowujemy pełną dokumentację wyjaśniającą, jak zbieramy, wykorzystujemy i chronimy Twoje dane. Oto, czego możesz się spodziewać po finalnej polityce:</span>
-          </p>
+          <h2 data-i18n="privacy.section1.title">What this page covers</h2>
+          <p data-i18n="privacy.section1.body">We’re preparing the full documentation explaining how we collect, use, and safeguard your information. Here’s what you can expect from the finished policy:</p>
           <ul>
-            <li>
-              <span class="lang" data-lang="en">Clear explanations of the types of data Moventa processes.</span>
-              <span class="lang" data-lang="pl">Przejrzyste wyjaśnienia rodzajów danych przetwarzanych przez Moventę.</span>
-            </li>
-            <li>
-              <span class="lang" data-lang="en">Details on how long we retain information and why.</span>
-              <span class="lang" data-lang="pl">Informacje o czasie przechowywania danych i powodach takich okresów.</span>
-            </li>
-            <li>
-              <span class="lang" data-lang="en">Your rights to access, correct, or delete your data.</span>
-              <span class="lang" data-lang="pl">Twoje prawa do dostępu, poprawy i usunięcia danych.</span>
-            </li>
-            <li>
-              <span class="lang" data-lang="en">Contact information for our privacy team.</span>
-              <span class="lang" data-lang="pl">Dane kontaktowe do naszego zespołu ds. prywatności.</span>
-            </li>
+            <li data-i18n="privacy.section1.item1">Clear explanations of the types of data Moventa processes.</li>
+            <li data-i18n="privacy.section1.item2">Details on how long we retain information and why.</li>
+            <li data-i18n="privacy.section1.item3">Your rights to access, correct, or delete your data.</li>
+            <li data-i18n="privacy.section1.item4">Contact information for our privacy team.</li>
           </ul>
         </article>
 
         <article>
-          <h2>
-            <span class="lang" data-lang="en">Need immediate assistance?</span>
-            <span class="lang" data-lang="pl">Potrzebujesz pilnej pomocy?</span>
-          </h2>
-          <p>
-            <span class="lang" data-lang="en">If you have questions about your data today, reach our privacy team at <a href="mailto:privacy@moventa.app">privacy@moventa.app</a>. We typically respond within two business days.</span>
-            <span class="lang" data-lang="pl">Masz pytania dotyczące swoich danych? Skontaktuj się z nami pod adresem <a href="mailto:privacy@moventa.app">privacy@moventa.app</a>. Zwykle odpowiadamy w ciągu dwóch dni roboczych.</span>
-          </p>
+          <h2 data-i18n="privacy.section2.title">Need immediate assistance?</h2>
+          <p data-i18n="privacy.section2.body" data-i18n-html="true">If you have questions about your data today, reach our privacy team at <a href="mailto:privacy@moventa.app">privacy@moventa.app</a>. We typically respond within two business days.</p>
         </article>
 
         <article>
-          <h2>
-            <span class="lang" data-lang="en">Future updates</span>
-            <span class="lang" data-lang="pl">Przyszłe aktualizacje</span>
-          </h2>
-          <p>
-            <span class="lang" data-lang="en">This notice will be updated before Moventa publicly launches. We’ll notify registered users via email about significant changes and provide version history on this page.</span>
-            <span class="lang" data-lang="pl">Zanim Moventa zostanie udostępniona publicznie, zaktualizujemy tę informację. O ważnych zmianach poinformujemy zarejestrowanych użytkowników e-mailem i przedstawimy historię wersji na tej stronie.</span>
-          </p>
+          <h2 data-i18n="privacy.section3.title">Future updates</h2>
+          <p data-i18n="privacy.section3.body">This notice will be updated before Moventa publicly launches. We’ll notify registered users via email about significant changes and provide version history on this page.</p>
         </article>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container">
-        <p>
-          <span class="lang" data-lang="en">&copy; <span id="year">2024</span> Moventa. All rights reserved.</span>
-          <span class="lang" data-lang="pl">&copy; <span id="year">2024</span> Moventa. Wszelkie prawa zastrzeżone.</span>
-        </p>
+        <p>&copy; <span id="year">2024</span> <span data-i18n="footer.rights">Moventa. All rights reserved.</span></p>
         <nav aria-label="Footer">
-          <a href="privacy.html" aria-current="page">
-            <span class="lang" data-lang="en" data-display="inline">Privacy</span>
-            <span class="lang" data-lang="pl" data-display="inline">Prywatność</span>
-          </a>
-          <a href="index.html#contact">
-            <span class="lang" data-lang="en" data-display="inline">Contact</span>
-            <span class="lang" data-lang="pl" data-display="inline">Kontakt</span>
-          </a>
+          <a href="privacy.html" data-i18n="nav.privacy" aria-current="page">Privacy</a>
+          <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
         </nav>
       </div>
     </footer>
