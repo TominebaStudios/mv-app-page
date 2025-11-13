@@ -84,3 +84,51 @@ carousels.forEach((carousel) => {
 
   startAutoplay();
 });
+
+// Progressive language switcher
+const languageButtons = document.querySelectorAll('[data-language-target]');
+const rootElement = document.documentElement;
+
+const supportedLanguages = ['en', 'pl'];
+
+const getStoredLanguage = () => {
+  try {
+    const stored = window.localStorage.getItem('moventa-language');
+    return stored && supportedLanguages.includes(stored) ? stored : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const storeLanguage = (lang) => {
+  try {
+    window.localStorage.setItem('moventa-language', lang);
+  } catch (error) {
+    // Ignore storage errors (private browsing or disabled storage)
+  }
+};
+
+const setLanguage = (lang) => {
+  const normalized = supportedLanguages.includes(lang) ? lang : 'en';
+  document.body.dataset.language = normalized;
+  rootElement.lang = normalized;
+
+  languageButtons.forEach((button) => {
+    const isActive = button.dataset.languageTarget === normalized;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+
+  storeLanguage(normalized);
+};
+
+if (languageButtons.length) {
+  const initialLanguage = getStoredLanguage() || rootElement.lang || 'en';
+  setLanguage(initialLanguage);
+
+  languageButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      setLanguage(button.dataset.languageTarget);
+    });
+  });
+}
