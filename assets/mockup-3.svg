@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" role="img" aria-labelledby="title3 desc3">
+  <title id="title3">Moventa transfer confirmation mockup</title>
+  <desc id="desc3">Illustration of a confirmation screen with progress indicators.</desc>
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+  </defs>
+  <rect width="360" height="640" rx="38" fill="url(#bg3)" />
+  <rect x="40" y="100" width="280" height="120" rx="28" fill="#38bdf8" opacity="0.55" />
+  <rect x="70" y="130" width="220" height="24" rx="12" fill="#f8fafc" opacity="0.9" />
+  <rect x="70" y="165" width="160" height="18" rx="9" fill="#e0f2fe" opacity="0.7" />
+  <rect x="40" y="250" width="280" height="220" rx="34" fill="#4ade80" opacity="0.55" />
+  <rect x="70" y="280" width="220" height="26" rx="13" fill="#ecfdf5" opacity="0.7" />
+  <rect x="70" y="320" width="180" height="18" rx="9" fill="#d1fae5" opacity="0.7" />
+  <rect x="70" y="350" width="220" height="18" rx="9" fill="#bbf7d0" opacity="0.6" />
+  <circle cx="180" cy="480" r="50" fill="#22d3ee" opacity="0.65" />
+  <path d="M168 476l10 10 24-24" fill="none" stroke="#f8fafc" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

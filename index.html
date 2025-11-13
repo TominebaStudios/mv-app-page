@@ -1,20 +1,144 @@
-<!doctype html>
-<html lang="pl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Moventa — Strona w budowie</title>
-  <style>
-    body{font-family:Inter,system-ui,Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#0b1220;color:#e6eef8}
-    .box{text-align:center}
-    h1{font-size:28px;margin:0 0 8px}
-    p{color:#9aa4b2;margin:0}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moventa — Effortless Money Movement App</title>
+  <meta name="description" content="Moventa helps you move money securely, track spending, and stay in control with instant insights.">
+  <link rel="canonical" href="https://moventa.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Moventa — Effortless Money Movement App">
+  <meta property="og:description" content="Experience lightning-fast transfers, intuitive budgeting, and personalized alerts with Moventa.">
+  <meta property="og:url" content="https://moventa.app/">
+  <meta property="og:image" content="https://moventa.app/og-image.jpg">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="box">
-    <h1>Moventa</h1>
-    <p>Strona w budowie — wrócimy wkrótce.</p>
-  </div>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a class="brand" href="index.html" aria-label="Moventa home">
+        <span aria-hidden="true">💠</span>
+        <span class="brand-name">Moventa</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-line" aria-hidden="true"></span>
+          <span class="nav-toggle-line" aria-hidden="true"></span>
+          <span class="nav-toggle-line" aria-hidden="true"></span>
+        </button>
+        <ul id="primary-menu">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#showcase">Showcase</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-content glass-panel">
+        <p class="eyebrow">Finance reimagined</p>
+        <h1>Moventa keeps your money in motion</h1>
+        <p class="lead">Instant transfers, smart budgeting, and personalized insights—wrapped in one sleek mobile experience.</p>
+        <a class="app-store-button" href="#" role="button" aria-label="Download Moventa on the App Store">Download on the App Store</a>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container section-heading">
+        <h2>Why you’ll love Moventa</h2>
+        <p>Designed to simplify every step of your financial life with trustworthy tools.</p>
+      </div>
+      <div class="container feature-grid">
+        <article class="feature-card glass-panel">
+          <h3>Lightning-fast transfers</h3>
+          <p>Send and receive funds globally with real-time status updates and no surprise fees.</p>
+        </article>
+        <article class="feature-card glass-panel">
+          <h3>Smart budgeting</h3>
+          <p>Build flexible budgets that adapt to your spending habits and keep you on track.</p>
+        </article>
+        <article class="feature-card glass-panel">
+          <h3>Personalized alerts</h3>
+          <p>Get instant notifications when payments clear, bills are due, or balances shift.</p>
+        </article>
+        <article class="feature-card glass-panel">
+          <h3>Secure vault</h3>
+          <p>Industry-grade encryption protects your information with biometric login support.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="showcase" id="showcase">
+      <div class="container section-heading">
+        <h2>Take a look inside the app</h2>
+        <p>Scroll through a few highlights or let the carousel glide automatically.</p>
+      </div>
+      <div class="container carousel" data-carousel>
+        <div class="carousel-track" aria-live="polite">
+          <figure class="carousel-slide">
+            <img src="assets/mockup-1.svg" alt="Moventa dashboard overview screen" loading="lazy">
+            <figcaption>Dashboard with real-time balance and quick actions.</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="assets/mockup-2.svg" alt="Moventa budgeting insights" loading="lazy">
+            <figcaption>Budgeting assistant highlighting spending trends.</figcaption>
+          </figure>
+          <figure class="carousel-slide">
+            <img src="assets/mockup-3.svg" alt="Moventa transfer confirmation" loading="lazy">
+            <figcaption>Instant transfer confirmation with status timeline.</figcaption>
+          </figure>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-button prev" type="button" data-carousel-prev>‹</button>
+          <button class="carousel-button next" type="button" data-carousel-next>›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container section-heading">
+        <h2>Stay in touch</h2>
+        <p>Have questions or want early access? Drop us a note and we’ll get back to you.</p>
+      </div>
+      <div class="container contact-grid">
+        <form class="glass-panel contact-form" action="/contact" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="submit-button">Send message</button>
+        </form>
+        <aside class="glass-panel contact-info">
+          <h3>Prefer direct contact?</h3>
+          <p>Email us at <a href="mailto:hello@moventa.app">hello@moventa.app</a> or call <a href="tel:+1234567890">+1 (234) 567-890</a>.</p>
+          <p>We’re headquartered in Berlin, serving customers worldwide.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year">2024</span> Moventa. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <a href="privacy.html">Privacy</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
