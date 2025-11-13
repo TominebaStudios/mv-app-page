@@ -19,6 +19,10 @@
   font-size: 16px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -161,6 +165,9 @@ img {
 
 .nav-toggle {
   display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -183,50 +190,29 @@ img {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.language-switcher {
-  display: inline-flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.language-button {
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(12, 18, 36, 0.7);
-  color: var(--text-primary);
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease, border 0.3s ease;
-}
-
-.language-button.is-active,
-.language-button:hover,
-.language-button:focus {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.85), rgba(244, 114, 182, 0.85));
-  border-color: transparent;
-  color: #051020;
-  transform: translateY(-2px);
-}
-
 .lang {
-  display: none;
-  --lang-display: block;
+  display: var(--lang-display, block);
 }
 
 .lang[data-display="inline"] {
   --lang-display: inline;
 }
 
+body[data-language] .lang {
+  display: none;
+}
+
+body[data-language="en"] .lang[data-lang="en"],
+body[data-language="pl"] .lang[data-lang="pl"] {
+  display: var(--lang-display, block);
+}
+
 .lang[data-display="inline-flex"] {
   --lang-display: inline-flex;
 }
 
-body:not([data-language]) .lang,
-body[data-language="en"] .lang[data-lang="en"],
-body[data-language="pl"] .lang[data-lang="pl"] {
-  display: var(--lang-display);
+body:not([data-language]) .lang {
+  display: var(--lang-display, block);
 }
 
 body:not([data-language]) .lang + .lang {
@@ -669,11 +655,6 @@ textarea {
     flex-wrap: wrap;
   }
 
-  .language-switcher {
-    order: 3;
-    width: 100%;
-    justify-content: flex-end;
-  }
 }
 
 @media (max-width: 768px) {
@@ -703,10 +684,6 @@ textarea {
     align-items: flex-start;
   }
 
-  .language-switcher {
-    justify-content: flex-start;
-  }
-
   .carousel-controls {
     display: none;
   }
@@ -725,10 +702,6 @@ textarea {
   .contact-form,
   .contact-info {
     padding: 2rem 1.6rem;
-  }
-
-  .language-switcher {
-    width: 100%;
   }
 }
 

@@ -9,10 +9,24 @@ navToggles.forEach((toggle) => {
   menu.classList.add('is-collapsed');
   toggle.setAttribute('aria-expanded', 'false');
 
+  const closeMenu = () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.classList.add('is-collapsed');
+  };
+
   toggle.addEventListener('click', () => {
     const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!isExpanded));
     menu.classList.toggle('is-collapsed');
+  });
+
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      const isToggleVisible = window.getComputedStyle(toggle).display !== 'none';
+      if (isToggleVisible) {
+        closeMenu();
+      }
+    });
   });
 });
 
@@ -85,50 +99,57 @@ carousels.forEach((carousel) => {
   startAutoplay();
 });
 
-// Progressive language switcher
-const languageButtons = document.querySelectorAll('[data-language-target]');
+// Automatic language detection based on browser preferences
 const rootElement = document.documentElement;
-
 const supportedLanguages = ['en', 'pl'];
 
-const getStoredLanguage = () => {
-  try {
-    const stored = window.localStorage.getItem('moventa-language');
-    return stored && supportedLanguages.includes(stored) ? stored : null;
-  } catch (error) {
-    return null;
-  }
-};
+const detectPreferredLanguage = () => {
+  const navigatorLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language || ''];
 
-const storeLanguage = (lang) => {
-  try {
-    window.localStorage.setItem('moventa-language', lang);
-  } catch (error) {
-    // Ignore storage errors (private browsing or disabled storage)
+  for (const locale of navigatorLanguages) {
+    if (!locale) continue;
+    const normalized = locale.toLowerCase();
+    if (normalized.startsWith('pl')) {
+      return 'pl';
+    }
+    if (normalized.startsWith('en')) {
+      return 'en';
+    }
   }
+
+  return 'en';
 };
 
 const setLanguage = (lang) => {
   const normalized = supportedLanguages.includes(lang) ? lang : 'en';
   document.body.dataset.language = normalized;
   rootElement.lang = normalized;
-
-  languageButtons.forEach((button) => {
-    const isActive = button.dataset.languageTarget === normalized;
-    button.classList.toggle('is-active', isActive);
-    button.setAttribute('aria-pressed', String(isActive));
-  });
-
-  storeLanguage(normalized);
 };
 
-if (languageButtons.length) {
-  const initialLanguage = getStoredLanguage() || rootElement.lang || 'en';
-  setLanguage(initialLanguage);
+setLanguage(detectPreferredLanguage());
 
-  languageButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      setLanguage(button.dataset.languageTarget);
-    });
+// Smooth scrolling for in-page navigation links
+const smoothScrollLinks = document.querySelectorAll('a[href*="#"]');
+
+smoothScrollLinks.forEach((link) => {
+  const href = link.getAttribute('href');
+  if (!href) return;
+
+  const url = new URL(href, window.location.href);
+  if (!url.hash || url.hash.length <= 1) return;
+
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const targetPath = url.pathname.replace(/\/$/, '');
+  if (currentPath !== targetPath) return;
+
+  link.addEventListener('click', (event) => {
+    const target = document.querySelector(url.hash);
+    if (!target) return;
+
+    event.preventDefault();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView(prefersReducedMotion ? { block: 'start' } : { behavior: 'smooth', block: 'start' });
   });
-}
+});
