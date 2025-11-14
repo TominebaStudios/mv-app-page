@@ -508,10 +508,6 @@ img {
   opacity: 0.72;
 }
 
-.carousel.is-enhanced .carousel-slide.is-clone {
-  visibility: hidden;
-}
-
 .carousel.is-enhanced .carousel-controls {
   display: flex;
 }
