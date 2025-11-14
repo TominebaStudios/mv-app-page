@@ -148,12 +148,39 @@ carousels.forEach((carousel) => {
   if (!track || baseSlides.length === 0) return;
 
   const totalSlides = baseSlides.length;
+  const markSlideImages = (slide, { eager = false, forceLazy = false } = {}) => {
+    const images = slide ? Array.from(slide.querySelectorAll('img')) : [];
+    images.forEach((image) => {
+      if (eager) {
+        if (image.getAttribute('loading') !== 'eager') {
+          image.setAttribute('loading', 'eager');
+        }
+        image.dataset.carouselLoaded = 'true';
+        if (typeof image.decode === 'function') {
+          image
+            .decode()
+            .catch(() => {
+              // Ignore decode failures so older browsers continue gracefully
+            });
+        }
+      } else {
+        if (forceLazy && image.getAttribute('loading') !== 'lazy') {
+          image.setAttribute('loading', 'lazy');
+        }
+        if (!image.dataset.carouselLoaded) {
+          image.dataset.carouselLoaded = 'false';
+        }
+      }
+    });
+  };
+
   baseSlides.forEach((slide, index) => {
     slide.setAttribute('role', 'group');
     slide.setAttribute('aria-roledescription', 'slide');
     slide.setAttribute('aria-label', `Slide ${index + 1} of ${totalSlides}`);
     slide.setAttribute('tabindex', index === 0 ? '0' : '-1');
     slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+    markSlideImages(slide, { eager: index === 0 });
   });
 
   if (totalSlides <= 1) {
@@ -193,6 +220,7 @@ carousels.forEach((carousel) => {
     if (slide.classList.contains('is-clone')) {
       slide.setAttribute('aria-hidden', 'true');
       slide.setAttribute('tabindex', '-1');
+      markSlideImages(slide, { eager: false, forceLazy: true });
     }
   });
 
@@ -275,6 +303,9 @@ carousels.forEach((carousel) => {
       slide.setAttribute('tabindex', isActive ? '0' : '-1');
       if (!isActive && slide === document.activeElement) {
         slide.blur();
+      }
+      if (isActive) {
+        markSlideImages(slide, { eager: true });
       }
     });
     updateDots(slideIndex);
