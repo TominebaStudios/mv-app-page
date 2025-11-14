@@ -317,7 +317,19 @@ carousels.forEach((carousel) => {
   };
 
   const measureWidth = () => {
-    slideWidth = carousel.getBoundingClientRect().width;
+    const carouselRect = carousel.getBoundingClientRect();
+    const baseRect = baseSlides[0] ? baseSlides[0].getBoundingClientRect() : null;
+    slideWidth = baseRect && baseRect.width ? baseRect.width : carouselRect.width;
+    if (!slideWidth) {
+      const fallbackRect = allSlides[0] ? allSlides[0].getBoundingClientRect() : null;
+      slideWidth = fallbackRect && fallbackRect.width ? fallbackRect.width : 0;
+    }
+    if (slideWidth) {
+      allSlides.forEach((slide) => {
+        slide.style.width = `${slideWidth}px`;
+        slide.style.flex = `0 0 ${slideWidth}px`;
+      });
+    }
   };
 
   const setTransition = (enabled) => {
@@ -325,7 +337,7 @@ carousels.forEach((carousel) => {
   };
 
   const applyTransform = () => {
-    track.style.transform = `translateX(${-(currentPosition * slideWidth)}px)`;
+    track.style.transform = `translate3d(${-(currentPosition * slideWidth)}px, 0, 0)`;
   };
 
   const getRealIndex = (position) => {
