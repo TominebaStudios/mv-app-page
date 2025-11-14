@@ -683,6 +683,29 @@ textarea {
   border: 0;
 }
 
+@media (min-width: 769px) {
+  .carousel-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-auto-flow: row;
+    gap: 1.5rem;
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+    transform: none !important;
+  }
+
+  .carousel-slide {
+    min-width: 0;
+    animation: none;
+  }
+
+  .carousel-controls,
+  .carousel-dots {
+    display: none !important;
+  }
+}
+
 @keyframes auroraDrift {
   0% {
     transform: translate3d(-2%, -4%, 0) rotate(0deg) scale(1.05);

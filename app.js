@@ -141,11 +141,41 @@ if (yearElement) {
 }
 
 // Accessible, looping carousel controller
+const mobileCarouselMedia =
+  typeof window.matchMedia === 'function' ? window.matchMedia('(max-width: 768px)') : null;
+
 const carousels = document.querySelectorAll('[data-carousel]');
 carousels.forEach((carousel) => {
   const track = carousel.querySelector('[data-carousel-track]');
   const baseSlides = Array.from(carousel.querySelectorAll('[data-carousel-slide]'));
   if (!track || baseSlides.length === 0) return;
+
+  const prevButton = carousel.querySelector('[data-carousel-prev]');
+  const nextButton = carousel.querySelector('[data-carousel-next]');
+  const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+  const statusElement = carousel.querySelector('[data-carousel-status]');
+
+  const shouldEnhance = !mobileCarouselMedia || mobileCarouselMedia.matches;
+  if (!shouldEnhance) {
+    carousel.classList.remove('is-enhanced');
+    track.style.transform = '';
+    track.style.transition = '';
+    baseSlides.forEach((slide) => {
+      slide.classList.remove('is-active');
+      slide.removeAttribute('aria-hidden');
+      slide.removeAttribute('tabindex');
+      slide.removeAttribute('aria-label');
+      slide.removeAttribute('aria-roledescription');
+      delete slide.dataset.carouselIndex;
+    });
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+    }
+    if (statusElement) {
+      statusElement.textContent = '';
+    }
+    return;
+  }
 
   const totalSlides = baseSlides.length;
   const slideFamilies = new Map();
@@ -160,21 +190,22 @@ carousels.forEach((carousel) => {
             image.setAttribute('loading', 'eager');
           }
           image.dataset.carouselLoaded = 'true';
-        if (typeof image.decode === 'function') {
-          image
-            .decode()
-            .catch(() => {
-              // Ignore decode failures so older browsers continue gracefully
-            });
+          if (typeof image.decode === 'function') {
+            image
+              .decode()
+              .catch(() => {
+                // Ignore decode failures so older browsers continue gracefully
+              });
+          }
+        } else {
+          if (forceLazy && image.getAttribute('loading') !== 'lazy') {
+            image.setAttribute('loading', 'lazy');
+          }
+          if (!image.dataset.carouselLoaded) {
+            image.dataset.carouselLoaded = 'false';
+          }
         }
-      } else {
-        if (forceLazy && image.getAttribute('loading') !== 'lazy') {
-          image.setAttribute('loading', 'lazy');
-        }
-        if (!image.dataset.carouselLoaded) {
-          image.dataset.carouselLoaded = 'false';
-        }
-      }
+      });
     });
   };
 
@@ -202,10 +233,6 @@ carousels.forEach((carousel) => {
 
   carousel.classList.add('is-enhanced');
 
-  const prevButton = carousel.querySelector('[data-carousel-prev]');
-  const nextButton = carousel.querySelector('[data-carousel-next]');
-  const dotsContainer = carousel.querySelector('[data-carousel-dots]');
-  const statusElement = carousel.querySelector('[data-carousel-status]');
   const AUTOPLAY_DELAY = 4000;
 
   const beforeFragment = document.createDocumentFragment();
@@ -602,7 +629,7 @@ const translations = {
     'features.card4.title': 'Secure vault',
     'features.card4.body': 'Industry-grade encryption protects your information with biometric login support.',
     'showcase.heading': 'Take a look inside the app',
-    'showcase.lead': 'Scroll through a few highlights or let the carousel glide automatically.',
+    'showcase.lead': 'Explore highlights below or, on mobile, let the carousel glide automatically.',
     'showcase.slide1': 'Dashboard with real-time balance and quick actions.',
     'showcase.slide2': 'Budgeting assistant highlighting spending trends.',
     'showcase.slide3': 'Instant transfer confirmation with status timeline.',
@@ -662,7 +689,7 @@ const translations = {
     'features.card4.title': 'Bezpieczny sejf',
     'features.card4.body': 'Szyfrowanie na poziomie bankowym chroni Twoje dane z obsługą logowania biometrycznego.',
     'showcase.heading': 'Zajrzyj do aplikacji',
-    'showcase.lead': 'Przewiń kilka najważniejszych ekranów lub pozwól karuzeli przesuwać się automatycznie.',
+    'showcase.lead': 'Poznaj najważniejsze ekrany poniżej lub, na telefonie, pozwól karuzeli przesuwać się automatycznie.',
     'showcase.slide1': 'Panel główny z saldem na żywo i szybkim dostępem do funkcji.',
     'showcase.slide2': 'Asystent budżetowy pokazujący trendy wydatków.',
     'showcase.slide3': 'Potwierdzenie przelewu z osią czasu i statusem.',
