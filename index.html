@@ -98,25 +98,27 @@
           <h2 data-i18n="showcase.heading">Take a look inside the app</h2>
           <p data-i18n="showcase.lead">Scroll through a few highlights or let the carousel glide automatically.</p>
         </div>
-        <div class="container carousel" data-carousel>
-          <div class="carousel-track" aria-live="polite">
-            <figure class="carousel-slide">
+        <div class="container carousel" data-carousel role="region" aria-label="Moventa app showcase carousel">
+          <div class="carousel-track" id="showcase-carousel-track" data-carousel-track>
+            <figure class="carousel-slide" data-carousel-slide>
               <img src="assets/mockup-1.svg" alt="Moventa dashboard overview screen showing balances / Ekran główny Moventy z podsumowaniem sald" loading="lazy">
               <figcaption data-i18n="showcase.slide1">Dashboard with real-time balance and quick actions.</figcaption>
             </figure>
-            <figure class="carousel-slide">
+            <figure class="carousel-slide" data-carousel-slide>
               <img src="assets/mockup-2.svg" alt="Moventa budgeting insights view / Widok analizy budżetu w Movencie" loading="lazy">
               <figcaption data-i18n="showcase.slide2">Budgeting assistant highlighting spending trends.</figcaption>
             </figure>
-            <figure class="carousel-slide">
+            <figure class="carousel-slide" data-carousel-slide>
               <img src="assets/mockup-3.svg" alt="Moventa transfer confirmation screen / Ekran potwierdzenia przelewu w Movencie" loading="lazy">
               <figcaption data-i18n="showcase.slide3">Instant transfer confirmation with status timeline.</figcaption>
             </figure>
           </div>
           <div class="carousel-controls">
-            <button class="carousel-button prev" type="button" data-carousel-prev>‹</button>
-            <button class="carousel-button next" type="button" data-carousel-next>›</button>
+            <button class="carousel-button prev" type="button" data-carousel-prev aria-controls="showcase-carousel-track" aria-label="Previous slide">‹</button>
+            <button class="carousel-button next" type="button" data-carousel-next aria-controls="showcase-carousel-track" aria-label="Next slide">›</button>
           </div>
+          <ol class="carousel-dots" data-carousel-dots></ol>
+          <p class="sr-only" data-carousel-status aria-live="polite"></p>
         </div>
       </section>
 

@@ -389,6 +389,7 @@ img {
 }
 
 .carousel-slide {
+  position: relative;
   scroll-snap-align: center;
   background: linear-gradient(145deg, rgba(10, 18, 40, 0.75), rgba(35, 22, 60, 0.55));
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -397,6 +398,7 @@ img {
   box-shadow: 0 18px 40px rgba(5, 7, 20, 0.42);
   min-width: min(78vw, 320px);
   animation: float 8s ease-in-out infinite;
+  outline: none;
 }
 
 .carousel-slide:nth-of-type(2) {
@@ -414,10 +416,14 @@ img {
   font-size: 0.95rem;
 }
 
+.carousel-slide:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.65), 0 18px 40px rgba(5, 7, 20, 0.42);
+}
+
 .carousel-controls {
   position: absolute;
   inset: 50% 0 auto;
-  display: flex;
+  display: none;
   justify-content: space-between;
   pointer-events: none;
 }
@@ -442,6 +448,86 @@ img {
   transform: translateY(-3px);
   background: rgba(56, 189, 248, 0.85);
   color: #041322;
+}
+
+.carousel-dots {
+  display: none;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.carousel-dots li {
+  display: flex;
+}
+
+.carousel-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.carousel-dot.is-active,
+.carousel-dot:focus-visible {
+  background: rgba(56, 189, 248, 0.9);
+  transform: scale(1.15);
+}
+
+.carousel-dot:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.7);
+  outline-offset: 3px;
+}
+
+.carousel.is-enhanced .carousel-track {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  scroll-snap-type: none;
+  touch-action: pan-y;
+}
+
+.carousel.is-enhanced .carousel-slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+  scroll-snap-align: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel.is-enhanced .carousel-slide:not(.is-active) {
+  opacity: 0.72;
+}
+
+.carousel.is-enhanced .carousel-slide.is-clone {
+  visibility: hidden;
+}
+
+.carousel.is-enhanced .carousel-controls {
+  display: flex;
+}
+
+.carousel.is-enhanced .carousel-dots {
+  display: flex;
+}
+
+.carousel.is-enhanced .carousel-track,
+.carousel.is-enhanced .carousel-track.is-transitioning {
+  transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.carousel.is-enhanced .carousel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .contact {
