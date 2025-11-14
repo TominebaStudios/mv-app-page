@@ -148,14 +148,18 @@ carousels.forEach((carousel) => {
   if (!track || baseSlides.length === 0) return;
 
   const totalSlides = baseSlides.length;
-  const markSlideImages = (slide, { eager = false, forceLazy = false } = {}) => {
-    const images = slide ? Array.from(slide.querySelectorAll('img')) : [];
-    images.forEach((image) => {
-      if (eager) {
-        if (image.getAttribute('loading') !== 'eager') {
-          image.setAttribute('loading', 'eager');
-        }
-        image.dataset.carouselLoaded = 'true';
+  const slideFamilies = new Map();
+  const markSlideImages = (input, { eager = false, forceLazy = false } = {}) => {
+    const slides = Array.isArray(input) ? input : [input];
+    slides.forEach((slide) => {
+      if (!slide) return;
+      const images = Array.from(slide.querySelectorAll('img'));
+      images.forEach((image) => {
+        if (eager) {
+          if (image.getAttribute('loading') !== 'eager') {
+            image.setAttribute('loading', 'eager');
+          }
+          image.dataset.carouselLoaded = 'true';
         if (typeof image.decode === 'function') {
           image
             .decode()
@@ -174,12 +178,21 @@ carousels.forEach((carousel) => {
     });
   };
 
+  const registerSlide = (slide, index) => {
+    if (!slide) return;
+    slide.dataset.carouselIndex = String(index);
+    const family = slideFamilies.get(index) || [];
+    family.push(slide);
+    slideFamilies.set(index, family);
+  };
+
   baseSlides.forEach((slide, index) => {
     slide.setAttribute('role', 'group');
     slide.setAttribute('aria-roledescription', 'slide');
     slide.setAttribute('aria-label', `Slide ${index + 1} of ${totalSlides}`);
     slide.setAttribute('tabindex', index === 0 ? '0' : '-1');
     slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+    registerSlide(slide, index);
     markSlideImages(slide, { eager: index === 0 });
   });
 
@@ -198,17 +211,19 @@ carousels.forEach((carousel) => {
   const beforeFragment = document.createDocumentFragment();
   const afterFragment = document.createDocumentFragment();
 
-  baseSlides.forEach((slide) => {
+  baseSlides.forEach((slide, index) => {
     const beforeClone = slide.cloneNode(true);
     beforeClone.classList.add('is-clone');
     beforeClone.setAttribute('aria-hidden', 'true');
     beforeClone.setAttribute('tabindex', '-1');
+    registerSlide(beforeClone, index);
     beforeFragment.appendChild(beforeClone);
 
     const afterClone = slide.cloneNode(true);
     afterClone.classList.add('is-clone');
     afterClone.setAttribute('aria-hidden', 'true');
     afterClone.setAttribute('tabindex', '-1');
+    registerSlide(afterClone, index);
     afterFragment.appendChild(afterClone);
   });
 
@@ -223,6 +238,8 @@ carousels.forEach((carousel) => {
       markSlideImages(slide, { eager: false, forceLazy: true });
     }
   });
+
+  const getSlideFamily = (index) => slideFamilies.get(index) || [];
 
   const clonesOffset = totalSlides;
   let currentPosition = clonesOffset;
@@ -305,7 +322,7 @@ carousels.forEach((carousel) => {
         slide.blur();
       }
       if (isActive) {
-        markSlideImages(slide, { eager: true });
+        markSlideImages(getSlideFamily(index), { eager: true });
       }
     });
     updateDots(slideIndex);
