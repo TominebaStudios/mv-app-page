@@ -133,6 +133,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 1.5rem;
+  margin-left: auto;
 }
 
 .primary-nav ul {
@@ -368,9 +369,9 @@ img {
   background: linear-gradient(145deg, rgba(10, 18, 40, 0.75), rgba(35, 22, 60, 0.55));
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1.7rem;
-  padding: 1.4rem;
-  box-shadow: 0 18px 40px rgba(5, 7, 20, 0.42);
-  min-width: min(78vw, 320px);
+  padding: 1.1rem;
+  box-shadow: 0 12px 28px rgba(6, 10, 28, 0.35);
+  min-width: min(68vw, 260px);
   animation: float 8s ease-in-out infinite;
   outline: none;
 }
@@ -390,8 +391,15 @@ img {
   font-size: 0.95rem;
 }
 
+.carousel-slide img {
+  width: min(62vw, 220px);
+  margin: 0 auto;
+  border-radius: 1.3rem;
+  box-shadow: 0 14px 30px rgba(4, 10, 30, 0.28);
+}
+
 .carousel-slide:focus-visible {
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.65), 0 18px 40px rgba(5, 7, 20, 0.42);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.65), 0 12px 28px rgba(6, 10, 28, 0.35);
 }
 
 .contact {
@@ -566,6 +574,12 @@ textarea {
     animation: none;
   }
 
+  .carousel-slide img {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+
 }
 
 @keyframes auroraDrift {
@@ -617,14 +631,14 @@ textarea {
 
 @media (max-width: 960px) {
   .nav-container {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
 }
 
 @media (max-width: 768px) {
   .primary-nav {
-    width: 100%;
+    margin-left: auto;
     justify-content: flex-end;
     gap: 1rem;
   }
@@ -652,7 +666,15 @@ textarea {
   }
 
   .nav-container {
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .carousel-slide {
+    min-width: min(70vw, 240px);
+  }
+
+  .carousel-slide img {
+    width: min(64vw, 200px);
   }
 }
 
