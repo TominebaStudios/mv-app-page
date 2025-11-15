@@ -316,20 +316,50 @@ carousels.forEach((carousel) => {
     });
   };
 
+  let pendingMeasureRaf;
+
   const measureWidth = () => {
-    const carouselRect = carousel.getBoundingClientRect();
     const baseRect = baseSlides[0] ? baseSlides[0].getBoundingClientRect() : null;
-    slideWidth = baseRect && baseRect.width ? baseRect.width : carouselRect.width;
-    if (!slideWidth) {
-      const fallbackRect = allSlides[0] ? allSlides[0].getBoundingClientRect() : null;
-      slideWidth = fallbackRect && fallbackRect.width ? fallbackRect.width : 0;
+    const trackRect = track.getBoundingClientRect();
+    const carouselRect = carousel.getBoundingClientRect();
+    const parentRect = carousel.parentElement ? carousel.parentElement.getBoundingClientRect() : null;
+    const containerRect = carousel.closest('.container')
+      ? carousel.closest('.container').getBoundingClientRect()
+      : null;
+
+    const candidates = [
+      baseRect && baseRect.width,
+      trackRect && trackRect.width,
+      carouselRect && carouselRect.width,
+      parentRect && parentRect.width,
+      containerRect && containerRect.width,
+    ].filter((value) => typeof value === 'number' && value >= 1);
+
+    let measuredWidth = candidates.length > 0 ? candidates[0] : 0;
+
+    if (!measuredWidth) {
+      const viewportWidth = Math.max(
+        document.documentElement ? document.documentElement.clientWidth : 0,
+        typeof window !== 'undefined' ? window.innerWidth : 0,
+      );
+      if (viewportWidth) {
+        const approxContainer = Math.max(1, viewportWidth * 0.92);
+        measuredWidth = Math.min(approxContainer, viewportWidth, 600);
+      }
     }
-    if (slideWidth) {
-      allSlides.forEach((slide) => {
-        slide.style.width = `${slideWidth}px`;
-        slide.style.flex = `0 0 ${slideWidth}px`;
-      });
+
+    if (!measuredWidth || Math.abs(measuredWidth - slideWidth) < 0.5) {
+      return Boolean(measuredWidth && slideWidth);
     }
+
+    slideWidth = measuredWidth;
+    allSlides.forEach((slide) => {
+      slide.style.width = `${slideWidth}px`;
+      slide.style.flex = `0 0 ${slideWidth}px`;
+      slide.style.minWidth = `${slideWidth}px`;
+    });
+
+    return true;
   };
 
   const setTransition = (enabled) => {
@@ -337,7 +367,40 @@ carousels.forEach((carousel) => {
   };
 
   const applyTransform = () => {
+    if (!slideWidth) {
+      return;
+    }
     track.style.transform = `translate3d(${-(currentPosition * slideWidth)}px, 0, 0)`;
+  };
+
+  const ensureMeasured = (options = {}) => {
+    const { resetTransition = false } = options;
+    const measured = measureWidth();
+    if (measured) {
+      if (pendingMeasureRaf) {
+        cancelAnimationFrame(pendingMeasureRaf);
+        pendingMeasureRaf = undefined;
+      }
+      if (resetTransition) {
+        setTransition(false);
+        applyTransform();
+        requestAnimationFrame(() => setTransition(true));
+      } else {
+        applyTransform();
+      }
+      return true;
+    }
+
+    if (pendingMeasureRaf) {
+      return false;
+    }
+
+    pendingMeasureRaf = requestAnimationFrame(() => {
+      pendingMeasureRaf = undefined;
+      ensureMeasured(options);
+    });
+
+    return false;
   };
 
   const getRealIndex = (position) => {
@@ -561,7 +624,7 @@ carousels.forEach((carousel) => {
     if (!isDragging || event.pointerId !== pointerId) return;
     dragDeltaX = event.clientX - dragStartX;
     const offset = -(currentPosition * slideWidth) + dragDeltaX;
-    track.style.transform = `translateX(${offset}px)`;
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
   });
 
   track.addEventListener('pointerup', (event) => {
@@ -576,10 +639,7 @@ carousels.forEach((carousel) => {
   });
 
   const handleResize = () => {
-    measureWidth();
-    setTransition(false);
-    applyTransform();
-    requestAnimationFrame(() => setTransition(true));
+    ensureMeasured({ resetTransition: true });
   };
 
   const scheduleResize = () => {
@@ -597,13 +657,11 @@ carousels.forEach((carousel) => {
     prefersReducedMotion.addListener(updateAutoplayState);
   }
 
-  measureWidth();
-  setTransition(false);
-  applyTransform();
+  ensureMeasured({ resetTransition: true });
   updateSlides(false);
-  requestAnimationFrame(() => setTransition(true));
   updateAutoplayState();
   updateStatus(true);
+  window.addEventListener('load', handleResize);
 });
 
 // Auto language detection and toggleable translations
