@@ -412,7 +412,6 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
-.contact-form,
 .contact-info {
   padding: 2.2rem;
   border-radius: 1.8rem;
@@ -421,7 +420,6 @@ img {
   animation: fadeUp 0.9s ease-out both;
 }
 
-.contact-form::before,
 .contact-info::before {
   content: "";
   position: absolute;
@@ -431,69 +429,14 @@ img {
   transform: rotate(-8deg);
 }
 
-.contact-form > *,
 .contact-info > * {
   position: relative;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin-bottom: 1.6rem;
-}
-
-label {
-  font-weight: 600;
-}
-
-input,
-textarea {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 0.95rem;
-  padding: 0.95rem 1.1rem;
-  background: rgba(5, 7, 15, 0.68);
-  color: var(--text-primary);
-  font: inherit;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
-}
-
-input:focus,
-textarea:focus,
 .app-store-button:focus,
-.submit-button:focus,
 .nav-toggle:focus {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-}
-
-input:focus,
-textarea:focus {
-  border-color: rgba(56, 189, 248, 0.65);
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
-}
-
-textarea {
-  resize: vertical;
-}
-
-.submit-button {
-  align-self: flex-start;
-  padding: 0.95rem 2.2rem;
-  border-radius: 999px;
-  border: 0;
-  background: linear-gradient(135deg, rgba(129, 230, 217, 0.92), rgba(56, 189, 248, 0.95));
-  color: #052c2c;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 16px 36px rgba(56, 189, 248, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.submit-button:hover,
-.submit-button:focus {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 22px 40px rgba(129, 230, 217, 0.35);
 }
 
 .contact-info p {
