@@ -74,7 +74,7 @@ a {
 
 a:hover,
 a:focus {
-  color: var(--accent-strong);
+  color: #403f47;
 }
 
 img {
@@ -261,7 +261,7 @@ img {
   justify-content: center;
   gap: 0.6rem;
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.95), rgba(244, 114, 182, 0.95));
-  color: #051022;
+  color: #ffffff;
   font-weight: 600;
   padding: 0.95rem 2.7rem;
   border-radius: 999px;
