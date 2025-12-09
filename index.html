@@ -56,13 +56,48 @@
 
     <main>
       <section class="hero" id="hero" tabindex="-1">
-        <div class="container hero-content glass-panel">
-          <p class="eyebrow" data-i18n="hero.eyebrow">Finance reimagined</p>
-          <h1 data-i18n="hero.heading">Moventa keeps your money in motion</h1>
-          <p class="lead" data-i18n="hero.lead">Instant transfers, smart budgeting, and personalized insights—wrapped in one sleek mobile experience.</p>
-          <a class="app-store-button" href="#" role="button" aria-label="Download Moventa on the App Store" data-i18n="hero.cta" data-i18n-attr="aria-label">
-            Download on the App Store
-          </a>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">Finance reimagined</p>
+            <h1 data-i18n="hero.heading">Moventa keeps your money in motion</h1>
+            <p class="lead" data-i18n="hero.lead">Instant transfers, smart budgeting, and personalized insights—wrapped in one sleek mobile experience.</p>
+            <div class="hero-actions">
+              <a class="app-store-button" href="#" role="button" aria-label="Download Moventa on the App Store" data-i18n="hero.cta" data-i18n-attr="aria-label">
+                Download on the App Store
+              </a>
+              <a class="ghost-button" href="#showcase" data-i18n="nav.showcase">Showcase</a>
+            </div>
+            <div class="hero-pills">
+              <span class="pill">Private &amp; secure</span>
+              <span class="pill">Made for speed</span>
+              <span class="pill">Designed like Apple</span>
+            </div>
+          </div>
+          <div class="hero-device" aria-hidden="true">
+            <div class="device-shell">
+              <div class="device-top">
+                <div class="notch"></div>
+              </div>
+              <div class="device-screen">
+                <div class="screen-card">
+                  <p class="screen-label">Balance</p>
+                  <p class="screen-value">€12,480</p>
+                  <p class="screen-sub">+ €320 today</p>
+                </div>
+                <div class="screen-card">
+                  <p class="screen-label">Insights</p>
+                  <p class="screen-value">Smart alerts</p>
+                  <p class="screen-sub">Always-on monitoring</p>
+                </div>
+                <div class="screen-card">
+                  <p class="screen-label">Transfers</p>
+                  <p class="screen-value">Instant</p>
+                  <p class="screen-sub">Tap. Confirm. Done.</p>
+                </div>
+              </div>
+            </div>
+            <div class="floating-badge">Seamless • Elegant • Fluid</div>
+          </div>
         </div>
       </section>
 
@@ -72,19 +107,23 @@
           <p data-i18n="features.lead">Designed to simplify every step of your financial life with trustworthy tools.</p>
         </div>
         <div class="container feature-grid">
-          <article class="feature-card glass-panel">
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">⚡️</div>
             <h3 data-i18n="features.card1.title">Lightning-fast transfers</h3>
             <p data-i18n="features.card1.body">Send and receive funds globally with real-time status updates and no surprise fees.</p>
           </article>
-          <article class="feature-card glass-panel">
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">📊</div>
             <h3 data-i18n="features.card2.title">Smart budgeting</h3>
             <p data-i18n="features.card2.body">Build flexible budgets that adapt to your spending habits and keep you on track.</p>
           </article>
-          <article class="feature-card glass-panel">
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">🔔</div>
             <h3 data-i18n="features.card3.title">Personalized alerts</h3>
             <p data-i18n="features.card3.body">Get instant notifications when payments clear, bills are due, or balances shift.</p>
           </article>
-          <article class="feature-card glass-panel">
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">🛡️</div>
             <h3 data-i18n="features.card4.title">Secure vault</h3>
             <p data-i18n="features.card4.body">Industry-grade encryption protects your information with biometric login support.</p>
           </article>
@@ -120,7 +159,7 @@
           <p data-i18n="contact.lead">Have questions or want early access? Drop us a note and we’ll get back to you.</p>
         </div>
         <div class="container contact-grid">
-          <aside class="glass-panel contact-info">
+          <aside class="contact-info">
             <h3 data-i18n="contact.aside.heading">Prefer direct contact?</h3>
             <p data-i18n="contact.aside.email" data-i18n-html="true">Email us at <a href="mailto:hello@moventa.pl">hello@moventa.pl</a> or call <a href="tel:+1234567890">+1 (234) 567-890</a>.</p>
             <p data-i18n="contact.aside.location">We’re headquartered in Berlin, serving customers worldwide.</p>
