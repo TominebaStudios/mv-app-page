@@ -143,13 +143,13 @@ if (yearElement) {
 const translations = {
   en: {
     'meta.language': 'en',
-    'meta.index.title': 'Moventa – The work tool for personal trainers',
+    'meta.index.title': 'Moventa - The work tool for personal trainers',
     'meta.index.description': 'Manage clients, plan workouts, and track progress all in one place.',
-    'meta.index.ogTitle': 'Moventa – The work tool for personal trainers',
+    'meta.index.ogTitle': 'Moventa - The work tool for personal trainers',
     'meta.index.ogDescription': 'Discover the essential work tool for personal trainers.',
     'meta.index.ogLocale': 'en_US',
   
-    'meta.privacy.title': 'Moventa – Privacy Policy',
+    'meta.privacy.title': 'Moventa - Privacy Policy',
     'meta.privacy.description': 'Privacy policy for the Moventa application',
     'meta.privacy.ogTitle': 'Moventa Privacy Information',
     'meta.privacy.ogDescription': 'Transparency about how Moventa collects, uses, and protects your data.',
