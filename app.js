@@ -164,6 +164,7 @@ const translations = {
     'hero.heading': 'Moventa',
     'hero.lead': 'Manage clients, plan workouts, and track progress. All in one place!',
     'hero.cta': 'Download on the App Store',
+    'hero.aboutapp': 'Learn more',
   
     'features.heading': 'Why you’ll love Moventa',
     'features.lead': 'Because it has everything you need!',
@@ -230,6 +231,7 @@ const translations = {
     'hero.heading': 'Moventa',
     'hero.lead': 'Zarządzaj podopiecznymi, planuj treningi i śledź postępy. Wszystko w jednym miejscu!',
     'hero.cta': 'Pobierz w App Store',
+    'hero.aboutapp': 'Dowiedz się więcej',
     'features.heading': 'Dlaczego pokochasz Moventę',
     'features.lead': 'Bo ma wszystko czego potrzebujesz!',
     'features.card1.title': 'Zarządzanie podopiecznymi',
