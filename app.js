@@ -245,7 +245,7 @@ const translations = {
     'showcase.heading': 'Tak właśnie wygląda Moventa',
     'showcase.lead': 'Dla nowych użytkowników oferujemy 3-miesięczny bezpłatny okres próbny',
     'showcase.slide1': 'Dodawaj podopiecznych, ile tylko chcesz',
-    'showcase.slide2': 'Mnitoruj postępy i ustawiaj cele treningowe',
+    'showcase.slide2': 'Monitoruj postępy i ustawiaj cele treningowe',
     'showcase.slide3': 'Zapisuj wszystkie spotkania i płatności w jednym miejscu',
     'contact.heading': 'Skontaktuj się z nami',
     'contact.lead': 'Masz pytania? Skontaktuj się znami, a odpowiemy tak szybko jak umiemy.',
