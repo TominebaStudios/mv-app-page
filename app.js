@@ -143,13 +143,13 @@ if (yearElement) {
 const translations = {
   en: {
     'meta.language': 'en',
-    'meta.index.title': 'Moventa – The work tool for personal trainers',
+    'meta.index.title': 'Moventa - The work tool for personal trainers',
     'meta.index.description': 'Manage clients, plan workouts, and track progress all in one place.',
-    'meta.index.ogTitle': 'Moventa – The work tool for personal trainers',
+    'meta.index.ogTitle': 'Moventa - The work tool for personal trainers',
     'meta.index.ogDescription': 'Discover the essential work tool for personal trainers.',
     'meta.index.ogLocale': 'en_US',
   
-    'meta.privacy.title': 'Moventa – Privacy Policy',
+    'meta.privacy.title': 'Moventa - Privacy Policy',
     'meta.privacy.description': 'Privacy policy for the Moventa application',
     'meta.privacy.ogTitle': 'Moventa Privacy Information',
     'meta.privacy.ogDescription': 'Transparency about how Moventa collects, uses, and protects your data.',
@@ -164,6 +164,7 @@ const translations = {
     'hero.heading': 'Moventa',
     'hero.lead': 'Manage clients, plan workouts, and track progress. All in one place!',
     'hero.cta': 'Download on the App Store',
+    'hero.aboutapp': 'Learn more',
   
     'features.heading': 'Why you’ll love Moventa',
     'features.lead': 'Because it has everything you need!',
@@ -230,6 +231,7 @@ const translations = {
     'hero.heading': 'Moventa',
     'hero.lead': 'Zarządzaj podopiecznymi, planuj treningi i śledź postępy. Wszystko w jednym miejscu!',
     'hero.cta': 'Pobierz w App Store',
+    'hero.aboutapp': 'Dowiedz się więcej',
     'features.heading': 'Dlaczego pokochasz Moventę',
     'features.lead': 'Bo ma wszystko czego potrzebujesz!',
     'features.card1.title': 'Zarządzanie podopiecznymi',
@@ -243,7 +245,7 @@ const translations = {
     'showcase.heading': 'Tak właśnie wygląda Moventa',
     'showcase.lead': 'Dla nowych użytkowników oferujemy 3-miesięczny bezpłatny okres próbny',
     'showcase.slide1': 'Dodawaj podopiecznych, ile tylko chcesz',
-    'showcase.slide2': 'Mnitoruj postępy i ustawiaj cele treningowe',
+    'showcase.slide2': 'Monitoruj postępy i ustawiaj cele treningowe',
     'showcase.slide3': 'Zapisuj wszystkie spotkania i płatności w jednym miejscu',
     'contact.heading': 'Skontaktuj się z nami',
     'contact.lead': 'Masz pytania? Skontaktuj się znami, a odpowiemy tak szybko jak umiemy.',
