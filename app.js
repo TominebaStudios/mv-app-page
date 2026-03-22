@@ -293,11 +293,6 @@ const translations = {
     'pricing.yearly.period': '/ rok',
     'pricing.yearly.savings': 'To tylko ~50 PLN miesięcznie!',
     'pricing.popular': 'Najlepszy wybór',
-    'pricing.feature1': 'Nieograniczona liczba podopiecznych',
-    'pricing.feature2': 'Kalendarz treningów i płatności',
-    'pricing.feature3': 'Filmiki z ćwiczeniami',
-    'pricing.feature4': 'Raporty PDF',
-    'pricing.feature5': '3 miesiące gratis dla nowych użytkowników',
 
     'cta.heading': 'Gotowy na transformację Twojego biznesu treningowego?',
     'cta.lead': 'Zacznij 3-miesięczny bezpłatny okres próbny. Bez karty kredytowej.',
