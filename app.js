@@ -90,7 +90,7 @@ navToggles.forEach((toggle) => {
 
   function resetAutoplay() {
     clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(next, 3000);
+    autoplayTimer = setInterval(next, 6000);
   }
 
   // Touch / pointer events for swipe
