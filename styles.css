@@ -642,13 +642,11 @@ a:focus-visible {
 
 .showcase-img-wrap {
   overflow: hidden;
-  max-height: 280px;
 }
 
 .showcase-img-wrap img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
   transition: transform 0.5s ease;
 }
