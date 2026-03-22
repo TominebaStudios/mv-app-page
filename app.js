@@ -29,6 +29,120 @@ navToggles.forEach((toggle) => {
   });
 });
 
+// Showcase carousel
+(function () {
+  const carousel = document.querySelector('.showcase-carousel');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.carousel-track');
+  const cards = Array.from(track.children);
+  const dotsContainer = carousel.querySelector('.carousel-dots');
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  let startX = 0;
+  let currentTranslate = 0;
+  let isDragging = false;
+
+  function getVisibleCount() {
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const containerWidth = carousel.getBoundingClientRect().width;
+    return Math.round(containerWidth / (cardWidth + 24));
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, cards.length - getVisibleCount());
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const maxIdx = getMaxIndex();
+    if (maxIdx <= 0) { dotsContainer.style.display = 'none'; return; }
+    dotsContainer.style.display = 'flex';
+    for (let i = 0; i <= maxIdx; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === currentIndex ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => { goTo(i); resetAutoplay(); });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIndex));
+  }
+
+  function getSlideOffset(index) {
+    if (index <= 0) return 0;
+    const card = cards[index];
+    return card.offsetLeft;
+  }
+
+  function goTo(index) {
+    const maxIdx = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(index, maxIdx));
+    currentTranslate = -getSlideOffset(currentIndex);
+    track.style.transform = 'translateX(' + currentTranslate + 'px)';
+    updateDots();
+  }
+
+  function next() { goTo(currentIndex >= getMaxIndex() ? 0 : currentIndex + 1); }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(next, 3000);
+  }
+
+  // Touch / pointer events for swipe
+  function onDragStart(e) {
+    isDragging = true;
+    startX = (e.touches ? e.touches[0] : e).clientX;
+    track.classList.add('is-dragging');
+    clearInterval(autoplayTimer);
+  }
+
+  function onDragEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('is-dragging');
+    const endX = (e.changedTouches ? e.changedTouches[0] : e).clientX;
+    const diff = endX - startX;
+    if (Math.abs(diff) > 50) {
+      diff < 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
+    } else {
+      goTo(currentIndex);
+    }
+    resetAutoplay();
+  }
+
+  function onDragMove(e) {
+    if (!isDragging) return;
+    const x = (e.touches ? e.touches[0] : e).clientX;
+    const diff = x - startX;
+    track.style.transform = 'translateX(' + (currentTranslate + diff) + 'px)';
+  }
+
+  carousel.addEventListener('touchstart', onDragStart, { passive: true });
+  carousel.addEventListener('touchmove', onDragMove, { passive: true });
+  carousel.addEventListener('touchend', onDragEnd);
+  carousel.addEventListener('mousedown', onDragStart);
+  carousel.addEventListener('mousemove', onDragMove);
+  carousel.addEventListener('mouseup', onDragEnd);
+  carousel.addEventListener('mouseleave', () => { if (isDragging) { isDragging = false; track.classList.remove('is-dragging'); goTo(currentIndex); resetAutoplay(); } });
+
+  // Prevent link/image dragging
+  track.addEventListener('dragstart', (e) => e.preventDefault());
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  carousel.addEventListener('mouseleave', () => { if (!isDragging) resetAutoplay(); });
+
+  function init() { buildDots(); goTo(0); resetAutoplay(); }
+
+  init();
+  window.addEventListener('resize', () => { buildDots(); goTo(Math.min(currentIndex, getMaxIndex())); });
+})();
+
 // Smooth anchor scrolling with active navigation state
 const getNormalizedPath = (inputUrl) => inputUrl.pathname.replace(/\/$/, '');
 const currentPath = getNormalizedPath(window.location);
@@ -263,6 +377,8 @@ const translations = {
     'showcase.slide1': 'Dodawaj podopiecznych, ile tylko chcesz',
     'showcase.slide2': 'Monitoruj postępy i ustawiaj cele treningowe',
     'showcase.slide3': 'Zapisuj wszystkie spotkania i płatności w jednym miejscu',
+    'showcase.slide4': 'Oglądaj filmiki z poprawną techniką ćwiczeń',
+    'showcase.slide5': 'Generuj szczegółowe raporty PDF',
     'contact.heading': 'Skontaktuj się z nami',
     'contact.lead': 'Masz pytania? Skontaktuj się znami, a odpowiemy tak szybko jak umiemy.',
     'contact.form.name': 'Imię',

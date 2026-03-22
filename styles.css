@@ -601,13 +601,28 @@ a:focus-visible {
   pointer-events: none;
 }
 
-.showcase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: start;
+.showcase-carousel {
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.showcase-carousel:active {
+  cursor: grabbing;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.carousel-track.is-dragging {
+  transition: none;
 }
 
 .showcase-card {
@@ -615,21 +630,14 @@ a:focus-visible {
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 0;
 }
 
 .showcase-card:hover {
   border-color: var(--border-hover);
-  transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
-}
-
-.showcase-card--featured {
-  transform: translateY(-12px);
-}
-
-.showcase-card--featured:hover {
-  transform: translateY(-18px);
 }
 
 .showcase-img-wrap {
@@ -655,6 +663,29 @@ a:focus-visible {
   color: var(--text-secondary);
   text-align: center;
   font-weight: 500;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dot.is-active {
+  background: var(--accent);
+  transform: scale(1.3);
 }
 
 /* ===== CTA BANNER ===== */
@@ -960,18 +991,8 @@ a:focus-visible {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .showcase-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .showcase-card--featured {
-    transform: none;
-  }
-
-  .showcase-card--featured:hover {
-    transform: translateY(-6px);
+  .showcase-card {
+    flex: 0 0 calc((100% - 24px) / 2);
   }
 
   .contact-grid {
@@ -1057,6 +1078,10 @@ a:focus-visible {
   .btn-ghost {
     width: 100%;
     max-width: 320px;
+  }
+
+  .showcase-card {
+    flex: 0 0 85%;
   }
 }
 
