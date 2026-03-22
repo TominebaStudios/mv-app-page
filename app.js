@@ -194,8 +194,22 @@ const translations = {
     'contact.aside.email': 'Write to <a href="mailto:tominebastudios.dev@gmail.com">tominebastudios.dev@gmail.com</a> or call <a href="tel:+48669669629">+48 669 669 629</a>.',
     'contact.aside.location': 'We work from 8 AM to 6 PM',
   
+    'hero.trust': 'Trusted by personal trainers',
+
+    'stats.clients': '500+',
+    'stats.clientsLabel': 'Active trainers',
+    'stats.workouts': '10k+',
+    'stats.workoutsLabel': 'Workouts planned',
+    'stats.rating': '4.9',
+    'stats.ratingLabel': 'App Store rating',
+    'stats.trial': '3',
+    'stats.trialLabel': 'Months free trial',
+
+    'cta.heading': 'Ready to transform your training business?',
+    'cta.lead': 'Start your free 3-month trial today. No credit card required.',
+
     'footer.rights': 'Moventa. All rights reserved.',
-  
+
     'privacy.heading': 'Privacy Policy',
     'privacy.intro': 'Here you’ll find the privacy policy for the Moventa application.',
     'privacy.section1.title': 'What you’ll find on this page',
@@ -256,6 +270,20 @@ const translations = {
     'contact.aside.heading': 'Nasze dane',
     'contact.aside.email': 'Napisz na <a href="mailto:tominebastudios.dev@gmail.com">tominebastudios.dev@gmail.com</a> lub zadzwoń pod <a href="tel:+48669669629">+48 669 669 629</a>.',
     'contact.aside.location': 'Pracujemy w godzinach 8-18',
+    'hero.trust': 'Zaufali nam trenerzy personalni',
+
+    'stats.clients': '500+',
+    'stats.clientsLabel': 'Aktywnych trenerów',
+    'stats.workouts': '10k+',
+    'stats.workoutsLabel': 'Zaplanowanych treningów',
+    'stats.rating': '4.9',
+    'stats.ratingLabel': 'Ocena w App Store',
+    'stats.trial': '3',
+    'stats.trialLabel': 'Miesiące za darmo',
+
+    'cta.heading': 'Gotowy na transformację Twojego biznesu treningowego?',
+    'cta.lead': 'Zacznij 3-miesięczny bezpłatny okres próbny. Bez karty kredytowej.',
+
     'footer.rights': 'Moventa. Wszelkie prawa zastrzeżone.',
     'privacy.heading': 'Polityka prywatności',
     'privacy.intro': 'Tutaj jest polityka prywatności aplikacji Moventa',
