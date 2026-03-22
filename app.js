@@ -158,6 +158,7 @@ const translations = {
     'nav.features': 'Features',
     'nav.showcase': 'Showcase',
     'nav.contact': 'Contact',
+    'nav.pricing': 'Pricing',
     'nav.privacy': 'Privacy Policy',
   
     'hero.eyebrow': 'A new work tool for personal trainers',
@@ -240,6 +241,7 @@ const translations = {
     'nav.features': 'Funkcje',
     'nav.showcase': 'Prezentacja',
     'nav.contact': 'Kontakt',
+    'nav.pricing': 'Cennik',
     'nav.privacy': 'Polityka prywatności',
     'hero.eyebrow': 'Nowe narzędzie pracy dla trenerów personalnych',
     'hero.heading': 'Moventa',
@@ -280,6 +282,22 @@ const translations = {
     'stats.ratingLabel': 'Ocena w App Store',
     'stats.trial': '3',
     'stats.trialLabel': 'Miesiące za darmo',
+
+    'pricing.heading': 'Wybierz plan dla siebie',
+    'pricing.lead': 'Zacznij za darmo - pierwsze 3 miesiące gratis dla nowych użytkowników',
+    'pricing.monthly.title': 'Miesięczny',
+    'pricing.monthly.desc': 'Elastyczny plan bez zobowiązań',
+    'pricing.monthly.period': '/ miesiąc',
+    'pricing.yearly.title': 'Roczny',
+    'pricing.yearly.desc': 'Oszczędzasz ponad 200 PLN rocznie',
+    'pricing.yearly.period': '/ rok',
+    'pricing.yearly.savings': 'To tylko ~50 PLN miesięcznie!',
+    'pricing.popular': 'Najlepszy wybór',
+    'pricing.feature1': 'Nieograniczona liczba podopiecznych',
+    'pricing.feature2': 'Kalendarz treningów i płatności',
+    'pricing.feature3': 'Filmiki z ćwiczeniami',
+    'pricing.feature4': 'Raporty PDF',
+    'pricing.feature5': '3 miesiące gratis dla nowych użytkowników',
 
     'cta.heading': 'Gotowy na transformację Twojego biznesu treningowego?',
     'cta.lead': 'Zacznij 3-miesięczny bezpłatny okres próbny. Bez karty kredytowej.',
@@ -389,6 +407,15 @@ const applyLanguage = (lang) => {
 
   document.querySelectorAll('meta[name="language"]').forEach((meta) => {
     meta.setAttribute('content', htmlLang);
+  });
+
+  const isPolish = normalized === 'pl';
+  document.querySelectorAll('.pl-only').forEach((el) => {
+    if (isPolish) {
+      el.removeAttribute('hidden');
+    } else {
+      el.setAttribute('hidden', '');
+    }
   });
 };
 

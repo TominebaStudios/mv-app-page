@@ -49,6 +49,9 @@
             <li>
               <a href="#contact" data-i18n="nav.contact">Contact</a>
             </li>
+            <li class="pl-only" hidden>
+              <a href="#pricing" data-i18n="nav.pricing">Cennik</a>
+            </li>
             <li>
               <a href="#hero" class="nav-cta" data-i18n="hero.cta">Download on the App Store</a>
             </li>
@@ -84,9 +87,8 @@
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
-            <div class="phone-mockup">
-              <div class="phone-notch"></div>
-              <img class="phone-screen" src="assets/xd4.jpg" alt="" loading="lazy">
+            <div class="hero-img-wrap">
+              <img class="hero-photo" src="assets/xd4.jpg" alt="" loading="lazy">
             </div>
           </div>
         </div>
@@ -185,6 +187,61 @@
         </div>
       </section>
 
+      <!-- Pricing Section (PL only) -->
+      <section class="pricing pl-only" id="pricing" tabindex="-1" hidden>
+        <div class="container section-header">
+          <div class="section-badge" data-i18n="nav.pricing">Cennik</div>
+          <h2 data-i18n="pricing.heading">Wybierz plan dla siebie</h2>
+          <p class="section-subtitle" data-i18n="pricing.lead">Zacznij za darmo - pierwsze 3 miesiące gratis dla nowych użytkowników</p>
+        </div>
+        <div class="container pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-card-header">
+              <h3 data-i18n="pricing.monthly.title">Miesięczny</h3>
+              <p class="pricing-desc" data-i18n="pricing.monthly.desc">Elastyczny plan bez zobowiązań</p>
+            </div>
+            <div class="pricing-price">
+              <span class="pricing-amount">69</span>
+              <div class="pricing-currency">
+                <span>PLN</span>
+                <span data-i18n="pricing.monthly.period">/ miesiąc</span>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li data-i18n="pricing.feature1">Nieograniczona liczba podopiecznych</li>
+              <li data-i18n="pricing.feature2">Kalendarz treningów i płatności</li>
+              <li data-i18n="pricing.feature3">Filmiki z ćwiczeniami</li>
+              <li data-i18n="pricing.feature4">Raporty PDF</li>
+              <li data-i18n="pricing.feature5">3 miesiące gratis dla nowych użytkowników</li>
+            </ul>
+            <a class="btn-ghost btn-pricing" href="#" data-i18n="hero.cta">Pobierz w App Store</a>
+          </div>
+          <div class="pricing-card pricing-card--popular">
+            <div class="pricing-popular-badge" data-i18n="pricing.popular">Najlepszy wybór</div>
+            <div class="pricing-card-header">
+              <h3 data-i18n="pricing.yearly.title">Roczny</h3>
+              <p class="pricing-desc" data-i18n="pricing.yearly.desc">Oszczędzasz ponad 200 PLN rocznie</p>
+            </div>
+            <div class="pricing-price">
+              <span class="pricing-amount">599</span>
+              <div class="pricing-currency">
+                <span>PLN</span>
+                <span data-i18n="pricing.yearly.period">/ rok</span>
+              </div>
+            </div>
+            <div class="pricing-savings" data-i18n="pricing.yearly.savings">To tylko ~50 PLN miesięcznie!</div>
+            <ul class="pricing-features">
+              <li data-i18n="pricing.feature1">Nieograniczona liczba podopiecznych</li>
+              <li data-i18n="pricing.feature2">Kalendarz treningów i płatności</li>
+              <li data-i18n="pricing.feature3">Filmiki z ćwiczeniami</li>
+              <li data-i18n="pricing.feature4">Raporty PDF</li>
+              <li data-i18n="pricing.feature5">3 miesiące gratis dla nowych użytkowników</li>
+            </ul>
+            <a class="btn-primary btn-pricing" href="#" data-i18n="hero.cta">Pobierz w App Store</a>
+          </div>
+        </div>
+      </section>
+
       <!-- CTA Banner -->
       <section class="cta-banner">
         <div class="container cta-content">
@@ -242,6 +299,7 @@
         <nav class="footer-nav" aria-label="Footer">
           <a href="#features" data-i18n="nav.features">Features</a>
           <a href="#showcase" data-i18n="nav.showcase">Showcase</a>
+          <a href="#pricing" class="pl-only" hidden data-i18n="nav.pricing">Cennik</a>
           <a href="#contact" data-i18n="nav.contact">Contact</a>
           <a href="privacy.html" data-i18n="nav.privacy">Privacy Policy</a>
         </nav>
