@@ -656,11 +656,7 @@ a:focus-visible {
 }
 
 .showcase-card figcaption {
-  padding: 20px 24px;
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  text-align: center;
-  font-weight: 500;
+  display: none;
 }
 
 .carousel-dots {
