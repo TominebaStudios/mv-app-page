@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moventa — Narzędzie pracy trenera personalnego</title>
+<meta name="description" content="Moventa to nowoczesna aplikacja dla trenerów personalnych. Zarządzaj podopiecznymi, planuj treningi, śledź postępy i generuj raporty — wszystko w jednym miejscu.">
+<link rel="canonical" href="https://moventa.pl/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Moventa — Narzędzie pracy trenera personalnego">
+<meta property="og:description" content="Zarządzaj podopiecznymi, planuj treningi i śledź postępy. Wszystko w jednym miejscu.">
+<meta property="og:url" content="https://moventa.pl/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0c;
+    --bg-1: #111114;
+    --bg-2: #16161b;
+    --line: rgba(255,255,255,0.08);
+    --line-2: rgba(255,255,255,0.14);
+    --text: #f4f4f5;
+    --muted: #9d9da8;
+    --muted-2: #6c6c78;
+    --accent: #ff3b47;
+    --accent-soft: rgba(255,59,71,0.14);
+    --accent-glow: rgba(255,59,71,0.45);
+    --r-sm: 10px;
+    --r-md: 16px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --container: 1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope', system-ui, -apple-system, sans-serif;
+    font-size:17px;
+    line-height:1.5;
+    letter-spacing:-0.01em;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace; letter-spacing:0; font-size:0.78em; text-transform:uppercase}
+  a{color:inherit; text-decoration:none}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+  img{display:block; max-width:100%}
+
+  .container{
+    width:min(100% - 40px, var(--container));
+    margin:0 auto;
+  }
+
+  /* ---------- HEADER ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    background: rgba(10,10,12,0.6);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-weight:700; font-size:18px; letter-spacing:-0.02em;
+  }
+  .brand-mark{
+    width:36px; height:36px; border-radius:9px;
+    overflow:hidden;
+    display:inline-flex; align-items:center; justify-content:center;
+    flex:0 0 auto;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.4);
+  }
+  .brand-mark img{ width:100%; height:100%; display:block; object-fit:cover}
+  .nav-links{
+    display:flex; gap:6px; align-items:center;
+  }
+  .nav-links a{
+    font-size:14px; font-weight:500; color:var(--muted);
+    padding:8px 14px; border-radius:99px;
+    transition: color .2s, background .2s;
+  }
+  .nav-links a:hover{ color:var(--text); background:rgba(255,255,255,0.05)}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--text); color:#0a0a0c;
+    font-weight:600; font-size:14px;
+    padding:10px 18px; border-radius:99px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .nav-cta:hover{ transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,0.12)}
+  .lang{
+    display:inline-flex; gap:2px; padding:3px;
+    background:rgba(255,255,255,0.06); border-radius:99px;
+    font-size:12px; font-weight:600;
+  }
+  .lang button{
+    padding:5px 10px; border-radius:99px; color:var(--muted);
+    transition:.2s;
+  }
+  .lang button.on{ background:var(--text); color:#0a0a0c }
+  .nav-toggle{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding: 80px 0 60px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(800px 500px at 80% 0%, var(--accent-soft), transparent 60%),
+      radial-gradient(600px 400px at 0% 80%, rgba(255,255,255,0.04), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    display:grid; grid-template-columns: 1.1fr 0.9fr;
+    gap:60px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:6px 14px 6px 8px;
+    background: rgba(255,59,71,0.08);
+    border:1px solid rgba(255,59,71,0.25);
+    border-radius:99px;
+    font-size:13px; font-weight:600; color:#ff8a90;
+  }
+  .eyebrow .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1)}
+    50%{ opacity:.5; transform:scale(.85)}
+  }
+  h1.hero-title{
+    font-size: clamp(44px, 6.4vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    margin: 22px 0 26px;
+  }
+  h1.hero-title em{
+    font-style:normal;
+    background: linear-gradient(120deg, #ff3b47 0%, #ff8674 50%, #ff3b47 100%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+  }
+  .hero-lead{
+    font-size: 19px; line-height:1.5; color:var(--muted);
+    max-width: 540px; margin-bottom: 36px;
+  }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 22px; border-radius:99px; font-weight:600; font-size:15px;
+    transition: transform .15s ease, background .2s, box-shadow .2s, border-color .2s;
+  }
+  .btn-primary{
+    background:var(--accent); color:#fff;
+    box-shadow: 0 10px 30px -8px var(--accent-glow);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow: 0 14px 36px -8px var(--accent-glow)}
+  .btn-ghost{
+    border:1px solid var(--line-2); color:var(--text);
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.25)}
+  .btn svg{width:18px; height:18px}
+
+  .hero-meta{
+    display:flex; gap:32px; margin-top:48px; flex-wrap:wrap;
+    padding-top:28px; border-top:1px solid var(--line);
+  }
+  .stat .n{
+    font-size:32px; font-weight:700; letter-spacing:-0.03em;
+    background: linear-gradient(180deg, #fff, #888);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat .l{ font-size:13px; color:var(--muted); margin-top:2px}
+
+  /* Hero phone */
+  .hero-phone-wrap{
+    position:relative;
+    display:flex; justify-content:center;
+  }
+  .hero-phone-wrap::before{
+    content:''; position:absolute; inset:-40px;
+    background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
+    filter: blur(40px); opacity:.5; z-index:0;
+  }
+  .phone{
+    position:relative;
+    width: 290px;
+    aspect-ratio: 1320/2868;
+    border-radius: 44px;
+    background: #000;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 40px 80px -20px rgba(0,0,0,0.8),
+      0 0 0 2px rgba(0,0,0,0.5);
+  }
+  .phone .screen{
+    width:100%; height:100%;
+    border-radius: 36px;
+    overflow:hidden;
+    background:#000;
+  }
+  .phone .screen img{
+    width:100%; height:100%; object-fit:cover; object-position:top;
+  }
+  .hero-phone-wrap .phone{
+    transform: rotate(-3deg);
+    animation: floaty 7s ease-in-out infinite;
+  }
+  @keyframes floaty{
+    0%,100%{ transform: rotate(-3deg) translateY(0)}
+    50%{ transform: rotate(-3deg) translateY(-14px)}
+  }
+
+  /* Floating chips around hero phone */
+  .chip{
+    position:absolute; z-index:2;
+    background: rgba(20,20,24,0.85);
+    backdrop-filter: blur(10px);
+    border:1px solid var(--line-2);
+    border-radius:14px;
+    padding:12px 14px;
+    display:flex; align-items:center; gap:10px;
+    font-size:13px; font-weight:600;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  }
+  .chip .ic{
+    width:32px; height:32px; border-radius:9px;
+    display:grid; place-items:center;
+    background:var(--accent-soft); color:var(--accent);
+  }
+  .chip-a{ top:2%; left:-12px; animation: floaty 6s ease-in-out infinite }
+  .chip-b{ bottom:18%; right:-20px; animation: floaty 8s ease-in-out infinite reverse}
+  .chip .delta{ color:#7be38e; font-size:12px; font-weight:700}
+  .chip-c{ top:46%; left:-60px; animation: floaty 9s ease-in-out infinite }
+
+  /* ---------- LOGO BAR / TRUSTED ---------- */
+  .marquee{
+    border-block: 1px solid var(--line);
+    padding: 22px 0;
+    color: var(--muted-2);
+    font-size: 13px;
+    text-align:center;
+  }
+  .marquee strong{ color:var(--text); font-weight:600}
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 100px 0; position:relative}
+  .section-head{
+    max-width: 760px; margin: 0 auto 60px; text-align:center;
+  }
+  .section-head .kicker{
+    color: var(--accent); font-weight:700; font-size:13px;
+    letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:14px; display:inline-block;
+  }
+  h2{
+    font-size: clamp(36px, 4.6vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .section-head p{
+    color:var(--muted); font-size:19px; margin-top:18px; max-width:560px; margin-inline:auto;
+  }
+
+  /* ---------- BENTO FEATURES ---------- */
+  .bento{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: minmax(220px, auto);
+    grid-auto-flow: row dense;
+    gap: 16px;
+  }
+  .card{
+    position:relative;
+    background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    border:1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    overflow:hidden;
+    transition: transform .3s ease, border-color .3s ease;
+  }
+  .card:hover{ border-color: var(--line-2); transform: translateY(-3px)}
+  .card .label{
+    color: var(--muted); font-size: 12px;
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .card .label .num{
+    width:18px; height:18px; border-radius:50%;
+    border:1px solid var(--line-2);
+    display:grid; place-items:center;
+    font-size:10px; color:var(--muted);
+  }
+  .card h3{
+    font-size: 26px; line-height:1.1;
+    letter-spacing:-0.022em; font-weight:700;
+    margin-bottom: 10px;
+  }
+  .card p{ color:var(--muted); font-size:15px; max-width:440px}
+
+  /* Span variations */
+  .span-3{ grid-column: span 3 }
+  .span-2{ grid-column: span 2 }
+  .span-4{ grid-column: span 4 }
+  .span-6{ grid-column: span 6 }
+  .row-2{ grid-row: span 2 }
+
+  /* Card visuals */
+  .card-visual{
+    position:absolute; right:-20px; bottom:-20px;
+    pointer-events:none;
+  }
+
+  /* clients card */
+  .clients-card{ display:flex; flex-direction:column; justify-content:space-between }
+  .client-list{
+    margin-top: 24px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .client-row{
+    display:flex; align-items:center; gap:12px;
+    background: rgba(255,255,255,0.03);
+    border:1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  .avatar{
+    width:32px; height:32px; border-radius:50%;
+    background: rgba(255,255,255,0.06); color:var(--text);
+    display:grid; place-items:center; font-size:12px; font-weight:700;
+    border:1px solid var(--line);
+  }
+  .avatar.red{ background: var(--accent-soft); color:#ff8a90; border-color: rgba(255,59,71,0.3)}
+  .client-row .nm{ font-size:14px; font-weight:600; flex:1}
+  .client-row .pill{
+    font-size: 11px; padding:3px 9px; border-radius:99px;
+    background: rgba(255,255,255,0.05); color:var(--muted);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .client-row .pill.live{ color:#7be38e; background:rgba(123,227,142,0.08)}
+
+  /* calendar card */
+  .calendar-card{ position:relative; padding-bottom:0; padding-right:0; overflow:hidden }
+  .cal-mini{
+    margin-top:20px;
+    display:grid; grid-template-columns: 32px repeat(5, 1fr);
+    grid-auto-rows: 22px;
+    font-size:10px; color:var(--muted-2);
+    font-family:'JetBrains Mono', monospace;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background: rgba(0,0,0,0.4);
+    overflow:hidden;
+  }
+  .cal-mini > div{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:3px 5px;
+    position:relative;
+  }
+  .cal-mini > div:last-child{ border-right:none }
+  .cal-cell{ padding:0 !important }
+  .cal-block{
+    position:absolute; left:2px; right:2px;
+    background: rgba(255,255,255,0.12);
+    border-radius:3px;
+    color:#fff; font-size:9px; padding:2px 4px;
+    font-family:'Manrope', sans-serif; font-weight:600;
+    overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+  }
+  .cal-block.red{ background: var(--accent); color:#fff }
+
+  /* Chart card */
+  .chart-card{ display:flex; flex-direction:column; justify-content:space-between }
+  .chart-svg{ width:100%; height:auto; margin-top:18px }
+  .chart-legend{
+    display:flex; gap:18px; font-size:12px; color:var(--muted);
+    margin-top:14px; font-family:'JetBrains Mono', monospace;
+  }
+  .legend-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle}
+
+  /* Reports card */
+  .reports-card .stat-row{
+    margin-top:18px; display:flex; gap:14px;
+  }
+  .stat-mini{
+    flex:1; padding:14px;
+    border:1px solid var(--line); border-radius:12px;
+    background: rgba(0,0,0,0.3);
+  }
+  .stat-mini .n{ font-size:24px; font-weight:700; letter-spacing:-0.02em}
+  .stat-mini .l{ font-size:11px; color:var(--muted); margin-top:2px; font-family:'JetBrains Mono', monospace; letter-spacing:.05em; text-transform:uppercase}
+  .stat-mini .n.up{ color:#7be38e }
+  .stat-mini .n.down{ color:var(--accent) }
+
+  /* Workout card */
+  .workout-card .set{
+    display:grid; grid-template-columns: 24px 1fr 1fr 1fr;
+    gap:8px; align-items:center;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background: rgba(0,0,0,0.3);
+    font-size:13px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .set .ix{ color:var(--muted-2)}
+  .set .v{ font-weight:600 }
+  .set .v small{ color:var(--muted-2); font-weight:500; margin-left:3px}
+
+  /* ---------- SHOWCASE / SCREENS ---------- */
+  .showcase{
+    background: linear-gradient(180deg, transparent, rgba(255,59,71,0.04), transparent);
+  }
+  .screens-row{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px;
+    margin-top: 60px;
+  }
+  .screen-col{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+  }
+  .screen-col .phone{ width:100%; max-width: 220px; padding:6px; border-radius:32px}
+  .screen-col .phone .screen{ border-radius:26px}
+  .screen-col h4{
+    font-size:16px; font-weight:600; margin-top:20px; letter-spacing:-0.01em;
+  }
+  .screen-col p{
+    font-size:13px; color:var(--muted); margin-top:6px; max-width: 220px;
+  }
+
+  /* ---------- TIMELINE / HOW IT WORKS ---------- */
+  .steps{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .step{
+    border:1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 32px 28px;
+    background: var(--bg-1);
+    position:relative;
+  }
+  .step .step-n{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--accent); letter-spacing:.1em;
+  }
+  .step h3{ font-size:22px; margin: 14px 0 10px; letter-spacing:-0.02em}
+  .step p{ color:var(--muted); font-size:15px}
+
+  /* ---------- CTA ---------- */
+  .cta{
+    text-align:center;
+    padding: 110px 0;
+  }
+  .cta-box{
+    position:relative;
+    border:1px solid var(--line-2);
+    border-radius: var(--r-xl);
+    padding: 80px 40px;
+    background:
+      radial-gradient(800px 400px at 50% 0%, var(--accent-soft), transparent 70%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    overflow:hidden;
+  }
+  .cta-box::before, .cta-box::after{
+    content:''; position:absolute; pointer-events:none;
+  }
+  .cta-box::before{
+    inset:0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 20px);
+  }
+  .cta h2{ font-size: clamp(40px, 5.4vw, 72px); position:relative}
+  .cta p{ color:var(--muted); font-size:19px; margin: 20px auto 36px; max-width:560px; position:relative}
+  .cta .hero-actions{ justify-content:center; position:relative}
+  .trial-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-bottom:20px;
+    font-size:13px; color:#7be38e;
+    background:rgba(123,227,142,0.08);
+    border:1px solid rgba(123,227,142,0.25);
+    padding:6px 14px; border-radius:99px;
+    font-weight:600;
+    position:relative;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{
+    max-width: 820px; margin: 0 auto;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .faq{
+    border:1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--bg-1);
+    overflow:hidden;
+    transition: border-color .2s;
+  }
+  .faq[open]{ border-color: var(--line-2)}
+  .faq summary{
+    list-style:none; cursor:pointer;
+    padding: 22px 26px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-weight:600; font-size:17px; letter-spacing:-0.01em;
+  }
+  .faq summary::-webkit-details-marker{ display:none}
+  .faq summary::after{
+    content:'+'; font-size:24px; color:var(--muted); transition: transform .2s;
+    line-height:1;
+  }
+  .faq[open] summary::after{ transform: rotate(45deg)}
+  .faq .ans{
+    padding: 0 26px 26px; color:var(--muted); font-size:15px; line-height:1.6
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns: 1.2fr 1fr; gap:60px; align-items:start;
+  }
+  .contact-info h2{ font-size: clamp(36px, 4.6vw, 56px); margin-bottom: 18px}
+  .contact-info > p{ color:var(--muted); font-size:18px; margin-bottom: 36px; max-width:480px}
+  .contact-list{ display:flex; flex-direction:column; gap: 14px}
+  .contact-item{
+    display:flex; align-items:center; gap:14px;
+    padding: 18px 20px;
+    border:1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--bg-1);
+    transition: border-color .2s, transform .2s;
+  }
+  .contact-item:hover{ border-color: var(--line-2); transform: translateX(2px)}
+  .contact-item .ic{
+    width:44px; height:44px; border-radius:12px;
+    display:grid; place-items:center;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .contact-item .ttl{ font-size:13px; color:var(--muted); font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:.05em}
+  .contact-item .v{ font-size:16px; font-weight:600; margin-top:2px; color:var(--text)}
+
+  .contact-card{
+    border:1px solid var(--line-2);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    background:
+      radial-gradient(400px 200px at 100% 0%, var(--accent-soft), transparent 70%),
+      var(--bg-1);
+  }
+  .contact-card h3{ font-size:22px; margin-bottom: 16px}
+  .contact-card .open-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; color:#7be38e; font-weight:600;
+    margin-bottom:16px;
+  }
+  .contact-card .open-pill .dot{
+    width:8px; height:8px; border-radius:50%; background:#7be38e;
+    box-shadow: 0 0 8px #7be38e;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site{
+    border-top:1px solid var(--line);
+    padding: 60px 0 40px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .foot-grid{
+    display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:40px;
+    margin-bottom:48px;
+  }
+  .foot-grid h5{
+    font-size:12px; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--muted-2); margin-bottom: 16px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .foot-grid ul{ list-style:none; display:flex; flex-direction:column; gap:10px}
+  .foot-grid a:hover{ color:var(--text)}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top: 28px; border-top: 1px solid var(--line);
+    flex-wrap:wrap; gap:14px;
+  }
+  .foot-brand p{ margin-top:14px; max-width: 320px; font-size:14px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero-grid{ grid-template-columns: 1fr; gap: 60px; text-align:center}
+    .hero-lead, .eyebrow{ margin-inline:auto }
+    .eyebrow{ display:inline-flex }
+    .hero-actions{ justify-content:center }
+    .hero-meta{ justify-content:center}
+    .bento{ grid-template-columns: repeat(4, 1fr)}
+    .span-3{ grid-column: span 4 }
+    .span-2{ grid-column: span 4 }
+    .span-4{ grid-column: span 4 }
+    .span-6{ grid-column: span 4 }
+    .screens-row{ grid-template-columns: repeat(3, 1fr); gap: 30px}
+    .screens-row .screen-col:nth-child(n+4){ grid-column: span 1 }
+    .steps{ grid-template-columns: 1fr}
+    .contact-grid{ grid-template-columns: 1fr; gap:40px}
+    .foot-grid{ grid-template-columns: 1fr 1fr; gap: 32px}
+  }
+  @media (max-width: 640px){
+    section{ padding: 70px 0}
+    .hero{ padding: 50px 0 40px}
+    .nav-links{ display:none}
+    .nav-toggle{ display:inline-flex; padding:8px}
+    .screens-row{ grid-template-columns: repeat(2, 1fr)}
+    .chip-a{ left: -10px; top: 4%; transform:scale(.85); transform-origin:left top}
+    .chip-b{ right: -10px; transform:scale(.85); transform-origin:right top}
+    .chip-c{ display:none}
+    .cta-box{ padding: 60px 24px}
+    .foot-grid{ grid-template-columns: 1fr; gap:28px}
+    .foot-bottom{ flex-direction:column; align-items:flex-start}
+    .span-6.reveal[style]{ flex-direction:column !important; align-items:stretch !important; gap:20px !important}
+  }
+
+  /* in-view reveal */
+  .reveal{ opacity:0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease}
+  .reveal.in{ opacity:1; transform:none }
+</style>
+</head>
+<body data-screen-label="Moventa Landing">
+
+<header class="site">
+  <div class="container nav">
+    <a href="#" class="brand" aria-label="Moventa">
+      <span class="brand-mark" aria-hidden="true">
+        <img src="assets/logo.png" alt="" />
+      </span>
+      <span>Moventa</span>
+    </a>
+    <nav class="nav-links" aria-label="Główna nawigacja">
+      <a href="#features" data-i18n="nav.features">Funkcje</a>
+      <a href="#showcase" data-i18n="nav.showcase">Aplikacja</a>
+      <a href="#how" data-i18n="nav.how">Jak działa</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center">
+      <div class="lang" role="group" aria-label="Język">
+        <button class="on" data-lang="pl">PL</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="#cta" class="nav-cta" data-i18n="nav.cta">
+        Pobierz
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="hero-title" data-i18n="hero.title" data-i18n-html="true">Mniej klikania.<br>Więcej <em>treningu</em>.</h1>
+      <p class="hero-lead" data-i18n="hero.lead">Aplikacja dla trenerów personalnych, którzy cenią porządek. Zarządzaj podopiecznymi, planuj sesje i śledź postępy — bez logowania, bez chmury, bez przeszkód. Otwierasz i pracujesz.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary" data-i18n="hero.cta">
+          <svg viewBox="0 0 384 512" fill="currentColor" width="16" height="16"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          Pobierz w App Store
+        </a>
+        <a href="#features" class="btn btn-ghost" data-i18n="hero.see">Funkcje</a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="stat">
+          <div class="n" data-i18n="meta.trial-n">Bez</div>
+          <div class="l" data-i18n="meta.trial">rejestracji</div>
+        </div>
+        <div class="stat">
+          <div class="n">∞</div>
+          <div class="l" data-i18n="meta.clients">liczba podopiecznych</div>
+        </div>
+        <div class="stat">
+          <div class="n">PDF</div>
+          <div class="l" data-i18n="meta.ios">raporty postępów</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-phone-wrap">
+      <div class="chip chip-a" aria-hidden="true">
+        <span class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22 4 12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <div data-i18n="chip.session">Sesja zapisana</div>
+          <div class="delta" data-i18n="chip.session-d">+8.5 kg progres</div>
+        </div>
+      </div>
+      <div class="chip chip-c" aria-hidden="true">
+        <span class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M1 21v-2a4 4 0 0 1 3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <div>
+          <div data-i18n="chip.clients">12 aktywnych</div>
+          <div class="delta" data-i18n="chip.clients-d">+2 w tym mies.</div>
+        </div>
+      </div>
+      <div class="chip chip-b" aria-hidden="true">
+        <span class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m7 14 4-4 4 4 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <div data-i18n="chip.pr">Nowy PR</div>
+          <div class="delta" data-i18n="chip.pr-d">EZ-Bar Curl 70 kg</div>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="screen">
+          <img src="assets/hero-app.png" alt="Moventa — strona główna aplikacji" loading="eager">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BAR -->
+<div class="marquee">
+  <div class="container">
+    <span data-i18n="trust">Stworzone dla trenerów, którzy cenią organizację · <strong>Polski produkt</strong> · Dostępne w App Store</span>
+  </div>
+</div>
+
+<!-- FEATURES BENTO -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="feat.kicker">Funkcje</span>
+      <h2 data-i18n="feat.h" data-i18n-html="true">Wszystko, czego potrzebuje<br>twoja praca trenerska.</h2>
+      <p data-i18n="feat.p">Skup się na tym, co naprawdę ważne — Moventa zajmie się resztą.</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- CLIENTS -->
+      <article class="card span-3 row-2 clients-card reveal">
+        <div>
+          <div class="label"><span class="num">01</span><span data-i18n="feat.c1.k">PODOPIECZNI</span></div>
+          <h3 data-i18n="feat.c1.t">Zarządzaj nielimitowaną listą podopiecznych</h3>
+          <p data-i18n="feat.c1.p">Dodawaj klientów, prowadź ich profile, śledź ich aktywność i historię treningów. Wszystko z poziomu jednej zakładki.</p>
+        </div>
+        <div class="client-list">
+          <div class="client-row"><span class="avatar red">TK</span><span class="nm">Tobiasz Kropidłowski</span><span class="pill live">aktywny</span></div>
+          <div class="client-row"><span class="avatar">GK</span><span class="nm">Grzegorz Kropidłowski</span><span class="pill">7 dni</span></div>
+          <div class="client-row"><span class="avatar">N</span><span class="nm">Norbert</span><span class="pill">3 dni</span></div>
+        </div>
+      </article>
+
+      <!-- CALENDAR -->
+      <article class="card span-3 calendar-card reveal">
+        <div class="label"><span class="num">02</span><span data-i18n="feat.c2.k">KALENDARZ</span></div>
+        <h3 data-i18n="feat.c2.t">Twórz grafik tygodnia w 30 sekund</h3>
+        <p data-i18n="feat.c2.p">Wszystkie sesje, klienci i terminy płatności w jednym widoku.</p>
+        <div class="cal-mini" aria-hidden="true">
+          <div></div><div>P</div><div>W</div><div>Ś</div><div>C</div><div>P</div>
+          <div>8</div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Michał</span></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Tamara</span></div>
+          <div class="cal-cell"><span class="cal-block red" style="top:2px; height:18px">Tobiasz</span></div>
+          <div class="cal-cell"></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Bruno</span></div>
+          <div>9</div>
+          <div class="cal-cell"></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Nadia</span></div>
+          <div class="cal-cell"></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Paco</span></div>
+          <div class="cal-cell"><span class="cal-block red" style="top:2px; height:18px">Norbert</span></div>
+          <div>10</div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Ola</span></div>
+          <div class="cal-cell"></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Daria</span></div>
+          <div class="cal-cell"><span class="cal-block" style="top:2px; height:18px">Tomek</span></div>
+          <div class="cal-cell"><span class="cal-block red" style="top:2px; height:18px">Krystian</span></div>
+        </div>
+      </article>
+
+      <!-- WORKOUTS -->
+      <article class="card span-2 workout-card reveal">
+        <div class="label"><span class="num">03</span><span data-i18n="feat.c3.k">TRENINGI</span></div>
+        <h3 data-i18n="feat.c3.t">Zapisuj sety w trakcie sesji</h3>
+        <p data-i18n="feat.c3.p">Klatka · ławka pozioma</p>
+        <div class="set"><span class="ix">1.</span><span class="v">50<small>kg</small></span><span class="v">10<small>×</small></span><span class="v">2<small>RIR</small></span></div>
+        <div class="set"><span class="ix">2.</span><span class="v">55<small>kg</small></span><span class="v">8<small>×</small></span><span class="v">1<small>RIR</small></span></div>
+        <div class="set"><span class="ix">3.</span><span class="v">60<small>kg</small></span><span class="v">6<small>×</small></span><span class="v">0<small>RIR</small></span></div>
+      </article>
+
+      <!-- CHART -->
+      <article class="card span-2 chart-card reveal">
+        <div class="label"><span class="num">04</span><span data-i18n="feat.c4.k">RAPORTY</span></div>
+        <h3 data-i18n="feat.c4.t">Wizualny progres siłowy</h3>
+        <svg class="chart-svg" viewBox="0 0 240 120" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ff3b47" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#ff3b47" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 90 L40 80 L80 85 L120 60 L160 50 L200 30 L240 18 L240 120 L0 120 Z" fill="url(#g1)"/>
+          <path d="M0 90 L40 80 L80 85 L120 60 L160 50 L200 30 L240 18" stroke="#ff3b47" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="240" cy="18" r="3" fill="#ff3b47"/>
+          <circle cx="240" cy="18" r="6" fill="#ff3b47" opacity="0.3"/>
+        </svg>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#ff3b47"></span>Ciężar (kg) · +30%</span>
+        </div>
+      </article>
+
+      <!-- REPORTS / PDF -->
+      <article class="card span-2 reports-card reveal">
+        <div class="label"><span class="num">05</span><span data-i18n="feat.c5.k">PDF</span></div>
+        <h3 data-i18n="feat.c5.t">Eksport do PDF</h3>
+        <p data-i18n="feat.c5.p">Raport siłowy + pomiary ciała w jednym pliku.</p>
+        <div class="stat-row">
+          <div class="stat-mini"><div class="n up">+20kg</div><div class="l">Progres</div></div>
+          <div class="stat-mini"><div class="n">5</div><div class="l">PR / 30d</div></div>
+        </div>
+      </article>
+
+      <!-- VIDEO -->
+      <article class="card span-2 reveal">
+        <div class="label"><span class="num">06</span><span data-i18n="feat.c6.k">BIBLIOTEKA ĆWICZEŃ</span></div>
+        <h3 data-i18n="feat.c6.t">Wideo-instrukcja do każdego ćwiczenia</h3>
+        <p data-i18n="feat.c6.p">Pełna biblioteka ćwiczeń z filmikami krok po kroku — pokaż klientowi technikę bez wychodzenia z aplikacji.</p>
+        <div style="margin-top:18px; aspect-ratio: 16/9; border-radius:12px; background:
+          linear-gradient(135deg, #1d1d23, #0f0f12);
+          border:1px solid var(--line);
+          display:grid; place-items:center;
+          position:relative; overflow:hidden">
+          <div style="position:absolute; inset:0; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 12px)"></div>
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--accent); display:grid; place-items:center; box-shadow: 0 0 30px var(--accent-glow); position:relative">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- MEASUREMENTS -->
+      <article class="card span-2 reveal">
+        <div class="label"><span class="num">07</span><span data-i18n="feat.c7.k">POMIARY</span></div>
+        <h3 data-i18n="feat.c7.t">Pomiary ciała i waga</h3>
+        <p data-i18n="feat.c7.p">Klatka, biceps, talia, biodra. Trendy obok obwodów.</p>
+        <div style="margin-top:18px; display:grid; grid-template-columns: repeat(2,1fr); gap:8px">
+          <div style="padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; display:flex; justify-content:space-between"><span style="color:var(--muted)">Klatka</span><span style="font-weight:600">108cm</span></div>
+          <div style="padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; display:flex; justify-content:space-between"><span style="color:var(--muted)">Biceps</span><span style="font-weight:600">38cm</span></div>
+          <div style="padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; display:flex; justify-content:space-between"><span style="color:var(--muted)">Talia</span><span style="font-weight:600">82cm</span></div>
+          <div style="padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:13px; display:flex; justify-content:space-between"><span style="color:var(--muted)">Waga</span><span style="font-weight:600">81.4kg</span></div>
+        </div>
+      </article>
+
+      <!-- OFFLINE -->
+      <article class="card span-2 reveal">
+        <div class="label"><span class="num">08</span><span data-i18n="feat.c8.k">OFFLINE</span></div>
+        <h3 data-i18n="feat.c8.t">Działa bez internetu</h3>
+        <p data-i18n="feat.c8.p">Pełna funkcjonalność na siłowni — także w piwnicy z metalu i betonu.</p>
+        <div style="margin-top:18px; display:flex; align-items:center; gap:12px; padding:14px; border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,0.3)">
+          <span style="width:36px; height:36px; border-radius:10px; background:rgba(123,227,142,0.12); color:#7be38e; display:grid; place-items:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="m2 2 20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <div style="font-size:13px; color:var(--muted); font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:.05em">Status</div>
+            <div style="font-weight:600; font-size:14px; color:#7be38e">Aplikacja gotowa do pracy</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRIVACY -->
+      <article class="card span-2 reveal">
+        <div class="label"><span class="num">09</span><span data-i18n="feat.c9.k">PRYWATNOŚĆ</span></div>
+        <h3 data-i18n="feat.c9.t">Twoje dane zostają u ciebie</h3>
+        <p data-i18n="feat.c9.p">Dane twoich podopiecznych zostają na twoim urządzeniu. Ty i twoi podopieczni — i nikt więcej.</p>
+        <div style="margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,0.3); display:flex; align-items:center; gap:12px">
+          <span style="width:36px; height:36px; border-radius:10px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div style="font-size:13px; line-height:1.4">
+            <div style="font-weight:600">Zgodność z RODO</div>
+            <div style="color:var(--muted)">Dane nie opuszczają twojego urządzenia</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- NO SIGNUP -->
+      <article class="card span-6 reveal" style="display:flex; gap:32px; align-items:center; padding:36px">
+        <div style="flex:1; min-width:0">
+          <div class="label"><span class="num">10</span><span data-i18n="feat.c10.k">ZERO BIUROKRACJI</span></div>
+          <h3 data-i18n="feat.c10.t">Bez rejestracji. Twojej i klientów.</h3>
+          <p data-i18n="feat.c10.p">Pobierasz, otwierasz, pracujesz. Twoi podopieczni nie muszą zakładać żadnego konta — to ty zarządzasz wszystkim.</p>
+        </div>
+        <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:8px; font-size:14px; font-family:'JetBrains Mono', monospace; min-width:280px">
+          <div style="display:flex; align-items:center; gap:12px; color:var(--muted-2); text-decoration:line-through; padding:10px 14px; border:1px dashed var(--line); border-radius:10px"><span>✕</span> Email · hasło · weryfikacja</div>
+          <div style="display:flex; align-items:center; gap:12px; color:var(--muted-2); text-decoration:line-through; padding:10px 14px; border:1px dashed var(--line); border-radius:10px"><span>✕</span> Konto klienta · zaproszenia</div>
+          <div style="display:flex; align-items:center; gap:12px; color:#7be38e; padding:12px 14px; border:1px solid rgba(123,227,142,0.3); border-radius:10px; background:rgba(123,227,142,0.06); font-weight:700"><span>→</span> Otwórz aplikację. Działa.</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE / SCREENS -->
+<section id="showcase" class="showcase">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="show.kicker">Aplikacja</span>
+      <h2 data-i18n="show.h" data-i18n-html="true">Tak właśnie wygląda<br>Moventa.</h2>
+    </div>
+    <div class="screens-row">
+      <div class="screen-col reveal">
+        <div class="phone"><div class="screen"><img src="assets/screen-01.png" alt="Statystyki Moventa" loading="lazy"></div></div>
+      </div>
+      <div class="screen-col reveal">
+        <div class="phone"><div class="screen"><img src="assets/screen-02.png" alt="Panel trenera Moventa" loading="lazy"></div></div>
+      </div>
+      <div class="screen-col reveal">
+        <div class="phone"><div class="screen"><img src="assets/screen-03.png" alt="Kalendarz Moventa" loading="lazy"></div></div>
+      </div>
+      <div class="screen-col reveal">
+        <div class="phone"><div class="screen"><img src="assets/screen-04.png" alt="Raporty Moventa" loading="lazy"></div></div>
+      </div>
+      <div class="screen-col reveal">
+        <div class="phone"><div class="screen"><img src="assets/screen-05.png" alt="Zapisywanie Moventa" loading="lazy"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="how.kicker">Jak to działa</span>
+      <h2 data-i18n="how.h" data-i18n-html="true">Trzy kroki<br>do uporządkowanej pracy.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-n">01</div>
+        <h3 data-i18n="how.1.t">Dodaj podopiecznego</h3>
+        <p data-i18n="how.1.p">Imię, cele, plan. W kilkanaście sekund nowy klient ląduje w twojej liście.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-n">02</div>
+        <h3 data-i18n="how.2.t">Stwórz trening</h3>
+        <p data-i18n="how.2.p">Dodaj ćwiczenia, sety, powtórzenia i RIR. Plan jest gotowy do wykonania na sali.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-n">03</div>
+        <h3 data-i18n="how.3.t">Wygeneruj raport</h3>
+        <p data-i18n="how.3.p">Po sesji wyeksportuj raport PDF z postępem siłowym i pomiarami — gotowy do wysłania klientowi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <span class="trial-tag"><span style="width:6px; height:6px; border-radius:50%; background:#7be38e; box-shadow:0 0 8px #7be38e"></span><span data-i18n="cta.trial">Bez rejestracji. Bez chmury. Bez przeszkód.</span></span>
+      <h2 data-i18n="cta.h" data-i18n-html="true">Otwierasz —<br>i już pracujesz.</h2>
+      <p data-i18n="cta.p">Pobierz Moventę z App Store i zacznij prowadzić swoich podopiecznych bardziej profesjonalnie niż kiedykolwiek. Bez zakładania konta.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">
+          <svg viewBox="0 0 384 512" fill="currentColor" width="16" height="16"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span data-i18n="cta.app">Pobierz w App Store</span>
+        </a>
+        <a href="#contact" class="btn btn-ghost"><span data-i18n="cta.talk">Porozmawiaj z nami</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker" data-i18n="faq.kicker">Pytania</span>
+      <h2 data-i18n="faq.h">Najczęściej pytacie o…</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary data-i18n="faq.1.q">Czy muszę się rejestrować?</summary>
+        <div class="ans" data-i18n="faq.1.a">Nie. Pobierasz Moventę z App Store, otwierasz i od razu zaczynasz pracę. Żadnego konta, żadnego logowania — ani od ciebie, ani od twoich podopiecznych.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="faq.2.q">Czy aplikacja działa bez internetu?</summary>
+        <div class="ans" data-i18n="faq.2.a">Tak — pełna funkcjonalność offline. Możesz prowadzić treningi w piwnicach, halach i wszędzie tam, gdzie zasięg bywa kapryśny.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="faq.3.q">Co z moimi danymi?</summary>
+        <div class="ans" data-i18n="faq.3.a">Nie przetwarzamy i nie mamy dostępu do twoich danych. Wszystko zostaje na twoim urządzeniu — pełna prywatność, zgodnie z RODO.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="faq.4.q">Na jakich urządzeniach działa aplikacja?</summary>
+        <div class="ans" data-i18n="faq.4.a">Moventa jest dostępna na iPhone'a i iPada (iOS 16+). Wersja na Androida jest w planach.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="faq.5.q">Czy mogę wyeksportować raporty do PDF?</summary>
+        <div class="ans" data-i18n="faq.5.a">Tak — dla każdego klienta wygenerujesz raport siłowy oraz raport pomiarów ciała w jednym kliknięciu.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="faq.6.q">Czy podopieczni też muszą mieć aplikację?</summary>
+        <div class="ans" data-i18n="faq.6.a">Nie. Moventa to narzędzie pracy trenera — to ty zapisujesz treningi i pomiary. Klient otrzymuje gotowy raport PDF.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="kicker" data-i18n="contact.kicker">Kontakt</span>
+        <h2 style="margin-top:14px" data-i18n="contact.h">Masz pytania?<br>Napisz lub zadzwoń.</h2>
+        <p data-i18n="contact.p">Odpowiadamy najszybciej, jak potrafimy. Pracujemy w godzinach 8 — 18 od poniedziałku do piątku.</p>
+
+        <div class="contact-list">
+          <a href="/cdn-cgi/l/email-protection#9de9f2f0f4f3f8fffceee9e8f9f4f2eeb3f9f8ebddfaf0fcf4f1b3fef2f0" class="contact-item">
+            <span class="ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="ttl" data-i18n="contact.email">E-mail</div>
+              <div class="v"><span class="__cf_email__" data-cfemail="5e2a313337303b3c3f2d2a2b3a37312d703a3b281e39333f3732703d3133">[email&#160;protected]</span></div>
+            </div>
+          </a>
+          <a href="tel:+48669669629" class="contact-item">
+            <span class="ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="ttl" data-i18n="contact.phone">Telefon</div>
+              <div class="v">+48 669 669 629</div>
+            </div>
+          </a>
+          <div class="contact-item">
+            <span class="ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <div>
+              <div class="ttl" data-i18n="contact.hours">Godziny</div>
+              <div class="v" data-i18n="contact.hours-v">Pon — pt · 8:00 — 18:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="contact-card reveal">
+        <div class="open-pill"><span class="dot"></span><span data-i18n="contact.open">Jesteśmy online</span></div>
+        <h3 data-i18n="contact.card.h">Trener? Powiedz nam, czego ci brakuje.</h3>
+        <p style="color:var(--muted); margin: 10px 0 24px" data-i18n="contact.card.p">Moventa jest tworzona w dialogu z trenerami personalnymi. Każda twoja sugestia może wpłynąć na kierunek rozwoju aplikacji.</p>
+        <a href="/cdn-cgi/l/email-protection#1c6873717572797e7d6f68697875736f3278796a5c7b717d7570327f7371236f697e76797f68214c7371656fd99e392e2c7873392e2c51736a7972687d" class="btn btn-primary" style="width:100%; justify-content:center">
+          <span data-i18n="contact.card.cta">Wyślij e-mail</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="assets/logo.png" alt="" />
+          </span>
+          <span>Moventa</span>
+        </div>
+        <p data-i18n="foot.tag">Narzędzie pracy trenera personalnego. Stworzone w Polsce.</p>
+      </div>
+      <div>
+        <h5 data-i18n="foot.product">Produkt</h5>
+        <ul>
+          <li><a href="#features" data-i18n="nav.features">Funkcje</a></li>
+          <li><a href="#showcase" data-i18n="nav.showcase">Aplikacja</a></li>
+          <li><a href="#how" data-i18n="nav.how">Jak działa</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i18n="foot.contact">Kontakt</h5>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#33475c5e5a5d565152404746575a5c401d57564573545e525a5f1d505c5e"><span class="__cf_email__" data-cfemail="afdbc0c2c6c1cacdcedcdbdacbc6c0dc81cbcad9efc8c2cec6c381ccc0c2">[email&#160;protected]</span></a></li>
+          <li><a href="tel:+48669669629">+48 669 669 629</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i18n="foot.legal">Informacje</h5>
+        <ul>
+          <li><a href="privacy.html" data-i18n="foot.privacy">Polityka prywatności</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© <span id="year">2026</span> Moventa · <span data-i18n="foot.rights">Wszelkie prawa zastrzeżone.</span></p>
+      <p style="font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted-2)">v2.0 · made in PL</p>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // i18n
+  const dict = {
+    pl: {}, // defaults already in HTML
+    en: {
+      'nav.features':'Features','nav.showcase':'App','nav.how':'How it works','nav.faq':'FAQ','nav.contact':'Contact','nav.cta':'Download',
+      'hero.eyebrow':'No sign-up · No bureaucracy · Works offline',
+      'hero.title':'Less tapping.<br>More <em>training</em>.',
+      'hero.lead':'An app for personal trainers who value organisation. Manage clients, plan sessions, track progress — no log-in, no cloud, no friction. Just open the app and get to work.',
+      'hero.cta':'Download on App Store','hero.see':'See features',
+      'meta.trial-n':'No','meta.trial':'sign-up','meta.clients':'unlimited clients','meta.ios':'progress reports',
+      'chip.session':'Session saved','chip.session-d':'+8.5 kg progress',
+      'chip.clients':'12 active','chip.clients-d':'+2 this month',
+      'chip.pr':'New PR','chip.pr-d':'EZ-Bar Curl 70 kg',
+      'trust':'Built for trainers who value organisation · <strong>Polish product</strong> · Available on the App Store',
+      'feat.kicker':'Features','feat.h':'Everything your<br>coaching practice needs.','feat.p':'Focus on what truly matters — Moventa handles the rest.',
+      'feat.c1.k':'CLIENTS','feat.c1.t':'Manage an unlimited list of clients','feat.c1.p':'Add clients, keep their profiles, track their activity and training history. All from one tab.',
+      'feat.c2.k':'CALENDAR','feat.c2.t':'Build a weekly schedule in 30 seconds','feat.c2.p':'Sessions, clients and payment dates in a single view.',
+      'feat.c3.k':'WORKOUTS','feat.c3.t':'Log sets while you coach','feat.c3.p':'Chest · bench press',
+      'feat.c4.k':'REPORTS','feat.c4.t':'Visual strength progression',
+      'feat.c5.k':'PDF','feat.c5.t':'Export to PDF','feat.c5.p':'Strength + body measurements in one file.',
+      'feat.c6.k':'EXERCISE LIBRARY','feat.c6.t':'Step-by-step video for every exercise','feat.c6.p':'A full library of exercises with video guides — show clients correct form without leaving the app.',
+      'feat.c7.k':'MEASUREMENTS','feat.c7.t':'Body measurements & weight','feat.c7.p':'Chest, biceps, waist, hips. Trends next to circumferences.',
+      'feat.c8.k':'OFFLINE','feat.c8.t':'Works without the internet','feat.c8.p':'Full functionality at the gym — even in basements of steel and concrete.',
+      'feat.c9.k':'PRIVACY','feat.c9.t':'Your data stays with you','feat.c9.p':'Your clients\u2019 data stays on your device. You and your clients \u2014 and no one else.',
+      'show.kicker':'The app','show.h':'This is what<br>Moventa looks like.','show.p':'Crisp, readable dark mode. UI designed for one-handed use and the gym floor.',
+      'show.s1.t':'Trainer panel','show.s1.p':'All shortcuts in one place',
+      'show.s2.t':'Calendar','show.s2.p':'Whole week at a glance',
+      'show.s3.t':'Reports','show.s3.p':'Weight & rep charts',
+      'show.s4.t':'Workout logging','show.s4.p':'Sets, RIR, weight — fast',
+      'show.s5.t':'Statistics','show.s5.p':'Tonnage, PRs, 30-day progress',
+      'how.kicker':'How it works','how.h':'Three steps<br>to organized coaching.',
+      'how.1.t':'Add a client','how.1.p':'Name, goals, plan. A new client lands in your list in seconds.',
+      'how.2.t':'Build a workout','how.2.p':'Add exercises, sets, reps and RIR. The plan is ready for the gym floor.',
+      'how.3.t':'Generate a report','how.3.p':'After the session, export a PDF with strength progress and measurements — ready to send to your client.',
+      'cta.trial':'No sign-up. No cloud. No friction.',
+      'cta.h':'You open it —<br>and you\'re working.','cta.p':'Download Moventa from the App Store and start running your clients more professionally than ever. No account needed.','cta.app':'Download on App Store','cta.talk':'Talk to us',
+      'faq.kicker':'Questions','faq.h':'Most often, you ask…',
+      'faq.1.q':'Do I need to sign up?','faq.1.a':'No. Download Moventa from the App Store, open it and start working. No account, no log-in — neither for you nor your clients.',
+      'faq.2.q':'Does the app work offline?','faq.2.a':'Yes — full offline functionality. You can run sessions in basement gyms, warehouses and anywhere else signal gets shaky.',
+      'faq.3.q':'What about my data?','faq.3.a':'We don\'t process or have access to your data. Everything stays on your device — full privacy, in line with GDPR.',
+      'faq.4.q':'What devices does it run on?','faq.4.a':'Moventa is available on iPhone and iPad (iOS 16+). An Android version is on the roadmap.',
+      'faq.5.q':'Can I export reports to PDF?','faq.5.a':'Yes — for any client you can generate a strength report and a body-measurements report in one click.',
+      'faq.6.q':'Do my clients need the app too?','faq.6.a':'No. Moventa is the trainer\'s working tool — you log sessions and measurements. Clients receive a finished PDF report.',
+      'contact.kicker':'Contact','contact.h':'Got questions?<br>Write or call.','contact.p':'We reply as fast as we can. Office hours 8 AM — 6 PM, Mon to Fri.',
+      'contact.email':'Email','contact.phone':'Phone','contact.hours':'Hours','contact.hours-v':'Mon — Fri · 8:00 — 18:00','contact.open':'We\'re online',
+      'contact.card.h':'A trainer? Tell us what you\'re missing.',
+      'contact.card.p':'Moventa is built in dialogue with personal trainers. Every suggestion can shape where the app is going.',
+      'contact.card.cta':'Send email',
+      'foot.tag':'A working tool for personal trainers. Made in Poland.',
+      'foot.product':'Product','foot.contact':'Contact','foot.legal':'Info','foot.privacy':'Privacy policy','foot.rights':'All rights reserved.'
+    }
+  };
+
+  // Snapshot Polish defaults from HTML so we can switch back
+  const snapshot = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const html = el.getAttribute('data-i18n-html') === 'true';
+    snapshot[key] = html ? el.innerHTML : el.textContent;
+  });
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const html = el.getAttribute('data-i18n-html') === 'true';
+      const val = lang === 'pl' ? snapshot[key] : (dict.en[key] || snapshot[key]);
+      if (html) el.innerHTML = val; else el.textContent = val;
+    });
+    try { localStorage.setItem('moventa-lang', lang); } catch(e){}
+  }
+
+  document.querySelectorAll('.lang button').forEach(b => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+  });
+
+  // Initial language detection
+  let initial = 'pl';
+  try {
+    const saved = localStorage.getItem('moventa-lang');
+    if (saved === 'pl' || saved === 'en') initial = saved;
+    else if ((navigator.language || '').toLowerCase().startsWith('en')) initial = 'en';
+  } catch(e){}
+  if (initial === 'en') setLang('en');
+</script>
+
+</body>
+</html>
