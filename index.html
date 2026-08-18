@@ -94,6 +94,16 @@
     transition: transform .2s ease, box-shadow .2s ease;
   }
   .nav-cta:hover{ transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,0.12)}
+  .biz-pill{
+    display:inline-flex; align-items:center; gap:8px; flex:0 0 auto;
+    padding:8px 15px; border-radius:99px;
+    border:1px solid rgba(255,59,71,0.42);
+    background:rgba(255,59,71,0.10);
+    color:#ff8a90; font-weight:600; font-size:13.5px; white-space:nowrap;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .biz-pill:hover{ background:rgba(255,59,71,0.2); border-color:rgba(255,59,71,0.7); color:#fff }
+  .biz-pill svg{ width:15px; height:15px; opacity:.85 }
   .lang{
     display:inline-flex; gap:2px; padding:3px;
     background:rgba(255,255,255,0.06); border-radius:99px;
@@ -622,6 +632,9 @@
     .foot-grid{ grid-template-columns: 1fr 1fr; gap: 32px}
   }
   @media (max-width: 640px){
+    /* w wąskim nagłówku plakietka "Dla siłowni" ma pierwszeństwo — App Store jest w hero tuż niżej */
+    .nav-cta{ display:none }
+    .biz-pill{ padding:7px 13px; font-size:13px }
     section{ padding: 70px 0}
     .hero{ padding: 50px 0 40px}
     .nav-links{ display:none}
@@ -634,6 +647,13 @@
     .foot-grid{ grid-template-columns: 1fr; gap:28px}
     .foot-bottom{ flex-direction:column; align-items:flex-start}
     .span-6.reveal[style]{ flex-direction:column !important; align-items:stretch !important; gap:20px !important}
+  }
+
+  @media (max-width: 420px){
+    /* na najwęższych ekranach zostaje sam znak marki, żeby plakietka się zmieściła */
+    .brand > span:not(.brand-mark){ display:none }
+    .lang button{ padding:4px 8px; font-size:11px }
+    .biz-pill{ padding:7px 12px; font-size:12.5px }
   }
 
   /* ---------- BANER: MOVENTA FOR BUSINESS ---------- */
@@ -649,8 +669,6 @@
   .biz-box .txt{ flex:1 }
   .biz-box h3{ font-size: clamp(24px, 2.6vw, 32px); letter-spacing:-0.03em; line-height:1.1 }
   .biz-box p{ color:var(--muted); font-size:16px; margin-top:10px; max-width:620px }
-  .nav-links a.biz-link{ color:#ff8a90 }
-  .nav-links a.biz-link:hover{ color:#fff; background:rgba(255,59,71,0.12) }
   @media (max-width: 980px){
     .biz-box{ flex-direction:column; text-align:center; gap:26px; padding:40px 26px }
     .biz-box .hero-actions{ justify-content:center }
@@ -677,9 +695,12 @@
       <a href="#how" data-i18n="nav.how">Jak działa</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contact" data-i18n="nav.contact">Kontakt</a>
-      <a href="business.html" class="biz-link" data-i18n="nav.business">Dla klubów</a>
     </nav>
     <div style="display:flex; gap:12px; align-items:center">
+      <a href="business.html" class="biz-pill" title="Oferta dla siłowni, klubów i sieci fitness">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 21V5a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v16M15 21V10h3a2 2 0 0 1 2 2v9M3 21h18M9 7h2M9 11h2M9 15h2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="nav.business">Dla siłowni</span>
+      </a>
       <div class="lang" role="group" aria-label="Język">
         <button class="on" data-lang="pl">PL</button>
         <button data-lang="en">EN</button>
@@ -1027,7 +1048,7 @@
       </div>
       <div class="hero-actions">
         <a href="business.html" class="btn btn-primary">
-          <span data-i18n="biz.cta">Zobacz ofertę dla klubów</span>
+          <span data-i18n="biz.cta">Zobacz ofertę dla siłowni</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1141,7 +1162,7 @@
           <li><a href="#showcase" data-i18n="nav.showcase">Aplikacja</a></li>
           <li><a href="#how" data-i18n="nav.how">Jak działa</a></li>
           <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
-          <li><a href="business.html" data-i18n="nav.business">Dla klubów</a></li>
+          <li><a href="business.html" data-i18n="nav.business">Dla siłowni</a></li>
         </ul>
       </div>
       <div>
@@ -1180,10 +1201,10 @@
   const dict = {
     pl: {}, // defaults already in HTML
     en: {
-      'nav.business':'For clubs',
+      'nav.business':'For gyms',
       'biz.h':'Do you run a gym or a chain of clubs?',
-      'biz.p':'Moventa for Business is the same app, rolled out across all of your trainers \u2014 with partnership models for clubs and chains. No IT rollout required.',
-      'biz.cta':'See the offer for clubs',
+      'biz.p':'Moventa for Business is the same app, rolled out across all of your trainers \u2014 with partnership models for gyms and chains. No IT rollout required.',
+      'biz.cta':'See the offer for gyms',
       'nav.features':'Features','nav.showcase':'App','nav.how':'How it works','nav.faq':'FAQ','nav.contact':'Contact','nav.cta':'Download',
       'hero.eyebrow':'No sign-up · No bureaucracy · Works offline',
       'hero.title':'Less tapping.<br>More <em>training</em>.',
