@@ -134,27 +134,7 @@
     opacity:0.42; filter:grayscale(0.35);
   }
 
-  /* pasek faktów */
-  .facts{
-    display:grid; grid-template-columns:repeat(4, 1fr);
-    border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden;
-    margin-top:56px; background:var(--s1);
-  }
-  .fact{ padding:24px 26px; border-left:1px solid var(--line) }
-  .fact:first-child{ border-left:0 }
-  .fact .v{ font-family:'Inter Tight', sans-serif; font-size:30px; font-weight:600; letter-spacing:-0.035em; line-height:1 }
-  .fact .k{ font-size:13px; color:var(--mu); margin-top:9px; line-height:1.4 }
 
-  /* ---------- KORZYŚCI ---------- */
-  .val-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0; border-bottom:1px solid var(--line) }
-  .val{
-    padding:34px 30px 34px 0; border-top:1px solid var(--line);
-  }
-  .val:nth-child(3n+2){ padding-left:30px; border-left:1px solid var(--line) }
-  .val:nth-child(3n){ padding-left:30px; border-left:1px solid var(--line) }
-  .val .n{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.14em; color:var(--mu-2); margin-bottom:16px; display:block }
-  .val h3{ margin-bottom:12px }
-  .val p{ font-size:14.5px; line-height:1.6 }
 
   /* ---------- EKSPLORATOR MODUŁÓW ---------- */
   .explorer{ border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden; background:var(--s1) }
@@ -201,45 +181,22 @@
   .mod-shot .device.tab{ width:400px; border-radius:20px; padding:8px }
   .mod-shot .device.tab img{ border-radius:14px }
 
-  /* ---------- PORÓWNANIE ---------- */
-  .cmp{ border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden; background:var(--s1) }
-  .cmp-row{ display:grid; grid-template-columns:1fr 1.12fr 1.12fr; border-top:1px solid var(--line) }
-  .cmp-row:first-child{ border-top:0 }
-  .cmp-row > div{ padding:20px 26px }
-  .cmp-row > div + div{ border-left:1px solid var(--line) }
-  .cmp-head > div{ padding:18px 26px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--mu-2) }
-  .cmp-head .hl{ color:var(--tx); background:rgba(255,255,255,0.05); position:relative }
-  .cmp-head .hl::before{ content:''; position:absolute; left:0; right:0; top:0; height:2px; background:var(--sig) }
-  .cmp-row .k{ font-size:15px; font-weight:600; color:var(--tx); line-height:1.4 }
-  .cmp-row .a{ font-size:14.5px; color:var(--mu-2); line-height:1.55 }
-  .cmp-row .b{ font-size:14.5px; color:var(--tx); line-height:1.55; background:rgba(255,255,255,0.035) }
-  .cmp-lbl{ display:none }
-  .note{
-    margin-top:34px; padding:28px 32px; border:1px solid var(--line); border-radius:var(--r-2);
-    background:var(--s1); position:relative;
-  }
-  .note::before{ content:''; position:absolute; left:0; top:26px; bottom:26px; width:2px; background:var(--sig) }
-  .note h4{ font-size:17px; margin-bottom:10px }
-  .note p{ font-size:15px; line-height:1.65 }
-  .note p strong{ color:var(--tx); font-weight:600 }
 
   /* ---------- OPINIE ---------- */
-  .quotes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:0 }
-  .q{ padding:32px 34px 32px 0; border-top:1px solid var(--line) }
-  .q:nth-child(even){ padding-left:34px; border-left:1px solid var(--line) }
-  .q .bar{ width:24px; height:2px; background:var(--sig); margin-bottom:20px }
-  .q p{ font-size:16px; line-height:1.62; color:var(--tx) }
+  .quotes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:34px 40px; padding:12px 0 26px }
+  .q{
+    background:var(--s3); border:1px solid var(--line-2); border-radius:var(--r-2);
+    padding:28px 30px; box-shadow:0 26px 44px -30px rgba(0,0,0,0.95);
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .q:nth-child(1){ transform:rotate(-1.7deg) translate(-6px, 6px) }
+  .q:nth-child(2){ transform:rotate(1.4deg) translate(12px, -16px) }
+  .q:nth-child(3){ transform:rotate(1deg) translate(-10px, 14px) }
+  .q:nth-child(4){ transform:rotate(-2.2deg) translate(8px, -4px) }
+  .q:hover{ transform:rotate(0deg) translate(0, 0); border-color:var(--line-3) }
+  .q .bar{ width:24px; height:2px; background:var(--sig); margin-bottom:18px }
+  .q p{ font-size:15.5px; line-height:1.62; color:var(--tx) }
   .q .who{ margin-top:20px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--mu-2) }
-
-  /* ---------- WDROŻENIE ---------- */
-  .steps{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0 }
-  .step{ padding:30px 30px 0 0 }
-  .step + .step{ padding-left:30px; border-left:1px solid var(--line) }
-  .step .n{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.14em; color:var(--sig) }
-  .step h3{ margin:16px 0 10px }
-  .step p{ font-size:14.5px; line-height:1.6 }
-  .steps-rule{ height:1px; background:var(--line) }
-
   /* ---------- MODELE ---------- */
   .models{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px }
   .model{
@@ -253,7 +210,6 @@
   .model ul{ margin-top:22px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:11px }
   .model ul li{ display:flex; gap:11px; align-items:flex-start; font-size:13.5px; color:var(--mu); line-height:1.5 }
   .model ul li::before{ content:''; flex:0 0 auto; width:5px; height:5px; margin-top:7px; border-radius:1px; background:var(--line-3) }
-  .models-note{ margin-top:26px; font-size:14px; color:var(--mu-2); max-width:760px; line-height:1.65 }
 
   /* ---------- FAQ ---------- */
   .faq-list{ border-top:1px solid var(--line) }
@@ -320,11 +276,6 @@
     .hero-grid{ grid-template-columns:1fr; gap:52px }
     .plate{ min-height:0; padding:44px 20px 0 }
     .device.ghost{ display:none }
-    .facts{ grid-template-columns:repeat(2, 1fr) }
-    .fact:nth-child(3), .fact:nth-child(4){ border-top:1px solid var(--line) }
-    .fact:nth-child(3){ border-left:0 }
-    .val-grid{ grid-template-columns:1fr }
-    .val, .val:nth-child(3n+2), .val:nth-child(3n){ padding:28px 0; border-left:0 }
     /* eksplorator: bez szyny, wszystko rozwinięte */
     .explorer.js{ display:block }
     .explorer.js .mod-rail{ display:none }
@@ -336,22 +287,12 @@
     .mod-shot .device{ width:206px }
     .mod-shot.two .device{ width:150px }
     .mod-shot .device.tab{ width:100% ; max-width:420px}
-    /* porównanie: karty zamiast tabeli */
-    .cmp{ border:0; background:transparent; border-radius:0 }
-    .cmp-head{ display:none }
-    .cmp-row{ display:block; border:1px solid var(--line); border-radius:var(--r); background:var(--s1); margin-bottom:10px }
-    .cmp-row > div{ padding:16px 20px }
-    .cmp-row > div + div{ border-left:0; border-top:1px solid var(--line) }
-    .cmp-row .k{ background:rgba(255,255,255,0.03) }
-    .cmp-lbl{
-      display:block; font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.12em;
-      text-transform:uppercase; color:var(--mu-2); margin-bottom:7px;
-    }
-    .cmp-row .b .cmp-lbl{ color:#ff8a90 }
-    .quotes{ grid-template-columns:1fr }
-    .q, .q:nth-child(even){ padding:28px 0; border-left:0 }
-    .steps{ grid-template-columns:1fr }
-    .step, .step + .step{ padding:26px 0 0; border-left:0 }
+    .quotes{ grid-template-columns:1fr; gap:20px; padding:6px 0 12px }
+    .q{ padding:24px 22px }
+    .q:nth-child(1){ transform:rotate(-1deg) }
+    .q:nth-child(2){ transform:rotate(1.1deg) }
+    .q:nth-child(3){ transform:rotate(0.8deg) }
+    .q:nth-child(4){ transform:rotate(-1.2deg) }
     .models{ grid-template-columns:1fr }
     .close-top{ grid-template-columns:1fr; padding:40px 28px 34px; gap:30px }
     .close-actions{ min-width:0 }
@@ -367,10 +308,6 @@
     .mod-shot .device{ width:auto; flex:1 1 0; min-width:0; max-width:212px }
     .mod-shot .device.tab{ width:auto; max-width:none }
     .hero-logo{ height:58px; margin-bottom:26px }
-    .facts{ grid-template-columns:1fr }
-    .fact{ border-left:0; border-top:1px solid var(--line) }
-    .fact:first-child{ border-top:0 }
-    .fact:nth-child(3){ border-top:1px solid var(--line) }
     .btn-row .btn{ width:100% }
     .mod-shot.two{ gap:12px }
   }
@@ -421,58 +358,8 @@
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="facts rv">
-      <div class="fact"><div class="v">12</div><div class="k" data-i18n="b.num.1">modułów: od grafiku po raporty PDF</div></div>
-      <div class="fact"><div class="v">50+</div><div class="k" data-i18n="b.num.2">filtrów w bazie ćwiczeń</div></div>
-      <div class="fact"><div class="v">100%</div><div class="k" data-i18n="b.num.3">funkcji dostępnych offline</div></div>
-      <div class="fact"><div class="v">0</div><div class="k" data-i18n="b.num.4">wdrożenia po stronie Waszego IT</div></div>
-    </div>
-  </div>
 </section>
 
-<!-- ===================== 01 · KORZYŚCI ===================== -->
-<section class="sec" id="korzysci">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <h2 data-i18n="b.value.h" data-i18n-html="true">Trener z systemem<br>pracuje inaczej.</h2>
-      <p data-i18n="b.value.p">Branża fitness idzie w stronę pełnej automatyzacji — to już nie kwestia „czy”, tylko „kiedy”. Moventa robi to za Was, dziś.</p>
-    </div>
-
-    <div class="val-grid rv">
-      <div class="val">
-        <span class="n">01</span>
-        <h3 data-i18n="b.value.1.t">Klient, który widzi efekty, zostaje dłużej</h3>
-        <p data-i18n="b.value.1.p">Postępy, rekordy, tonaż i historia treningów — podopieczny dostaje dowód, że to działa. To najprostsza dźwignia retencji, jaką ma trener, a razem z nim Wasz klub.</p>
-      </div>
-      <div class="val">
-        <span class="n">02</span>
-        <h3 data-i18n="b.value.2.t">Kilka godzin tygodniowo mniej na papierologię</h3>
-        <p data-i18n="b.value.2.p">Grafik, rozliczanie karnetów i układanie planów przestają zjadać wieczory. Trener może prowadzić więcej podopiecznych bez spadku jakości — czyli więcej wykorzystanych godzin w Waszych klubach.</p>
-      </div>
-      <div class="val">
-        <span class="n">03</span>
-        <h3 data-i18n="b.value.3.t">Profesjonalny standard w całej sieci</h3>
-        <p data-i18n="b.value.3.p">Raport PDF z pomiarami i wykresami zamiast notatki w telefonie. Ten sam poziom obsługi u każdego trenera, w każdym klubie — niezależnie od tego, jak kto lubi prowadzić notatki.</p>
-      </div>
-      <div class="val">
-        <span class="n">04</span>
-        <h3 data-i18n="b.value.4.t">Argument w rozmowie z trenerem</h3>
-        <p data-i18n="b.value.4.p">Narzędzie pracy w pakiecie to konkretny element employer brandingu. Dobrzy trenerzy wybierają klub, w którym łatwiej im pracować — i rzadziej się z niego wyprowadzają.</p>
-      </div>
-      <div class="val">
-        <span class="n">05</span>
-        <h3 data-i18n="b.value.5.t">Dane zostają na urządzeniu trenera</h3>
-        <p data-i18n="b.value.5.p">Moventa działa lokalnie — bez kont, bez chmury, bez logowania. Sieć nie przejmuje bazy danych treningowych podopiecznych, więc po Waszej stronie nie powstaje nowy proces RODO.</p>
-      </div>
-      <div class="val">
-        <span class="n">06</span>
-        <h3 data-i18n="b.value.6.t">Wdrożenie w jeden dzień, bez działu IT</h3>
-        <p data-i18n="b.value.6.p">Aplikacja jest w App Store. Trener pobiera, otwiera i pracuje — bez rejestracji, bez integracji z Waszymi systemami, bez projektu wdrożeniowego i bez szkolenia na cały dzień.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== 02 · MODUŁY ===================== -->
 <section class="sec" id="moduly">
@@ -676,73 +563,6 @@
   </div>
 </section>
 
-<!-- ===================== 03 · WŁASNA APLIKACJA ===================== -->
-<section class="sec" id="wlasna">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <h2 data-i18n="b.vs.h" data-i18n-html="true">„A może zrobimy<br>własną aplikację?”</h2>
-      <p data-i18n="b.vs.p">Uczciwie: to dobre pytanie i sami byśmy je zadali. Poniżej to, co zwykle wychodzi po policzeniu wszystkiego do końca.</p>
-    </div>
-
-    <div class="cmp rv">
-      <div class="cmp-row cmp-head">
-        <div data-i18n="b.vs.col0">Co trzeba ogarnąć</div>
-        <div data-i18n="b.vs.col1">Własna aplikacja od zera</div>
-        <div class="hl" data-i18n="b.vs.col2">Moventa for Business</div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r1.k">Czas do wersji, której trener użyje na sali</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r1.a">Realnie 9–18 miesięcy od decyzji do stabilnej wersji</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r1.b">Od dziś — aplikacja jest w App Store i działa</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r2.k">Zespół</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r2.a">Developer iOS, projektant, tester, ktoś od produktu i ktoś, kto to spina</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r2.b">Po Waszej stronie: nikt. Zespół już pracuje nad produktem</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r3.k">Baza ćwiczeń z wideo</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r3.a">Setki pozycji do nagrania, opisania i otagowania filtrami</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r3.b">Gotowa, z filmami i ponad 50 filtrami — plus własne ćwiczenia z Waszego klubu</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r4.k">Utrzymanie po premierze</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r4.a">Stały koszt: poprawki, wsparcie trenerów, kolejne wersje</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r4.b">W abonamencie — utrzymanie i wsparcie są po naszej stronie</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r5.k">Nowa wersja iOS co roku</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r5.a">Każdy wrzesień to prace, żeby aplikacja dalej działała</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r5.b">Nasz problem, nie Wasz</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r6.k">Dane i RODO</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r6.a">Sieć zostaje administratorem danych treningowych i zdrowotnych podopiecznych</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r6.b">Dane zostają na urządzeniu trenera — nie tworzycie nowej bazy do zabezpieczenia</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r7.k">Rozwój funkcji</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r7.a">Konkuruje o budżet i uwagę z resztą projektów w firmie</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r7.b">Ciągły — na bazie uwag trenerów z całej Polski, którzy używają jej codziennie</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r8.k">Ryzyko</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r8.a">Projekt może nie dowieźć albo trenerzy mogą go nie przyjąć — koszt zostaje</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r8.b">Sprawdzacie na żywym organizmie: pilotaż w jednym klubie, potem decyzja</span></div>
-      </div>
-      <div class="cmp-row">
-        <div class="k" data-i18n="b.vs.r9.k">Test na trenerach</div>
-        <div class="a"><span class="cmp-lbl" data-i18n="b.vs.lbl.a">Własna aplikacja</span><span data-i18n="b.vs.r9.a">Dopiero po premierze — i wtedy wychodzi, czego brakuje</span></div>
-        <div class="b"><span class="cmp-lbl" data-i18n="b.vs.lbl.b">Moventa for Business</span><span data-i18n="b.vs.r9.b">Od pierwszego tygodnia. Produkt przeszedł już tę lekcję</span></div>
-      </div>
-    </div>
-
-    <div class="note rv">
-      <h4 data-i18n="b.fair.h">Kiedy własna aplikacja ma sens?</h4>
-      <p data-i18n="b.fair.p" data-i18n-html="true">Wtedy, gdy ma być produktem samym w sobie — z Waszym logo w App Store, dla klientów końcowych, jako część strategii marki. To realna droga i nie będziemy udawać, że nie. Ale jeśli chodzi o <strong>narzędzie pracy dla trenerów</strong> — grafik, karnety, finanse, plany, pomiary i raporty — to problem, który już został rozwiązany i jest utrzymywany. Zbudowanie go drugi raz kosztuje rok i zespół, a na końcu daje to samo, co możecie dać trenerom w przyszłym tygodniu.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== 04 · OPINIE ===================== -->
 <section class="sec" id="opinie">
@@ -776,33 +596,6 @@
   </div>
 </section>
 
-<!-- ===================== 05 · WDROŻENIE ===================== -->
-<section class="sec" id="wdrozenie">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <h2 data-i18n="b.how.h" data-i18n-html="true">Trzy kroki.<br>Bez projektu wdrożeniowego.</h2>
-      <p data-i18n="b.how.p">Nie integrujemy się z Waszymi systemami i nie potrzebujemy dostępu do niczego. Dlatego to idzie szybko.</p>
-    </div>
-    <div class="steps-rule rv"></div>
-    <div class="steps rv">
-      <div class="step">
-        <div class="n"><span data-i18n="b.how.step">Krok</span> 01</div>
-        <h3 data-i18n="b.how.1.t">Prezentacja online</h3>
-        <p data-i18n="b.how.1.p">Dwadzieścia minut na żywo: pokazujemy aplikację od strony trenera i odpowiadamy na pytania. Bez slajdów sprzedażowych.</p>
-      </div>
-      <div class="step">
-        <div class="n"><span data-i18n="b.how.step">Krok</span> 02</div>
-        <h3 data-i18n="b.how.2.t">Pilotaż w jednym klubie</h3>
-        <p data-i18n="b.how.2.p">Grupa trenerów dostaje dostęp i pracuje normalnie. Zbieramy od nich uwagi, Wy widzicie, czy narzędzie faktycznie się przyjmuje.</p>
-      </div>
-      <div class="step">
-        <div class="n"><span data-i18n="b.how.step">Krok</span> 03</div>
-        <h3 data-i18n="b.how.3.t">Wdrożenie w sieci</h3>
-        <p data-i18n="b.how.3.p">Wybrany model współpracy, materiały do klubów i wsparcie dla trenerów. Reszta dzieje się sama — aplikację się pobiera, nie instaluje.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== 06 · MODELE ===================== -->
 <section class="sec" id="wspolpraca">
@@ -840,7 +633,6 @@
         </ul>
       </div>
     </div>
-    <p class="models-note" data-i18n="b.models.note">Modele można ze sobą łączyć, a warunki dopasowujemy do wielkości sieci i liczby trenerów. Konkretny cennik i propozycję przygotowujemy indywidualnie — napiszcie lub zadzwońcie, a odeślemy ją tego samego dnia roboczego.</p>
   </div>
 </section>
 
@@ -894,8 +686,7 @@
       <div class="close-top">
         <div>
           <img class="logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
-          <h2 data-i18n="b.contact.h" data-i18n-html="true">Porozmawiajmy<br>o Waszej sieci.</h2>
-          <p data-i18n="b.contact.p">Napiszcie, ilu trenerów pracuje u Was na co dzień i w ilu klubach — odeślemy propozycję dopasowaną do tej skali. Prezentacja online zajmuje dwadzieścia minut i do niczego nie zobowiązuje.</p>
+          <h2 data-i18n="b.contact.h">Skontaktuj się z nami</h2>
         </div>
         <div class="close-actions">
           <a href="mailto:support@moventa.pl?subject=Moventa%20for%20Business%20%E2%80%94%20prezentacja" class="btn btn-p">
@@ -985,24 +776,6 @@
       'b.hero.lead':'Moventa is a ready-made working tool for personal trainers — schedule, passes, finances, training plans, measurements and reports in one app. Trainers stop running clients out of a notebook and a spreadsheet, and clients see their results in black and white.',
       'b.hero.cta':'Book a demo',
       'b.hero.see':'Explore all modules',
-      'b.value.h':'A trainer with a system<br>works differently.',
-      'b.value.p':'Fitness is heading towards full automation — it is no longer a question of “if”, only “when”. Moventa gets you there today.',
-      'b.value.1.t':'Clients who see results stay longer',
-      'b.value.1.p':'Progress, records, tonnage and training history — the client gets proof that it works. It is the simplest retention lever a trainer has, and your club has with them.',
-      'b.value.2.t':'Several hours a week back from paperwork',
-      'b.value.2.p':'Scheduling, settling passes and writing plans stop eating evenings. A trainer can take on more clients without losing quality — which means more booked hours in your clubs.',
-      'b.value.3.t':'One professional standard across the chain',
-      'b.value.3.p':'A PDF report with measurements and charts instead of a note in someone’s phone. The same level of service from every trainer, in every club, no matter how each of them likes to keep notes.',
-      'b.value.4.t':'An argument in the conversation with a trainer',
-      'b.value.4.p':'A working tool in the package is a concrete piece of employer branding. Good trainers pick the club where their job is easier — and move on from it less often.',
-      'b.value.5.t':'Data stays on the trainer’s device',
-      'b.value.5.p':'Moventa runs locally — no accounts, no cloud, no log-in. The chain does not take over a database of clients’ training records, so no new GDPR process appears on your side.',
-      'b.value.6.t':'Rolled out in a day, with no IT department',
-      'b.value.6.p':'The app is on the App Store. A trainer downloads it, opens it and works — no sign-up, no integration with your systems, no implementation project and no full-day training.',
-      'b.num.1':'modules: from scheduling to PDF reports',
-      'b.num.2':'filters in the exercise library',
-      'b.num.3':'of the features work offline',
-      'b.num.4':'accounts your clients have to create',
       'b.feat.h':'Everything a trainer does<br>besides the training itself.',
       'b.feat.p':'Twelve modules that together replace a notebook, a spreadsheet, a messenger and a calendar. Pick a module from the list to see the screen from the app.',
       'b.f01.k':'Trainer dashboard',
@@ -1078,42 +851,6 @@
       'b.f12.b1':'<strong>Two devices at once</strong>',
       'b.f12.b2':'<strong>Changes appear instantly</strong> on both screens',
       'b.f12.b3':'<strong>A bigger screen for the client conversation</strong> — charts and measurements readable from across the desk',
-      'b.vs.h':'“Should we just build<br>our own app?”',
-      'b.vs.p':'Honestly: it is a fair question and we would ask it too. Here is what usually comes out once everything is counted to the end.',
-      'b.vs.col0':'What has to be handled',
-      'b.vs.col1':'Your own app from scratch',
-      'b.vs.col2':'Moventa for Business',
-      'b.vs.r1.k':'Time to a version a trainer would use on the floor',
-      'b.vs.r1.a':'Realistically 9–18 months from decision to a stable release',
-      'b.vs.r1.b':'From today — the app is on the App Store and working',
-      'b.vs.r2.k':'Team',
-      'b.vs.r2.a':'An iOS developer, a designer, a tester, someone on product and someone holding it together',
-      'b.vs.r2.b':'On your side: nobody. The team is already working on the product',
-      'b.vs.r3.k':'Exercise library with video',
-      'b.vs.r3.a':'Hundreds of entries to record, describe and tag with filters',
-      'b.vs.r3.b':'Ready, with videos and over 50 filters — plus custom exercises from your own club',
-      'b.vs.r4.k':'Maintenance after launch',
-      'b.vs.r4.a':'A permanent cost: fixes, trainer support, further releases',
-      'b.vs.r4.b':'Included in the subscription — maintenance and support are on us',
-      'b.vs.r5.k':'A new iOS every year',
-      'b.vs.r5.a':'Every September means work just to keep the app running',
-      'b.vs.r5.b':'Our problem, not yours',
-      'b.vs.r6.k':'Data and GDPR',
-      'b.vs.r6.a':'The chain becomes the controller of clients’ training and health data',
-      'b.vs.r6.b':'Data stays on the trainer’s device — you are not creating a new database to secure',
-      'b.vs.r7.k':'Feature development',
-      'b.vs.r7.a':'Competes for budget and attention with every other project in the company',
-      'b.vs.r7.b':'Continuous — driven by trainers across Poland who use it daily',
-      'b.vs.r8.k':'Risk',
-      'b.vs.r8.a':'The project may not land, or trainers may not adopt it — the cost stays',
-      'b.vs.r8.b':'You test it for real: a pilot in one club, then you decide',
-      'b.vs.r9.k':'Testing with trainers',
-      'b.vs.r9.a':'Only after launch — and that is when the gaps show up',
-      'b.vs.r9.b':'From week one. The product has already been through that lesson',
-      'b.vs.lbl.a':'Your own app',
-      'b.vs.lbl.b':'Moventa for Business',
-      'b.fair.h':'When does building your own make sense?',
-      'b.fair.p':'When the app is meant to be a product in itself — your logo on the App Store, aimed at end clients, part of the brand strategy. That is a real path and we will not pretend otherwise. But if what you need is a <strong>working tool for trainers</strong> — schedule, passes, finances, plans, measurements and reports — that problem is already solved and already maintained. Building it a second time costs a year and a team, and ends up giving you what you could give your trainers next week.',
       'b.testi.h':'What trainers already working with it say.',
       'b.testi.p':'Messages from personal trainers using Moventa day to day.',
       'b.testi.1':'Great that you keep developing the app — I personally use the training-plan upload and the reports a lot. It is all very simple to use, because these are the features that are actually needed 💪',
@@ -1121,14 +858,6 @@
       'b.testi.3':'I have been through plenty of trainer apps by now, and this is the one I have stuck with the longest so far 😄😎',
       'b.testi.4':'Hi 🙂 I use Moventa and it makes my work a lot smoother. And it is great how fast you react to feedback 😊 adding my own exercise videos will come in really handy 💪',
       'b.testi.who':WHO,
-      'b.how.h':'Three steps.<br>No implementation project.',
-      'b.how.p':'We do not integrate with your systems and we do not need access to anything. That is why this moves fast.',
-      'b.how.1.t':'Online demo',
-      'b.how.1.p':'Twenty minutes live: we show the app from the trainer’s side and answer your questions. No sales deck.',
-      'b.how.2.t':'A pilot in one club',
-      'b.how.2.p':'A group of trainers gets access and simply works. We collect their feedback, you see whether the tool actually catches on.',
-      'b.how.3.t':'Roll out across the chain',
-      'b.how.3.p':'The chosen partnership model, materials for the clubs and support for trainers. The rest takes care of itself — the app is downloaded, not installed.',
       'b.models.h':'Three models.<br>They can be combined.',
       'b.models.p':'We adapt to how your chain works — from zero cash cost on your side to a full benefit for the team.',
       'b.models.1.t':'Referral programme',
@@ -1146,7 +875,6 @@
       'b.models.3.b1':'Cost split between the chain and the trainer, or covered in full',
       'b.models.3.b2':'A concrete argument in recruitment and in salary conversations',
       'b.models.3.b3':'The same standard of work across every trainer in the chain',
-      'b.models.note':'The models can be combined, and terms are matched to the size of the chain and the number of trainers. We prepare the actual pricing and proposal individually — write or call and we will send it back the same working day.',
       'b.faq.h':'What clubs ask us.',
       'b.faq.1.q':'Do we need an IT department or an integration with our system?',
       'b.faq.1.a':'No. Moventa is a standalone App Store app — the trainer downloads it onto their phone and starts working. We do not integrate with your membership system or entry cards, so there is nothing for IT to roll out.',
@@ -1166,8 +894,7 @@
       'b.faq.8.a':'Yes — we prepare materials for trainer zones and reception desks, plus communication for the team. In the referral model, putting them up in the clubs improves your terms.',
       'b.cta.mail':'Book a demo',
       'b.cta.call':'Call: +48 669 669 629',
-      'b.contact.h':'Let’s talk<br>about your chain.',
-      'b.contact.p':'Tell us how many trainers work with you day to day and across how many clubs — we will send back a proposal matched to that scale. The online demo takes twenty minutes and commits you to nothing.',
+      'b.contact.h':'Get in touch',
       'b.contact.email':'Email',
       'b.contact.phone':'Phone',
       'b.contact.hours':'Hours',
@@ -1178,7 +905,6 @@
       'b.foot.privacy':'Privacy policy',
       'b.foot.store':'App Store',
       'b.top.back':'Site for trainers',
-      'b.how.step':'Step'
     }
   };
 
