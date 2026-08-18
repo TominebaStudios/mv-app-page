@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moventa for Business — system pracy trenera dla siłowni i klubów fitness</title>
+<meta name="description" content="Moventa for Business to gotowy system pracy dla trenerów personalnych w Waszych klubach: grafik, karnety, finanse, plany treningowe, raporty PDF i baza ćwiczeń z wideo. Bez wdrożenia IT.">
+<link rel="canonical" href="https://moventa.pl/business">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Moventa for Business — system pracy trenera dla siłowni i klubów">
+<meta property="og:description" content="Gotowe narzędzie pracy dla trenerów w Waszych klubach. Wyższa retencja podopiecznych, mniej administracji, zero wdrożenia IT.">
+<meta property="og:url" content="https://moventa.pl/business">
+<meta property="og:image" content="https://moventa.pl/assets/business/logo-business.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     MOVENTA FOR BUSINESS
+     Osobny system wizualny: dokument ofertowy, nie landing page.
+     Platyna zamiast czerwieni, hairline'y zamiast kart z poświatą,
+     kanty 10px zamiast pigułek, siatka zamiast gradientów.
+     ============================================================ */
+  :root{
+    --ink:#07080a;
+    --s1:#0c0e11;
+    --s2:#101317;
+    --s3:#161a1f;
+    --line:rgba(255,255,255,0.075);
+    --line-2:rgba(255,255,255,0.15);
+    --line-3:rgba(255,255,255,0.26);
+    --tx:#f1f3f6;
+    --mu:#98a1ae;
+    --mu-2:#616976;
+    --sig:#ff3b47;
+    --r:10px;
+    --r-2:14px;
+    --w:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
+  body{
+    background-color:var(--ink);
+    background-image:
+      radial-gradient(1100px 460px at 50% -180px, rgba(255,255,255,0.055), transparent 72%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 112px);
+    background-attachment:fixed;
+    color:var(--tx);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.6;
+    letter-spacing:-0.005em;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none}
+  img{display:block; max-width:100%; height:auto}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+  ul{list-style:none}
+  ::selection{background:rgba(255,59,71,0.28)}
+
+  .wrap{width:min(100% - 40px, var(--w)); margin-inline:auto}
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace; letter-spacing:0.12em; text-transform:uppercase; font-size:11px}
+  h1,h2,h3,h4{font-family:'Inter Tight', 'Inter', sans-serif; font-weight:600; letter-spacing:-0.032em; line-height:1.05}
+  h1{font-size:clamp(38px, 5.2vw, 66px)}
+  h2{font-size:clamp(28px, 3.5vw, 44px)}
+  h3{font-size:20px; letter-spacing:-0.024em}
+  p{color:var(--mu)}
+
+  /* ---------- PASEK UŻYTKOWY (nie nawigacja) ---------- */
+  .topbar{ border-bottom:1px solid var(--line); background:rgba(7,8,10,0.7) }
+  .topbar .wrap{ display:flex; align-items:center; justify-content:flex-end; height:46px; gap:16px }
+  .tools{ display:flex; align-items:center; gap:14px; flex:0 0 auto }
+  .lang{ display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden }
+  .lang button{
+    padding:4px 9px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.1em;
+    color:var(--mu-2); transition:.18s;
+  }
+  .lang button.on{ background:rgba(255,255,255,0.09); color:var(--tx) }
+  .back-link{
+    display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mu);
+    transition:color .18s; white-space:nowrap;
+  }
+  .back-link:hover{ color:var(--tx) }
+  .back-link svg{ width:11px; height:11px; opacity:.7 }
+
+  /* ---------- PRZYCISKI ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    padding:13px 22px; border-radius:var(--r);
+    font-size:14.5px; font-weight:600; letter-spacing:-0.01em;
+    border:1px solid transparent; transition:.2s ease;
+  }
+  .btn svg{ width:15px; height:15px }
+  .btn-p{ background:var(--tx); color:#0a0b0d }
+  .btn-p:hover{ background:#fff; transform:translateY(-1px) }
+  .btn-s{ border-color:var(--line-2); color:var(--tx) }
+  .btn-s:hover{ border-color:var(--line-3); background:rgba(255,255,255,0.04) }
+  .btn-row{ display:flex; gap:12px; flex-wrap:wrap }
+
+  /* ---------- SEKCJE ---------- */
+  .sec{ padding:96px 0; border-top:1px solid var(--line); position:relative }
+  .sec-head{ max-width:760px; margin-bottom:56px }
+  .sec-head p{ font-size:17.5px; margin-top:20px; max-width:640px }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:76px 0 84px }
+  .hero-grid{ display:grid; grid-template-columns:1.04fr 0.96fr; gap:64px; align-items:center }
+  .hero-logo{ height:78px; width:auto; margin-bottom:34px }
+  .hero p.lead{ font-size:17.5px; line-height:1.6; margin:26px 0 34px; max-width:560px }
+
+  .plate{
+    position:relative; border:1px solid var(--line); border-radius:var(--r-2);
+    background:linear-gradient(180deg, var(--s1), var(--ink));
+    min-height:530px; overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+    padding:52px 24px 0;
+  }
+  .plate::before{
+    content:''; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 36px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 36px);
+    -webkit-mask-image: radial-gradient(75% 68% at 50% 42%, #000, transparent);
+    mask-image: radial-gradient(75% 68% at 50% 42%, #000, transparent);
+  }
+  .device{
+    position:relative; z-index:1; width:238px; flex:0 0 auto;
+    border-radius:34px; background:#000; padding:6px;
+    border:1px solid rgba(255,255,255,0.16);
+    box-shadow: 0 40px 70px -24px rgba(0,0,0,0.9), 0 0 0 1px rgba(0,0,0,0.6);
+  }
+  .device img{ width:100%; border-radius:28px; display:block }
+  .device.ghost{
+    position:absolute; right:26px; bottom:-56px; width:176px; z-index:0;
+    opacity:0.42; filter:grayscale(0.35);
+  }
+
+
+
+  /* ---------- EKSPLORATOR MODUŁÓW ---------- */
+  .explorer{ border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden; background:var(--s1) }
+  .explorer.js{ display:grid; grid-template-columns:352px 1fr }
+  .mod-rail{ display:none; border-right:1px solid var(--line); background:rgba(0,0,0,0.24) }
+  .explorer.js .mod-rail{ display:block }
+  .mod-rail button{
+    display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:baseline;
+    width:100%; text-align:left; padding:15px 22px;
+    border-bottom:1px solid var(--line); position:relative; transition:background .18s;
+  }
+  .mod-rail button:last-child{ border-bottom:0 }
+  .mod-rail button .i{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--mu-2); transition:color .18s }
+  .mod-rail button .l{ font-size:14.5px; font-weight:500; color:var(--mu); transition:color .18s }
+  .mod-rail button:hover{ background:rgba(255,255,255,0.03) }
+  .mod-rail button:hover .l{ color:var(--tx) }
+  .mod-rail button.on{ background:rgba(255,255,255,0.055) }
+  .mod-rail button.on::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--sig) }
+  .mod-rail button.on .l{ color:var(--tx); font-weight:600 }
+  .mod-rail button.on .i{ color:var(--sig) }
+
+  .mod-panels{ min-width:0 }
+  .explorer.js .mod-panels{ min-height:588px; display:flex; align-items:center }
+  .mod{
+    display:grid; grid-template-columns:1fr auto; gap:52px; align-items:center;
+    padding:48px 52px; width:100%;
+  }
+  .explorer.js .mod{ display:none }
+  .explorer.js .mod.on{ display:grid }
+  .explorer:not(.js) .mod{ border-top:1px solid var(--line) }
+  .explorer:not(.js) .mod:first-child{ border-top:0 }
+  .mod h3{ font-size:clamp(24px, 2.3vw, 31px); margin:0 0 14px; letter-spacing:-0.03em; line-height:1.1 }
+  .mod > .mod-copy > p{ font-size:15.5px; line-height:1.62; max-width:470px }
+  .mod ul{ margin-top:24px; display:flex; flex-direction:column; gap:11px }
+  .mod ul li{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--mu); line-height:1.5 }
+  .mod ul li::before{
+    content:''; flex:0 0 auto; width:5px; height:5px; margin-top:8px; border-radius:1px;
+    background:var(--sig); opacity:.85;
+  }
+  .mod ul li strong{ color:var(--tx); font-weight:600 }
+  .mod-shot{ display:flex; gap:18px; align-items:center; flex:0 0 auto }
+  .mod-shot .device{ width:214px }
+  .mod-shot.two .device{ width:174px }
+  .mod-shot .device.tab{ width:400px; border-radius:20px; padding:8px }
+  .mod-shot .device.tab img{ border-radius:14px }
+
+
+  /* ---------- OPINIE ---------- */
+  .quotes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:34px 40px; padding:12px 0 26px }
+  .q{
+    background:var(--s3); border:1px solid var(--line-2); border-radius:var(--r-2);
+    padding:28px 30px; box-shadow:0 26px 44px -30px rgba(0,0,0,0.95);
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .q:nth-child(1){ transform:rotate(-1.7deg) translate(-6px, 6px) }
+  .q:nth-child(2){ transform:rotate(1.4deg) translate(12px, -16px) }
+  .q:nth-child(3){ transform:rotate(1deg) translate(-10px, 14px) }
+  .q:nth-child(4){ transform:rotate(-2.2deg) translate(8px, -4px) }
+  .q:hover{ transform:rotate(0deg) translate(0, 0); border-color:var(--line-3) }
+  .q .bar{ width:24px; height:2px; background:var(--sig); margin-bottom:18px }
+  .q p{ font-size:15.5px; line-height:1.62; color:var(--tx) }
+  .q .who{ margin-top:20px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--mu-2) }
+  /* ---------- MODELE ---------- */
+  .models{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px }
+  .model{
+    border:1px solid var(--line); border-radius:var(--r-2); background:var(--s1);
+    padding:32px 30px; display:flex; flex-direction:column;
+    transition:border-color .25s ease;
+  }
+  .model:hover{ border-color:var(--line-2) }
+  .model h3{ margin:0 0 12px; font-size:22px }
+  .model > p{ font-size:14.5px; line-height:1.6 }
+  .model ul{ margin-top:22px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:11px }
+  .model ul li{ display:flex; gap:11px; align-items:flex-start; font-size:13.5px; color:var(--mu); line-height:1.5 }
+  .model ul li::before{ content:''; flex:0 0 auto; width:5px; height:5px; margin-top:7px; border-radius:1px; background:var(--line-3) }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ border-top:1px solid var(--line) }
+  .faq{ border-bottom:1px solid var(--line) }
+  .faq summary{
+    list-style:none; cursor:pointer; padding:22px 40px 22px 0; position:relative;
+    font-size:16.5px; font-weight:600; letter-spacing:-0.018em;
+    font-family:'Inter Tight', sans-serif; transition:color .18s;
+  }
+  .faq summary::-webkit-details-marker{ display:none }
+  .faq summary:hover{ color:#fff }
+  .faq summary::after{
+    content:''; position:absolute; right:6px; top:50%; width:11px; height:11px;
+    border-right:1.5px solid var(--mu); border-bottom:1.5px solid var(--mu);
+    transform:translateY(-70%) rotate(45deg); transition:transform .2s;
+  }
+  .faq[open] summary::after{ transform:translateY(-30%) rotate(-135deg) }
+  .faq .ans{ padding:0 60px 26px 0; font-size:15px; color:var(--mu); line-height:1.65; max-width:820px }
+
+  /* ---------- ZAMKNIĘCIE / KONTAKT ---------- */
+  .close-box{
+    border:1px solid var(--line-2); border-radius:var(--r-2); overflow:hidden;
+    background:linear-gradient(180deg, var(--s2), var(--s1));
+  }
+  .close-top{ padding:56px 56px 48px; display:grid; grid-template-columns:1fr auto; gap:44px; align-items:center }
+  .close-top .logo{ height:56px; width:auto; margin-bottom:24px }
+  .close-top h2{ max-width:520px }
+  .close-top p{ font-size:16px; margin-top:16px; max-width:520px }
+  .close-actions{ display:flex; flex-direction:column; gap:11px; min-width:250px }
+  .close-actions .btn{ width:100% }
+  .close-grid{ display:grid; grid-template-columns:repeat(3, 1fr); border-top:1px solid var(--line) }
+  .close-cell{ padding:24px 30px; border-left:1px solid var(--line) }
+  .close-cell:first-child{ border-left:0 }
+  .close-cell .k{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--mu-2) }
+  .close-cell .v{ font-size:15.5px; font-weight:600; margin-top:7px; display:block }
+  a.close-cell:hover .v{ color:#fff }
+
+  /* ---------- STOPKA ---------- */
+  footer{ border-top:1px solid var(--line); padding:34px 0 44px; margin-top:96px }
+  .foot{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap }
+  .foot p, .foot a{ font-size:13px; color:var(--mu-2) }
+  .foot a:hover{ color:var(--tx) }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap }
+
+  /* ---------- WEJŚCIE W WIDOK ---------- */
+  .rv{ opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease }
+  .rv.in{ opacity:1; transform:none }
+  @media (prefers-reduced-motion: reduce){
+    .rv{ opacity:1; transform:none; transition:none }
+    html{ scroll-behavior:auto }
+  }
+
+  /* ---------- RESPONSYWNOŚĆ ---------- */
+  @media (max-width: 1080px){
+    .explorer.js{ grid-template-columns:300px 1fr }
+    .mod{ padding:40px 36px; gap:36px }
+    .mod-shot .device{ width:186px }
+    .mod-shot.two .device{ width:146px }
+    .mod-shot .device.tab{ width:330px }
+  }
+  @media (max-width: 900px){
+    .sec{ padding:72px 0 }
+    .hero{ padding:52px 0 64px }
+    .hero-grid{ grid-template-columns:1fr; gap:52px }
+    .plate{ min-height:0; padding:44px 20px 0 }
+    .device.ghost{ display:none }
+    /* eksplorator: bez szyny, wszystko rozwinięte */
+    .explorer.js{ display:block }
+    .explorer.js .mod-rail{ display:none }
+    .explorer.js .mod-panels{ min-height:0; display:block }
+    .explorer.js .mod{ display:grid }
+    .explorer .mod{ border-top:1px solid var(--line); grid-template-columns:1fr; gap:30px; padding:34px 26px }
+    .explorer .mod:first-child{ border-top:0 }
+    .mod-shot{ justify-content:flex-start }
+    .mod-shot .device{ width:206px }
+    .mod-shot.two .device{ width:150px }
+    .mod-shot .device.tab{ width:100% ; max-width:420px}
+    .quotes{ grid-template-columns:1fr; gap:20px; padding:6px 0 12px }
+    .q{ padding:24px 22px }
+    .q:nth-child(1){ transform:rotate(-1deg) }
+    .q:nth-child(2){ transform:rotate(1.1deg) }
+    .q:nth-child(3){ transform:rotate(0.8deg) }
+    .q:nth-child(4){ transform:rotate(-1.2deg) }
+    .models{ grid-template-columns:1fr }
+    .close-top{ grid-template-columns:1fr; padding:40px 28px 34px; gap:30px }
+    .close-actions{ min-width:0 }
+    .close-grid{ grid-template-columns:1fr }
+    .close-cell{ border-left:0; border-top:1px solid var(--line) }
+    .close-cell:first-child{ border-top:0 }
+  }
+  @media (max-width: 560px){
+    /* na wąskich ekranach zrzuty skalują się do szerokości karty, zamiast ją rozpychać */
+    .explorer .mod{ grid-template-columns:minmax(0, 1fr); padding:30px 20px }
+    .mod-copy{ min-width:0 }
+    .mod-shot{ width:100%; gap:10px }
+    .mod-shot .device{ width:auto; flex:1 1 0; min-width:0; max-width:212px }
+    .mod-shot .device.tab{ width:auto; max-width:none }
+    .hero-logo{ height:58px; margin-bottom:26px }
+    .btn-row .btn{ width:100% }
+    .mod-shot.two{ gap:12px }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Język">
+        <button class="on" data-lang="pl">PL</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="index.html" class="back-link">
+        <span data-i18n="b.top.back">Strona dla trenerów</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <img class="hero-logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
+      <h1 data-i18n="b.hero.title" data-i18n-html="true">Wasi trenerzy.<br>Jeden system.</h1>
+      <p class="lead" data-i18n="b.hero.lead">Moventa to gotowe narzędzie pracy trenera personalnego — grafik, karnety, finanse, plany treningowe, pomiary i raporty w jednej aplikacji. Trener przestaje prowadzić klientów w zeszycie i Excelu, a podopieczny widzi swoje efekty czarno na białym.</p>
+      <div class="btn-row">
+        <a href="#kontakt" class="btn btn-p">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-i18n="b.hero.cta">Umów prezentację</span>
+        </a>
+        <a href="#moduly" class="btn btn-s"><span data-i18n="b.hero.see">Poznaj wszystkie moduły</span></a>
+      </div>
+    </div>
+
+    <div class="plate">
+      <div class="device ghost">
+        <img src="assets/business/kalendarz.webp" alt="" width="640" height="1391" loading="lazy">
+      </div>
+      <div class="device">
+        <img src="assets/business/panel.webp" alt="Panel trenera w aplikacji Moventa" width="640" height="1391">
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ===================== 02 · MODUŁY ===================== -->
+<section class="sec" id="moduly">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.feat.h" data-i18n-html="true">Wszystko, co trener robi<br>poza samym treningiem.</h2>
+      <p data-i18n="b.feat.p">Dwanaście modułów, które razem zastępują zeszyt, arkusz kalkulacyjny, komunikator i kalendarz. Wybierzcie moduł z listy, żeby zobaczyć ekran z aplikacji.</p>
+    </div>
+
+    <div class="explorer rv" id="explorer">
+      <div class="mod-rail" role="tablist" aria-label="Moduły aplikacji">
+        <button type="button" data-mod="01"><span class="i">01</span><span class="l" data-i18n="b.f01.k">Panel trenera</span></button>
+        <button type="button" data-mod="02"><span class="i">02</span><span class="l" data-i18n="b.f02.k">Kalendarz tygodnia</span></button>
+        <button type="button" data-mod="03"><span class="i">03</span><span class="l" data-i18n="b.f03.k">Panel podopiecznego</span></button>
+        <button type="button" data-mod="04"><span class="i">04</span><span class="l" data-i18n="b.f04.k">Zapis treningu</span></button>
+        <button type="button" data-mod="05"><span class="i">05</span><span class="l" data-i18n="b.f05.k">Baza ćwiczeń</span></button>
+        <button type="button" data-mod="06"><span class="i">06</span><span class="l" data-i18n="b.f06.k">Finanse</span></button>
+        <button type="button" data-mod="07"><span class="i">07</span><span class="l" data-i18n="b.f07.k">Karnety</span></button>
+        <button type="button" data-mod="08"><span class="i">08</span><span class="l" data-i18n="b.f08.k">Pomiary i progres</span></button>
+        <button type="button" data-mod="09"><span class="i">09</span><span class="l" data-i18n="b.f09.k">Raport PDF</span></button>
+        <button type="button" data-mod="10"><span class="i">10</span><span class="l" data-i18n="b.f10.k">Własne ćwiczenia</span></button>
+        <button type="button" data-mod="11"><span class="i">11</span><span class="l" data-i18n="b.f11.k">Plany treningowe</span></button>
+        <button type="button" data-mod="12"><span class="i">12</span><span class="l" data-i18n="b.f12.k">Synchronizacja</span></button>
+      </div>
+
+      <div class="mod-panels">
+      <article class="mod" data-mod="01">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f01.t">Cały dzień trenera na jednym ekranie</h3>
+          <p data-i18n="b.f01.p">Po otwarciu aplikacji trener od razu widzi, co go dziś czeka — bez przewijania kalendarza i szukania w notatkach.</p>
+          <ul>
+            <li><span data-i18n="b.f01.b1" data-i18n-html="true"><strong>Harmonogram dnia</strong> — lista sesji z godzinami i nazwiskami podopiecznych</span></li>
+            <li><span data-i18n="b.f01.b2" data-i18n-html="true"><strong>Trening w toku</strong> podświetlony, z paskiem postępu sesji</span></li>
+            <li><span data-i18n="b.f01.b3" data-i18n-html="true"><strong>Szybkie skróty</strong> do podopiecznych, kalendarza, finansów i własnych ćwiczeń</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/panel.webp" alt="Panel trenera w aplikacji Moventa" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="02">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f02.t">Grafik całego tygodnia w jednym widoku</h3>
+          <p data-i18n="b.f02.p">Każdy typ sesji ma swój kolor, więc trener jednym spojrzeniem odróżnia trening grupowy od konsultacji czy spotkania online.</p>
+          <ul>
+            <li><span data-i18n="b.f02.b1" data-i18n-html="true"><strong>Kolory typów sesji</strong> — 1:1, grupowy, konsultacja, online</span></li>
+            <li><span data-i18n="b.f02.b2" data-i18n-html="true"><strong>Zaległe płatności na czerwono</strong> — widać je w grafiku, zanim urosną</span></li>
+            <li><span data-i18n="b.f02.b3" data-i18n-html="true"><strong>Podsumowanie tygodnia</strong> na dole ekranu: sesje, godziny, przychód</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/kalendarz.webp" alt="Kalendarz tygodnia w aplikacji Moventa" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="03">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f03.t">Efekty klienta czarno na białym</h3>
+          <p data-i18n="b.f03.p">To ekran, który trener pokazuje podopiecznemu na sali. Najlepszy argument za przedłużeniem współpracy, jaki może mieć.</p>
+          <ul>
+            <li><span data-i18n="b.f03.b1" data-i18n-html="true"><strong>Automatyczne rekordy</strong> — aplikacja sama oznacza życiówki i przyrost obciążenia</span></li>
+            <li><span data-i18n="b.f03.b2" data-i18n-html="true"><strong>Podsumowanie tygodnia</strong> z porównaniem do poprzedniego: progres, tonaż, rekordy</span></li>
+            <li><span data-i18n="b.f03.b3" data-i18n-html="true"><strong>Statystyki bez ręcznego liczenia</strong> — tonaż, liczba treningów, objętość</span></li>
+            <li><span data-i18n="b.f03.b4" data-i18n-html="true"><strong>Rekord, 1RM i wykres trendu</strong> dla każdego ćwiczenia</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/podopieczny.webp" alt="Panel podopiecznego ze statystykami" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="04">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f04.t">Serie zapisywane w trakcie sesji, na sali</h3>
+          <p data-i18n="b.f04.p">Trener nie musi nic przepisywać po treningu — wszystko powstaje na bieżąco, między seriami.</p>
+          <ul>
+            <li><span data-i18n="b.f04.b1" data-i18n-html="true"><strong>Ciężar, powtórzenia i RIR</strong> dla każdej serii</span></li>
+            <li><span data-i18n="b.f04.b2" data-i18n-html="true"><strong>Widoczny rekord i szacowane 1RM</strong> przy ćwiczeniu</span></li>
+            <li><span data-i18n="b.f04.b3" data-i18n-html="true"><strong>Timer przerw</strong> i dodawanie kolejnych serii jednym tapnięciem</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/trening.webp" alt="Zapis serii treningowej" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="05">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f05.t">Gotowa biblioteka ćwiczeń z filmami instruktażowymi</h3>
+          <p data-i18n="b.f05.p">Trener pokazuje technikę bez wychodzenia z aplikacji, a nowy pracownik nie musi budować własnej bazy od zera.</p>
+          <ul>
+            <li><span data-i18n="b.f05.b1" data-i18n-html="true"><strong>Filmy instruktażowe</strong> do ćwiczeń w całej bazie</span></li>
+            <li><span data-i18n="b.f05.b2" data-i18n-html="true"><strong>Ponad 50 filtrów</strong> — partia mięśniowa, sprzęt, cel, poziom, biomechanika</span></li>
+            <li><span data-i18n="b.f05.b3" data-i18n-html="true"><strong>Ulubione ćwiczenia</strong> trenera zawsze pod ręką</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot two">
+          <div class="device"><img src="assets/business/baza-cwiczen.webp" alt="Baza ćwiczeń z filmami" width="640" height="1388" loading="lazy"></div>
+          <div class="device"><img src="assets/business/filtry.webp" alt="Filtry bazy ćwiczeń" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="06">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f06.t">Trener wie, ile zarobił. Bez Excela.</h3>
+          <p data-i18n="b.f06.p">Rozliczenia przestają być comiesięcznym wieczorem z kalkulatorem — a to zwykle pierwsza rzecz, która odpada z grafiku pracy z klientem.</p>
+          <ul>
+            <li><span data-i18n="b.f06.b1" data-i18n-html="true"><strong>Podsumowanie zarobków</strong> — przychód miesiąca, sesje, średnia na sesję</span></li>
+            <li><span data-i18n="b.f06.b2" data-i18n-html="true"><strong>Podział wg typu sesji</strong> — grupowe, 1:1, konsultacje i online rozbite na złotówki</span></li>
+            <li><span data-i18n="b.f06.b3" data-i18n-html="true"><strong>Ranking podopiecznych</strong> z liczbą sesji i wartością współpracy</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/finanse.webp" alt="Panel finansów trenera" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="07">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f07.t">Zero zaległości w wejściach</h3>
+          <p data-i18n="b.f07.p">Najczęstsze źródło niezręcznych rozmów z klientem — „ile mi jeszcze zostało?” — znika z listy problemów.</p>
+          <ul>
+            <li><span data-i18n="b.f07.b1" data-i18n-html="true"><strong>Licznik wejść</strong> — wykorzystane, pozostałe i długość karnetu od razu widoczne</span></li>
+            <li><span data-i18n="b.f07.b2" data-i18n-html="true"><strong>Finanse karnetu</strong> — cena wejścia, wartość bieżącego karnetu i suma całej współpracy</span></li>
+            <li><span data-i18n="b.f07.b3" data-i18n-html="true"><strong>Przypomnienie o odnowieniu</strong>, gdy karnet dobiega końca</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/karnet.webp" alt="Karnet podopiecznego z licznikiem wejść" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="08">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f08.t">Sylwetka i siła w jednym miejscu</h3>
+          <p data-i18n="b.f08.p">Pomiary przestają żyć w zeszycie, a trener ma czym udowodnić postęp również wtedy, gdy waga stoi w miejscu.</p>
+          <ul>
+            <li><span data-i18n="b.f08.b1" data-i18n-html="true"><strong>Pomiary ciała</strong> — obwody, waga i WHR z datą wpisu oraz zmianą od ostatniego pomiaru</span></li>
+            <li><span data-i18n="b.f08.b2" data-i18n-html="true"><strong>Progres siłowy</strong> — wykres ciężaru i powtórzeń dla każdego ćwiczenia</span></li>
+            <li><span data-i18n="b.f08.b3" data-i18n-html="true"><strong>Bilans okresu</strong> — początek, koniec i zmiana w jednym rzucie oka</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot two">
+          <div class="device"><img src="assets/business/pomiary.webp" alt="Pomiary ciała podopiecznego" width="640" height="1388" loading="lazy"></div>
+          <div class="device"><img src="assets/business/progres.webp" alt="Wykresy progresu siłowego" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="09">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f09.t">Klient dostaje dokument, nie SMS-a</h3>
+          <p data-i18n="b.f09.p">Jeden plik, który podopieczny może pokazać rodzinie, zachować i porównać za pół roku. Dla klubu to darmowa reklama krążąca poza salą.</p>
+          <ul>
+            <li><span data-i18n="b.f09.b1" data-i18n-html="true"><strong>Pomiary i wykresy</strong> zebrane w jednym dokumencie</span></li>
+            <li><span data-i18n="b.f09.b2" data-i18n-html="true"><strong>Wysyłka jednym kliknięciem</strong> — mailem lub komunikatorem</span></li>
+            <li><span data-i18n="b.f09.b3" data-i18n-html="true"><strong>Gotowy do druku</strong> układ dla klienta, który woli papier</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/raport-pdf.webp" alt="Raport PDF z progresem" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="10">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f10.t">Wasz sprzęt, wasze filmy</h3>
+          <p data-i18n="b.f10.p">To funkcja, która robi największą różnicę w sieci klubów: trener nagrywa ćwiczenie na maszynie, która naprawdę stoi u Was na sali.</p>
+          <ul>
+            <li><span data-i18n="b.f10.b1" data-i18n-html="true"><strong>Własne nagranie</strong> ćwiczenia prosto z telefonu, na Waszym sprzęcie</span></li>
+            <li><span data-i18n="b.f10.b2" data-i18n-html="true"><strong>Wybór klatki na miniaturkę</strong>, opis i przypisanie filtrów</span></li>
+            <li><span data-i18n="b.f10.b3" data-i18n-html="true"><strong>Baza rośnie razem z klubem</strong> — po każdej nowej maszynie czy zmianie układu sali</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device"><img src="assets/business/wlasne-cwiczenia.webp" alt="Dodawanie własnego ćwiczenia z filmem" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="11">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f11.t">Plan w aplikacji, PDF dla podopiecznego</h3>
+          <p data-i18n="b.f11.p">Szablony zamiast pisania planu od nowa dla każdej osoby — i gotowy dokument, który klient dostaje od ręki.</p>
+          <ul>
+            <li><span data-i18n="b.f11.b1" data-i18n-html="true"><strong>Szablony planów</strong> do wielokrotnego użycia</span></li>
+            <li><span data-i18n="b.f11.b2" data-i18n-html="true"><strong>Pełne parametry serii</strong> — ćwiczenia, ciężary i powtórzenia w jednym miejscu</span></li>
+            <li><span data-i18n="b.f11.b3" data-i18n-html="true"><strong>Eksport do PDF</strong> i wysyłka podopiecznemu prosto z aplikacji</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot two">
+          <div class="device"><img src="assets/business/plan-szablon.webp" alt="Szablon planu treningowego" width="640" height="1388" loading="lazy"></div>
+          <div class="device"><img src="assets/business/plan-pdf.webp" alt="Plan treningowy wyeksportowany do PDF" width="640" height="1388" loading="lazy"></div>
+        </div>
+      </article>
+      <article class="mod" data-mod="12">
+        <div class="mod-copy">
+          <h3 data-i18n="b.f12.t">iPhone i iPad, jednocześnie</h3>
+          <p data-i18n="b.f12.p">Trener zapisuje trening na telefonie przy stanowisku, a na tablecie w recepcji ma go od razu — bez eksportów i przesyłania plików.</p>
+          <ul>
+            <li><span data-i18n="b.f12.b1" data-i18n-html="true"><strong>Praca na dwóch urządzeniach</strong> w tym samym czasie</span></li>
+            <li><span data-i18n="b.f12.b2" data-i18n-html="true"><strong>Zmiany widoczne od razu</strong> na obu ekranach</span></li>
+            <li><span data-i18n="b.f12.b3" data-i18n-html="true"><strong>Większy ekran do rozmowy z klientem</strong> — wykresy i pomiary czytelne z drugiej strony biurka</span></li>
+          </ul>
+        </div>
+        <div class="mod-shot">
+          <div class="device tab"><img src="assets/business/tablet.webp" alt="Moventa na iPadzie" width="980" height="1410" loading="lazy"></div>
+        </div>
+      </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== 04 · OPINIE ===================== -->
+<section class="sec" id="opinie">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.testi.h">Co mówią trenerzy, którzy już z niej pracują.</h2>
+      <p data-i18n="b.testi.p">Wiadomości od trenerów personalnych korzystających z Moventy na co dzień.</p>
+    </div>
+    <div class="quotes rv">
+      <div class="q">
+        <div class="bar"></div>
+        <p data-i18n="b.testi.1">Super, fajnie że rozwijacie aplikację — ja generalnie bardzo dużo korzystam z samej funkcji wrzucania planów treningowych i tych raportów. Bardzo prosto się tego wszystkiego używa, bo są te funkcje, które są faktycznie potrzebne 💪</p>
+        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      </div>
+      <div class="q">
+        <div class="bar"></div>
+        <p data-i18n="b.testi.2">Siemka, mega zmiana na plus 😎 naprawdę doceniam za wzięcie moich uwag i wprowadzenie ich do aplikacji. Dzięki wielkie 🙌 Będę informował i proponował kolejne zmiany, aby aplikacja była jeszcze lepsza!</p>
+        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      </div>
+      <div class="q">
+        <div class="bar"></div>
+        <p data-i18n="b.testi.3">Generalnie przeleciałem już dużo aplikacji dla trenerów i chyba przy tej trzymam się póki co najdłużej 😄😎</p>
+        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      </div>
+      <div class="q">
+        <div class="bar"></div>
+        <p data-i18n="b.testi.4">Hej 🙂 używam aplikacji Moventa, bardzo usprawnia mi pracę. I mega, że tak szybko reagujecie na uwagi 😊 dodawanie własnych filmików do ćwiczeń bardzo mi się przyda 💪</p>
+        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== 06 · MODELE ===================== -->
+<section class="sec" id="wspolpraca">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.models.h" data-i18n-html="true">Trzy modele.<br>Można je łączyć.</h2>
+      <p data-i18n="b.models.p">Dopasowujemy się do tego, jak działa Wasza sieć — od zera kosztu po Waszej stronie po pełny benefit dla zespołu.</p>
+    </div>
+    <div class="models rv">
+      <div class="model">
+        <h3 data-i18n="b.models.1.t">Program partnerski</h3>
+        <p data-i18n="b.models.1.p">Polecacie Moventę swoim trenerom — kodem lub linkiem polecającym — a my dzielimy się z Wami przychodem z każdej subskrypcji, która z tego powstanie.</p>
+        <ul>
+          <li data-i18n="b.models.1.b1">Zero kosztu gotówkowego po Waszej stronie</li>
+          <li data-i18n="b.models.1.b2">Rozliczenie od faktycznie pozyskanych trenerów</li>
+          <li data-i18n="b.models.1.b3">Lepsze warunki przy materiałach promocyjnych w klubach</li>
+        </ul>
+      </div>
+      <div class="model">
+        <h3 data-i18n="b.models.2.t">Licencja zbiorcza</h3>
+        <p data-i18n="b.models.2.p">Wykupujecie pakiet licencji dla trenerów w sieci i dostajecie jedną fakturę zbiorczą zamiast rozproszonych subskrypcji.</p>
+        <ul>
+          <li data-i18n="b.models.2.b1">Jedna faktura, jeden termin, jeden kontakt</li>
+          <li data-i18n="b.models.2.b2">Im większy zespół, tym korzystniejsze warunki</li>
+          <li data-i18n="b.models.2.b3">Dodatkowy upust przy rozliczeniu rocznym</li>
+        </ul>
+      </div>
+      <div class="model">
+        <h3 data-i18n="b.models.3.t">Benefit pracowniczy</h3>
+        <p data-i18n="b.models.3.p">Moventa wchodzi do pakietu benefitów dla trenerów jako element employer brandingu — narzędzie pracy, nie karta sportowa.</p>
+        <ul>
+          <li data-i18n="b.models.3.b1">Koszt dzielony między sieć a trenera lub pokryty w całości</li>
+          <li data-i18n="b.models.3.b2">Konkretny argument w rekrutacji i rozmowie o warunkach</li>
+          <li data-i18n="b.models.3.b3">Ten sam standard pracy u wszystkich trenerów w sieci</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 · FAQ ===================== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.faq.h">O co pytają kluby.</h2>
+    </div>
+    <div class="faq-list rv">
+      <details class="faq">
+        <summary data-i18n="b.faq.1.q">Czy potrzebujemy działu IT albo integracji z naszym systemem?</summary>
+        <div class="ans" data-i18n="b.faq.1.a">Nie. Moventa jest niezależną aplikacją w App Store — trener pobiera ją na swój telefon i zaczyna pracę. Nie integrujemy się z Waszym systemem członkowskim ani kartami wejść, więc nie ma czego wdrażać po stronie IT.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.2.q">Czy sieć będzie miała dostęp do danych podopiecznych?</summary>
+        <div class="ans" data-i18n="b.faq.2.a">Nie — i to jest celowe. Dane treningowe zostają na urządzeniu trenera. Sieć nie staje się administratorem danych zdrowotnych i treningowych klientów, więc nie powstaje po Waszej stronie nowy obowiązek RODO ani nowa baza do zabezpieczenia.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.3.q">Czy trenerzy i podopieczni muszą zakładać konta?</summary>
+        <div class="ans" data-i18n="b.faq.3.a">Nie. Żadnej rejestracji ani logowania — po pobraniu aplikacja jest od razu gotowa do pracy. Podopieczni w ogóle nie potrzebują aplikacji: dostają od trenera gotowy raport PDF.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.4.q">Na jakich urządzeniach działa aplikacja?</summary>
+        <div class="ans" data-i18n="b.faq.4.a">iPhone i iPad z iOS 17 lub nowszym, z synchronizacją między nimi. Wersja na Androida jest w planach — przy większym wdrożeniu chętnie porozmawiamy o priorytetach.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.5.q">Czy możemy dodać ćwiczenia na naszym sprzęcie?</summary>
+        <div class="ans" data-i18n="b.faq.5.a">Tak. Trener nagrywa ćwiczenie telefonem na maszynie stojącej u Was na sali, wybiera klatkę na miniaturkę, dodaje opis i filtry. Baza rośnie razem z wyposażeniem klubu.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.6.q">Czy aplikacja działa bez internetu?</summary>
+        <div class="ans" data-i18n="b.faq.6.a">Tak, w pełni. To ważne w podziemnych strefach siłowni i halach, gdzie zasięg bywa kapryśny — trener zapisuje serie tam, gdzie stoi ze sztangą.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.7.q">Czy da się przetestować to na małej grupie przed decyzją?</summary>
+        <div class="ans" data-i18n="b.faq.7.a">Tak i szczerze to polecamy. Pilotaż z grupą trenerów w jednym klubie pokazuje w kilka tygodni, czy narzędzie się przyjmuje — bez zobowiązania dla całej sieci.</div>
+      </details>
+      <details class="faq">
+        <summary data-i18n="b.faq.8.q">Czy dostaniemy materiały do klubów?</summary>
+        <div class="ans" data-i18n="b.faq.8.a">Tak — przygotowujemy materiały do stref trenerskich i recepcji oraz komunikację dla zespołu. Przy modelu partnerskim wystawienie ich w klubach poprawia warunki rozliczenia.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KONTAKT ===================== -->
+<section class="sec" id="kontakt">
+  <div class="wrap">
+    <div class="close-box rv">
+      <div class="close-top">
+        <div>
+          <img class="logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
+          <h2 data-i18n="b.contact.h">Skontaktuj się z nami</h2>
+        </div>
+        <div class="close-actions">
+          <a href="mailto:support@moventa.pl?subject=Moventa%20for%20Business%20%E2%80%94%20prezentacja" class="btn btn-p">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="b.cta.mail">Umów prezentację</span>
+          </a>
+          <a href="tel:+48669669629" class="btn btn-s"><span data-i18n="b.cta.call">Zadzwoń: +48 669 669 629</span></a>
+          <a href="https://apps.apple.com/pl/app/moventa-personal-trainer-app/id6754777415" class="btn btn-s">
+            <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span data-i18n="b.contact.card.cta">Zobaczcie ją sami w App Store</span>
+          </a>
+        </div>
+      </div>
+      <div class="close-grid">
+        <a class="close-cell" href="mailto:support@moventa.pl?subject=Moventa%20for%20Business">
+          <div class="k" data-i18n="b.contact.email">E-mail</div>
+          <span class="v">support@moventa.pl</span>
+        </a>
+        <a class="close-cell" href="tel:+48669669629">
+          <div class="k" data-i18n="b.contact.phone">Telefon</div>
+          <span class="v">+48 669 669 629</span>
+        </a>
+        <div class="close-cell">
+          <div class="k" data-i18n="b.contact.hours">Godziny</div>
+          <span class="v" data-i18n="b.contact.hours-v">Pon — pt · 8:00 — 18:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>© <span id="year">2026</span> Moventa · <span data-i18n="b.foot.tag">Narzędzie pracy trenera personalnego. Stworzone w Polsce.</span></p>
+    <div class="foot-links">
+      <a href="index.html" data-i18n="b.foot.main">Strona dla trenerów</a>
+      <a href="privacy.html" data-i18n="b.foot.privacy">Polityka prywatności</a>
+      <a href="https://apps.apple.com/pl/app/moventa-personal-trainer-app/id6754777415" data-i18n="b.foot.store">App Store</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- wejście sekcji w widok --- */
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* --- eksplorator modułów: szyna + panel (bez JS wszystko po prostu leci w pionie) --- */
+  (function(){
+    const ex = document.getElementById('explorer');
+    if (!ex) return;
+    const tabs = [...ex.querySelectorAll('.mod-rail button')];
+    const mods = [...ex.querySelectorAll('.mod')];
+    if (!tabs.length) return;
+    ex.classList.add('js');
+    function show(id){
+      tabs.forEach(t => t.classList.toggle('on', t.dataset.mod === id));
+      mods.forEach(m => m.classList.toggle('on', m.dataset.mod === id));
+      mods.forEach(m => { if (m.dataset.mod === id) m.querySelectorAll('img[loading="lazy"]').forEach(i => i.loading = 'eager'); });
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t.dataset.mod));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        const n = tabs[(i + d + tabs.length) % tabs.length];
+        n.focus(); show(n.dataset.mod);
+      });
+    });
+    show(tabs[0].dataset.mod);
+  })();
+
+  /* --- PL / EN --- */
+  const WHO = 'Personal trainer · Moventa user';
+  const dict = {
+    pl: {},
+    en: {
+      'b.hero.eyebrow':'For fitness chains, clubs and training studios',
+      'b.hero.title':'Your trainers.<br>One <em>system</em>.',
+      'b.hero.lead':'Moventa is a ready-made working tool for personal trainers — schedule, passes, finances, training plans, measurements and reports in one app. Trainers stop running clients out of a notebook and a spreadsheet, and clients see their results in black and white.',
+      'b.hero.cta':'Book a demo',
+      'b.hero.see':'Explore all modules',
+      'b.feat.h':'Everything a trainer does<br>besides the training itself.',
+      'b.feat.p':'Twelve modules that together replace a notebook, a spreadsheet, a messenger and a calendar. Pick a module from the list to see the screen from the app.',
+      'b.f01.k':'Trainer dashboard',
+      'b.f01.t':'The whole day on one screen',
+      'b.f01.p':'The moment the app opens, the trainer sees what is ahead today — no scrolling through a calendar, no digging through notes.',
+      'b.f01.b1':'<strong>Today’s schedule</strong> — sessions with times and client names',
+      'b.f01.b2':'<strong>Session in progress</strong> highlighted, with a progress bar',
+      'b.f01.b3':'<strong>Quick shortcuts</strong> to clients, calendar, finances and custom exercises',
+      'b.f02.k':'Weekly calendar',
+      'b.f02.t':'The whole week in a single view',
+      'b.f02.p':'Every session type has its own colour, so a trainer tells a group session from a consultation or an online meeting at a glance.',
+      'b.f02.b1':'<strong>Colour-coded session types</strong> — 1:1, group, consultation, online',
+      'b.f02.b2':'<strong>Overdue payments in red</strong> — visible in the schedule before they pile up',
+      'b.f02.b3':'<strong>Weekly summary</strong> at the bottom: sessions, hours, revenue',
+      'b.f03.k':'Client profile',
+      'b.f03.t':'Client results in black and white',
+      'b.f03.p':'This is the screen a trainer shows the client on the gym floor. The best argument for extending the collaboration they can have.',
+      'b.f03.b1':'<strong>Automatic records</strong> — the app flags PRs and load increases by itself',
+      'b.f03.b2':'<strong>Weekly summary</strong> compared to the previous one: progress, tonnage, records',
+      'b.f03.b3':'<strong>Statistics with no manual maths</strong> — tonnage, number of workouts, volume',
+      'b.f03.b4':'<strong>Record, 1RM and a trend chart</strong> for every exercise',
+      'b.f04.k':'Logging a workout',
+      'b.f04.t':'Sets logged during the session, on the floor',
+      'b.f04.p':'Nothing has to be rewritten after the session — it all takes shape as it happens, between sets.',
+      'b.f04.b1':'<strong>Weight, reps and RIR</strong> for every set',
+      'b.f04.b2':'<strong>Visible record and estimated 1RM</strong> next to the exercise',
+      'b.f04.b3':'<strong>Rest timer</strong> and adding the next set in one tap',
+      'b.f05.k':'Exercise library',
+      'b.f05.t':'A ready library of exercises with instructional video',
+      'b.f05.p':'The trainer demonstrates technique without leaving the app, and a new hire does not have to build their own library from scratch.',
+      'b.f05.b1':'<strong>Instructional videos</strong> across the library',
+      'b.f05.b2':'<strong>Over 50 filters</strong> — muscle group, equipment, goal, level, biomechanics',
+      'b.f05.b3':'<strong>Favourites</strong> always within reach',
+      'b.f06.k':'Finances',
+      'b.f06.t':'Trainers know what they earned. Without a spreadsheet.',
+      'b.f06.p':'Settling up stops being a monthly evening with a calculator — usually the first thing to get cut from time spent with clients.',
+      'b.f06.b1':'<strong>Earnings summary</strong> — monthly revenue, sessions, average per session',
+      'b.f06.b2':'<strong>Split by session type</strong> — group, 1:1, consultations and online, broken down in złoty',
+      'b.f06.b3':'<strong>Client ranking</strong> with session count and value of the collaboration',
+      'b.f07.k':'Passes',
+      'b.f07.t':'No more unpaid entries slipping through',
+      'b.f07.p':'The most common source of awkward client conversations — “how many do I have left?” — drops off the list.',
+      'b.f07.b1':'<strong>Entry counter</strong> — used, remaining and pass length visible instantly',
+      'b.f07.b2':'<strong>Pass finances</strong> — price per entry, value of the current pass and the whole collaboration',
+      'b.f07.b3':'<strong>Renewal reminder</strong> as the pass runs out',
+      'b.f08.k':'Measurements & strength',
+      'b.f08.t':'Body and strength in one place',
+      'b.f08.p':'Measurements stop living in a notebook, and the trainer can prove progress even when the scale refuses to move.',
+      'b.f08.b1':'<strong>Body measurements</strong> — circumferences, weight and WHR with dates and change since last entry',
+      'b.f08.b2':'<strong>Strength progression</strong> — weight and rep charts for every exercise',
+      'b.f08.b3':'<strong>Period balance</strong> — start, end and change at a glance',
+      'b.f09.k':'PDF report',
+      'b.f09.t':'The client gets a document, not a text message',
+      'b.f09.p':'One file the client can show their family, keep, and compare six months later. For the club, that is free advertising travelling outside the gym.',
+      'b.f09.b1':'<strong>Measurements and charts</strong> gathered in one document',
+      'b.f09.b2':'<strong>Sent in one tap</strong> — by email or messenger',
+      'b.f09.b3':'<strong>Print-ready</strong> layout for clients who prefer paper',
+      'b.f10.k':'Custom exercises',
+      'b.f10.t':'Your equipment, your videos',
+      'b.f10.p':'This is the feature that matters most in a chain: the trainer records an exercise on a machine that actually stands on your floor.',
+      'b.f10.b1':'<strong>Your own recording</strong> straight from a phone, on your equipment',
+      'b.f10.b2':'<strong>Pick the thumbnail frame</strong>, add a description and assign filters',
+      'b.f10.b3':'<strong>The library grows with the club</strong> — after every new machine or floor layout change',
+      'b.f11.k':'Training plans',
+      'b.f11.t':'The plan in the app, a PDF for the client',
+      'b.f11.p':'Templates instead of writing a plan from scratch for every person — and a finished document the client gets on the spot.',
+      'b.f11.b1':'<strong>Reusable plan templates</strong>',
+      'b.f11.b2':'<strong>Full set parameters</strong> — exercises, weights and reps in one place',
+      'b.f11.b3':'<strong>Export to PDF</strong> and send it to the client straight from the app',
+      'b.f12.k':'Data sync',
+      'b.f12.t':'iPhone and iPad, at the same time',
+      'b.f12.p':'A workout logged on the phone by the rack is already there on the tablet at reception — no exports, no sending files around.',
+      'b.f12.b1':'<strong>Two devices at once</strong>',
+      'b.f12.b2':'<strong>Changes appear instantly</strong> on both screens',
+      'b.f12.b3':'<strong>A bigger screen for the client conversation</strong> — charts and measurements readable from across the desk',
+      'b.testi.h':'What trainers already working with it say.',
+      'b.testi.p':'Messages from personal trainers using Moventa day to day.',
+      'b.testi.1':'Great that you keep developing the app — I personally use the training-plan upload and the reports a lot. It is all very simple to use, because these are the features that are actually needed 💪',
+      'b.testi.2':'Hey, a massive change for the better 😎 I really appreciate you taking my remarks on board and putting them into the app. Thanks a lot 🙌 I will keep reporting and suggesting further changes to make it even better!',
+      'b.testi.3':'I have been through plenty of trainer apps by now, and this is the one I have stuck with the longest so far 😄😎',
+      'b.testi.4':'Hi 🙂 I use Moventa and it makes my work a lot smoother. And it is great how fast you react to feedback 😊 adding my own exercise videos will come in really handy 💪',
+      'b.testi.who':WHO,
+      'b.models.h':'Three models.<br>They can be combined.',
+      'b.models.p':'We adapt to how your chain works — from zero cash cost on your side to a full benefit for the team.',
+      'b.models.1.t':'Referral programme',
+      'b.models.1.p':'You recommend Moventa to your trainers — with a referral code or link — and we share the revenue from every subscription that comes out of it.',
+      'b.models.1.b1':'No cash cost on your side',
+      'b.models.1.b2':'Settled on trainers actually acquired',
+      'b.models.1.b3':'Better terms with promotional materials in the clubs',
+      'b.models.2.t':'Bulk licence',
+      'b.models.2.p':'You buy a licence package for the trainers in your chain and get one consolidated invoice instead of scattered subscriptions.',
+      'b.models.2.b1':'One invoice, one date, one contact',
+      'b.models.2.b2':'The larger the team, the better the terms',
+      'b.models.2.b3':'An extra discount on annual billing',
+      'b.models.3.t':'Employee benefit',
+      'b.models.3.p':'Moventa joins the benefits package for trainers as a piece of employer branding — a working tool, not a gym card.',
+      'b.models.3.b1':'Cost split between the chain and the trainer, or covered in full',
+      'b.models.3.b2':'A concrete argument in recruitment and in salary conversations',
+      'b.models.3.b3':'The same standard of work across every trainer in the chain',
+      'b.faq.h':'What clubs ask us.',
+      'b.faq.1.q':'Do we need an IT department or an integration with our system?',
+      'b.faq.1.a':'No. Moventa is a standalone App Store app — the trainer downloads it onto their phone and starts working. We do not integrate with your membership system or entry cards, so there is nothing for IT to roll out.',
+      'b.faq.2.q':'Will the chain have access to client data?',
+      'b.faq.2.a':'No — and that is deliberate. Training data stays on the trainer’s device. The chain does not become the controller of clients’ health and training data, so no new GDPR obligation and no new database to secure appears on your side.',
+      'b.faq.3.q':'Do trainers and clients have to create accounts?',
+      'b.faq.3.a':'No. No sign-up and no log-in — once downloaded, the app is ready to work. Clients do not need the app at all: they receive a finished PDF report from their trainer.',
+      'b.faq.4.q':'What devices does it run on?',
+      'b.faq.4.a':'iPhone and iPad on iOS 17 or newer, syncing between them. An Android version is on the roadmap — with a larger rollout we are happy to talk about priorities.',
+      'b.faq.5.q':'Can we add exercises on our own equipment?',
+      'b.faq.5.a':'Yes. The trainer records the exercise on a machine standing on your floor, picks a thumbnail frame, adds a description and filters. The library grows with the club’s equipment.',
+      'b.faq.6.q':'Does the app work without the internet?',
+      'b.faq.6.a':'Yes, fully. That matters in basement training zones and halls where signal gets shaky — the trainer logs sets right where the barbell is.',
+      'b.faq.7.q':'Can we test it with a small group before deciding?',
+      'b.faq.7.a':'Yes, and we honestly recommend it. A pilot with a group of trainers in one club shows within weeks whether the tool catches on — with no commitment for the whole chain.',
+      'b.faq.8.q':'Do we get materials for the clubs?',
+      'b.faq.8.a':'Yes — we prepare materials for trainer zones and reception desks, plus communication for the team. In the referral model, putting them up in the clubs improves your terms.',
+      'b.cta.mail':'Book a demo',
+      'b.cta.call':'Call: +48 669 669 629',
+      'b.contact.h':'Get in touch',
+      'b.contact.email':'Email',
+      'b.contact.phone':'Phone',
+      'b.contact.hours':'Hours',
+      'b.contact.hours-v':'Mon — Fri · 8:00 — 18:00',
+      'b.contact.card.cta':'See it yourself on the App Store',
+      'b.foot.tag':'A working tool for personal trainers. Made in Poland.',
+      'b.foot.main':'Site for trainers',
+      'b.foot.privacy':'Privacy policy',
+      'b.foot.store':'App Store',
+      'b.top.back':'Site for trainers',
+    }
+  };
+
+  const snapshot = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const html = el.getAttribute('data-i18n-html') === 'true';
+    if (!(key in snapshot)) snapshot[key] = html ? el.innerHTML : el.textContent;
+  });
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const html = el.getAttribute('data-i18n-html') === 'true';
+      const val = lang === 'pl' ? snapshot[key] : (dict.en[key] || snapshot[key]);
+      if (html) el.innerHTML = val; else el.textContent = val;
+    });
+    try { localStorage.setItem('moventa-lang', lang); } catch(e){}
+  }
+
+  document.querySelectorAll('.lang button').forEach(b => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+  });
+
+  let initial = 'pl';
+  try {
+    const saved = localStorage.getItem('moventa-lang');
+    if (saved === 'pl' || saved === 'en') initial = saved;
+    else if ((navigator.language || '').toLowerCase().startsWith('en')) initial = 'en';
+  } catch(e){}
+  if (initial === 'en') setLang('en');
+</script>
+
+</body>
+</html>
