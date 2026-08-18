@@ -636,6 +636,26 @@
     .span-6.reveal[style]{ flex-direction:column !important; align-items:stretch !important; gap:20px !important}
   }
 
+  /* ---------- BANER: MOVENTA FOR BUSINESS ---------- */
+  .biz-band{ padding: 0 0 100px }
+  .biz-box{
+    border:1px solid var(--line-2); border-radius: var(--r-xl);
+    padding: 46px 48px; display:flex; align-items:center; gap:44px;
+    background:
+      radial-gradient(600px 300px at 10% 0%, rgba(255,59,71,0.10), transparent 70%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  }
+  .biz-box img.logo{ height:66px; width:auto; flex:0 0 auto }
+  .biz-box .txt{ flex:1 }
+  .biz-box h3{ font-size: clamp(24px, 2.6vw, 32px); letter-spacing:-0.03em; line-height:1.1 }
+  .biz-box p{ color:var(--muted); font-size:16px; margin-top:10px; max-width:620px }
+  .nav-links a.biz-link{ color:#ff8a90 }
+  .nav-links a.biz-link:hover{ color:#fff; background:rgba(255,59,71,0.12) }
+  @media (max-width: 980px){
+    .biz-box{ flex-direction:column; text-align:center; gap:26px; padding:40px 26px }
+    .biz-box .hero-actions{ justify-content:center }
+  }
+
   /* in-view reveal */
   .reveal{ opacity:0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease}
   .reveal.in{ opacity:1; transform:none }
@@ -657,6 +677,7 @@
       <a href="#how" data-i18n="nav.how">Jak działa</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+      <a href="business.html" class="biz-link" data-i18n="nav.business">Dla klubów</a>
     </nav>
     <div style="display:flex; gap:12px; align-items:center">
       <div class="lang" role="group" aria-label="Język">
@@ -744,7 +765,7 @@
 <!-- TRUSTED BAR -->
 <div class="marquee">
   <div class="container">
-    <span data-i18n="trust">Stworzone dla trenerów, którzy cenią organizację · Polski produkt · Dostępne w App Store</span>
+    <span data-i18n="trust" data-i18n-html="true">Stworzone dla trenerów, którzy cenią organizację · Polski produkt · Dostępne w App Store</span>
   </div>
 </div>
 
@@ -995,6 +1016,25 @@
   </div>
 </section>
 
+<!-- MOVENTA FOR BUSINESS -->
+<section class="biz-band">
+  <div class="container">
+    <div class="biz-box reveal">
+      <img class="logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
+      <div class="txt">
+        <h3 data-i18n="biz.h">Prowadzisz siłownię albo sieć klubów?</h3>
+        <p data-i18n="biz.p">Moventa for Business to ta sama aplikacja, wdrożona u wszystkich Waszych trenerów — z modelami współpracy dla klubów i sieci. Bez wdrożenia IT.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="business.html" class="btn btn-primary">
+          <span data-i18n="biz.cta">Zobacz ofertę dla klubów</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq">
   <div class="container">
@@ -1101,6 +1141,7 @@
           <li><a href="#showcase" data-i18n="nav.showcase">Aplikacja</a></li>
           <li><a href="#how" data-i18n="nav.how">Jak działa</a></li>
           <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+          <li><a href="business.html" data-i18n="nav.business">Dla klubów</a></li>
         </ul>
       </div>
       <div>
@@ -1139,6 +1180,10 @@
   const dict = {
     pl: {}, // defaults already in HTML
     en: {
+      'nav.business':'For clubs',
+      'biz.h':'Do you run a gym or a chain of clubs?',
+      'biz.p':'Moventa for Business is the same app, rolled out across all of your trainers \u2014 with partnership models for clubs and chains. No IT rollout required.',
+      'biz.cta':'See the offer for clubs',
       'nav.features':'Features','nav.showcase':'App','nav.how':'How it works','nav.faq':'FAQ','nav.contact':'Contact','nav.cta':'Download',
       'hero.eyebrow':'No sign-up · No bureaucracy · Works offline',
       'hero.title':'Less tapping.<br>More <em>training</em>.',
@@ -1158,6 +1203,7 @@
       'feat.c6.k':'EXERCISE LIBRARY','feat.c6.t':'Step-by-step video for every exercise','feat.c6.p':'A full library of exercises with video guides — show clients correct form without leaving the app.',
       'feat.c7.k':'MEASUREMENTS','feat.c7.t':'Body measurements & weight','feat.c7.p':'Chest, biceps, waist, hips. Trends next to circumferences.',
       'feat.c8.k':'OFFLINE','feat.c8.t':'Works without the internet','feat.c8.p':'Full functionality at the gym — even in basements of steel and concrete.',
+      'feat.c10.k':'ZERO PAPERWORK','feat.c10.t':'No sign-up. Yours or your clients\u2019.','feat.c10.p':'Download, open, work. Your clients don\u2019t have to create any account \u2014 you manage everything.',
       'feat.c9.k':'PRIVACY','feat.c9.t':'Your data stays with you','feat.c9.p':'Your clients\u2019 data stays on your device. You and your clients \u2014 and no one else.',
       'show.kicker':'The app','show.h':'This is what<br>Moventa looks like.','show.p':'Crisp, readable dark mode. UI designed for one-handed use and the gym floor.',
       'show.s1.t':'Trainer panel','show.s1.p':'All shortcuts in one place',
