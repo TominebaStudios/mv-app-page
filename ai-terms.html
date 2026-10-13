@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regulamin funkcji AI · Moventa</title>
+<style>
+  :root { --bg: #f2f2f7; --card: #ffffff; --text: #1c1c1e; --muted: #6e6e73; --accent: #3a8f8a; --line: #e5e5ea; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #000000; --card: #1c1c1e; --text: #f2f2f7; --muted: #a1a1a6; --accent: #5fb7b1; --line: #38383a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  .card { background: var(--card); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 28px 0 8px; }
+  .meta { color: var(--muted); font-size: .9rem; margin: 0 0 16px; }
+  nav a { color: var(--accent); font-weight: 600; margin-right: 16px; text-decoration: none; }
+  ul { padding-left: 20px; }
+  li { margin: 4px 0; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <nav class="card"><a href="#pl">Polski</a><a href="#en">English</a></nav>
+
+  <article class="card" id="pl" lang="pl">
+    <h1>Regulamin funkcji „Plany treningowe z AI”</h1>
+    <p class="meta">Wersja 1 · obowiązuje od 13 października 2026</p>
+
+    <h2>1. Czym jest funkcja</h2>
+    <p>Funkcja „Plany treningowe z AI” w aplikacji Moventa tworzy propozycję jednostki treningowej (planu treningowego) na podstawie opcji wybranych przez trenera oraz historii treningów podopiecznego. Wygenerowany plan trafia do edytora, w którym trener może go dowolnie zmienić przed zapisaniem. Funkcja jest dostępna dla użytkowników z aktywną subskrypcją Moventa Premium.</p>
+
+    <h2>2. Limit generowań</h2>
+    <ul>
+      <li>W ramach subskrypcji Moventa Premium przysługuje 10 generowań w każdym miesiącu kalendarzowym (według czasu polskiego). Limit odnawia się pierwszego dnia miesiąca.</li>
+      <li>Niewykorzystane generowania nie przechodzą na kolejny miesiąc.</li>
+      <li>Generowania zakończone błędem (np. brak odpowiedzi AI) nie są wliczane do limitu.</li>
+      <li>Aktualny stan limitu jest widoczny w aplikacji w zakładce Subskrypcja.</li>
+    </ul>
+
+    <h2>3. Charakter wygenerowanych planów</h2>
+    <ul>
+      <li>Plany tworzy model sztucznej inteligencji. Mogą zawierać błędy, nieodpowiednio dobrane ćwiczenia lub ciężary.</li>
+      <li>Plan jest propozycją dla trenera, a nie poradą medyczną, fizjoterapeutyczną ani dietetyczną.</li>
+      <li>Trener, jako profesjonalista, odpowiada za sprawdzenie i dostosowanie planu do możliwości i stanu zdrowia podopiecznego, zanim go zastosuje lub przekaże.</li>
+      <li>W granicach dopuszczalnych przez prawo Moventa nie odpowiada za skutki zastosowania planu bez takiej weryfikacji.</li>
+    </ul>
+
+    <h2>4. Jakie dane są przetwarzane</h2>
+    <p>Przy każdym generowaniu aplikacja wysyła:</p>
+    <ul>
+      <li>wybrane opcje: partie mięśniowe, cel, poziom, miejsce treningu, liczbę ćwiczeń i uwagi wpisane przez trenera,</li>
+      <li>historię treningów podopiecznego z ostatnich 90 dni w skróconej formie: identyfikatory ćwiczeń, ciężary, powtórzenia, RIR, liczbę serii i liczbę dni od treningu,</li>
+      <li>nazwy i tagi własnych ćwiczeń trenera,</li>
+      <li>podpisany przez Apple dowód aktywnej subskrypcji (do weryfikacji uprawnień i liczenia limitu).</li>
+    </ul>
+    <p>Aplikacja <strong>nie wysyła</strong> imienia i nazwiska podopiecznego, pomiarów ciała, zdjęć, danych kontaktowych ani notatek spoza pola „Uwagi dla AI”.</p>
+
+    <h2>5. Kto przetwarza dane</h2>
+    <ul>
+      <li><strong>Serwer Moventa</strong> działający w infrastrukturze Cloudflare, Inc. — weryfikuje subskrypcję, liczy limit i przekazuje zapytanie do modelu. Serwer nie zapisuje treści zapytań ani planów. Przechowuje wyłącznie identyfikator transakcji subskrypcji i licznik generowań (do ok. 40 dni).</li>
+      <li><strong>OpenAI</strong> — generuje plan. Zgodnie z zasadami OpenAI dane przesyłane przez API nie są wykorzystywane do trenowania modeli. OpenAI może przechowywać je przez ograniczony czas (do 30 dni) w celu wykrywania nadużyć.</li>
+    </ul>
+    <p>Dane mogą być przetwarzane poza Europejskim Obszarem Gospodarczym na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską.</p>
+
+    <h2>6. Obowiązki trenera</h2>
+    <ul>
+      <li>Trener odpowiada za posiadanie podstawy prawnej do przetwarzania danych treningowych swoich podopiecznych oraz za poinformowanie ich, że dane te mogą posłużyć do generowania planów z użyciem AI.</li>
+      <li>W polu „Uwagi dla AI” należy podawać wyłącznie informacje potrzebne do ułożenia treningu (np. „ból lewego kolana”, „bez sztangi”), bez imion i innych danych pozwalających zidentyfikować podopiecznego.</li>
+      <li>Zabronione jest obchodzenie limitów, automatyzowanie zapytań oraz wpisywanie treści niezgodnych z prawem.</li>
+    </ul>
+
+    <h2>7. Zgoda i jej wycofanie</h2>
+    <p>Przed pierwszym użyciem funkcji trener akceptuje niniejszy regulamin i wyraża zgodę na przesyłanie danych opisanych w pkt 4 do podmiotów z pkt 5. Zgodę można wycofać w każdej chwili w aplikacji: zakładka Subskrypcja → „Plany treningowe z AI” → „Wycofaj”. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem. Bez zgody funkcja jest niedostępna; pozostałe funkcje aplikacji działają bez zmian.</p>
+
+    <h2>8. Zmiany regulaminu</h2>
+    <p>O zmianie regulaminu poinformujemy w aplikacji. Nowa wersja wymaga ponownej akceptacji przed kolejnym użyciem funkcji.</p>
+
+    <h2>9. Kontakt</h2>
+    <p>Pytania dotyczące funkcji i przetwarzania danych: <a href="mailto:support@moventa.pl">support@moventa.pl</a>. Szczegóły dotyczące danych osobowych i przysługujących praw znajdziesz w <a href="https://moventa.pl/privacy.html">Polityce prywatności</a>.</p>
+  </article>
+
+  <article class="card" id="en" lang="en">
+    <h1>“AI Training Plans” Terms</h1>
+    <p class="meta">Version 1 · effective October 13, 2026</p>
+
+    <h2>1. What the feature does</h2>
+    <p>The “AI Training Plans” feature in the Moventa app creates a proposed training session (training plan) based on options selected by the trainer and the client's workout history. The generated plan opens in the editor, where the trainer can change anything before saving it. The feature is available to users with an active Moventa Premium subscription.</p>
+
+    <h2>2. Generation limit</h2>
+    <ul>
+      <li>A Moventa Premium subscription includes 10 generations per calendar month (Polish time). The limit resets on the first day of each month.</li>
+      <li>Unused generations do not carry over to the next month.</li>
+      <li>Generations that fail (e.g. the AI does not respond) are not counted.</li>
+      <li>The current limit is shown in the app on the Subscription screen.</li>
+    </ul>
+
+    <h2>3. Nature of generated plans</h2>
+    <ul>
+      <li>Plans are created by an artificial intelligence model. They may contain mistakes or unsuitable exercises or weights.</li>
+      <li>A plan is a suggestion for the trainer, not medical, physiotherapy or dietary advice.</li>
+      <li>As a professional, the trainer is responsible for reviewing the plan and adapting it to the client's abilities and health before using or sharing it.</li>
+      <li>To the extent permitted by law, Moventa is not liable for the consequences of using a plan without such review.</li>
+    </ul>
+
+    <h2>4. Data processed</h2>
+    <p>Each generation sends:</p>
+    <ul>
+      <li>the selected options: muscle groups, goal, level, training location, number of exercises and the trainer's notes,</li>
+      <li>the client's workout history from the last 90 days in condensed form: exercise identifiers, weights, repetitions, RIR, number of sets and days since each workout,</li>
+      <li>names and tags of the trainer's custom exercises,</li>
+      <li>an Apple-signed proof of the active subscription (to verify access and count the limit).</li>
+    </ul>
+    <p>The app <strong>does not send</strong> the client's name, body measurements, photos, contact details or any notes outside the “Notes for the AI” field.</p>
+
+    <h2>5. Who processes the data</h2>
+    <ul>
+      <li><strong>The Moventa server</strong>, running on Cloudflare, Inc. infrastructure, verifies the subscription, counts the limit and forwards the request to the model. It does not store request or plan contents; it only keeps the subscription transaction identifier and the generation counter (for about 40 days).</li>
+      <li><strong>OpenAI</strong> generates the plan. Under OpenAI's policies, data sent through the API is not used to train models. OpenAI may retain it for a limited period (up to 30 days) for abuse monitoring.</li>
+    </ul>
+    <p>Data may be processed outside the European Economic Area under the Standard Contractual Clauses approved by the European Commission.</p>
+
+    <h2>6. Trainer's responsibilities</h2>
+    <ul>
+      <li>The trainer is responsible for having a legal basis to process their clients' workout data and for informing clients that this data may be used to generate plans with AI.</li>
+      <li>The “Notes for the AI” field should only contain information needed to build the workout (e.g. “left knee pain”, “no barbell”), without names or other data that could identify the client.</li>
+      <li>Circumventing limits, automating requests and entering unlawful content are prohibited.</li>
+    </ul>
+
+    <h2>7. Consent and withdrawal</h2>
+    <p>Before first use, the trainer accepts these terms and consents to sending the data described in section 4 to the parties in section 5. Consent can be withdrawn at any time in the app: Subscription → “AI Training Plans” → “Withdraw”. Withdrawal does not affect the lawfulness of processing carried out before it. Without consent the feature is unavailable; all other app features keep working.</p>
+
+    <h2>8. Changes</h2>
+    <p>We will announce changes to these terms in the app. A new version must be accepted again before the feature can be used.</p>
+
+    <h2>9. Contact</h2>
+    <p>Questions about the feature or data processing: <a href="mailto:support@moventa.pl">support@moventa.pl</a>. Details about personal data and your rights are in the <a href="https://moventa.pl/privacy.html">Privacy Policy</a>.</p>
+  </article>
+</main>
+</body>
+</html>
