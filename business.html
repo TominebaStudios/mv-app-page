@@ -11,378 +11,117 @@
 <meta property="og:description" content="Gotowe narzędzie pracy dla trenerów w Waszych klubach. Wyższa retencja podopiecznych, mniej administracji, zero wdrożenia IT.">
 <meta property="og:url" content="https://moventa.pl/business">
 <meta property="og:image" content="https://moventa.pl/assets/business/logo-business.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  /* ============================================================
-     MOVENTA FOR BUSINESS
-     Osobny system wizualny: dokument ofertowy, nie landing page.
-     Platyna zamiast czerwieni, hairline'y zamiast kart z poświatą,
-     kanty 10px zamiast pigułek, siatka zamiast gradientów.
-     ============================================================ */
-  :root{
-    --ink:#07080a;
-    --s1:#0c0e11;
-    --s2:#101317;
-    --s3:#161a1f;
-    --line:rgba(255,255,255,0.075);
-    --line-2:rgba(255,255,255,0.15);
-    --line-3:rgba(255,255,255,0.26);
-    --tx:#f1f3f6;
-    --mu:#98a1ae;
-    --mu-2:#616976;
-    --sig:#ff3b47;
-    --r:10px;
-    --r-2:14px;
-    --w:1180px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0}
-  html{scroll-behavior:smooth; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
-  body{
-    background-color:var(--ink);
-    background-image:
-      radial-gradient(1100px 460px at 50% -180px, rgba(255,255,255,0.055), transparent 72%),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 112px);
-    background-attachment:fixed;
-    color:var(--tx);
-    font-family:'Inter', system-ui, -apple-system, sans-serif;
-    font-size:16px; line-height:1.6;
-    letter-spacing:-0.005em;
-    overflow-x:hidden;
-  }
-  a{color:inherit; text-decoration:none}
-  img{display:block; max-width:100%; height:auto}
-  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
-  ul{list-style:none}
-  ::selection{background:rgba(255,59,71,0.28)}
-
-  .wrap{width:min(100% - 40px, var(--w)); margin-inline:auto}
-  .mono{font-family:'JetBrains Mono', ui-monospace, monospace; letter-spacing:0.12em; text-transform:uppercase; font-size:11px}
-  h1,h2,h3,h4{font-family:'Inter Tight', 'Inter', sans-serif; font-weight:600; letter-spacing:-0.032em; line-height:1.05}
-  h1{font-size:clamp(38px, 5.2vw, 66px)}
-  h2{font-size:clamp(28px, 3.5vw, 44px)}
-  h3{font-size:20px; letter-spacing:-0.024em}
-  p{color:var(--mu)}
-
-  /* ---------- PASEK UŻYTKOWY (nie nawigacja) ---------- */
-  .topbar{ border-bottom:1px solid var(--line); background:rgba(7,8,10,0.7) }
-  .topbar .wrap{ display:flex; align-items:center; justify-content:flex-end; height:46px; gap:16px }
-  .tools{ display:flex; align-items:center; gap:14px; flex:0 0 auto }
-  .lang{ display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden }
-  .lang button{
-    padding:4px 9px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.1em;
-    color:var(--mu-2); transition:.18s;
-  }
-  .lang button.on{ background:rgba(255,255,255,0.09); color:var(--tx) }
-  .back-link{
-    display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mu);
-    transition:color .18s; white-space:nowrap;
-  }
-  .back-link:hover{ color:var(--tx) }
-  .back-link svg{ width:11px; height:11px; opacity:.7 }
-
-  /* ---------- PRZYCISKI ---------- */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:9px;
-    padding:13px 22px; border-radius:var(--r);
-    font-size:14.5px; font-weight:600; letter-spacing:-0.01em;
-    border:1px solid transparent; transition:.2s ease;
-  }
-  .btn svg{ width:15px; height:15px }
-  .btn-p{ background:var(--tx); color:#0a0b0d }
-  .btn-p:hover{ background:#fff; transform:translateY(-1px) }
-  .btn-s{ border-color:var(--line-2); color:var(--tx) }
-  .btn-s:hover{ border-color:var(--line-3); background:rgba(255,255,255,0.04) }
-  .btn-row{ display:flex; gap:12px; flex-wrap:wrap }
-
-  /* ---------- SEKCJE ---------- */
-  .sec{ padding:96px 0; border-top:1px solid var(--line); position:relative }
-  .sec-head{ max-width:760px; margin-bottom:56px }
-  .sec-head p{ font-size:17.5px; margin-top:20px; max-width:640px }
-
-  /* ---------- HERO ---------- */
-  .hero{ padding:76px 0 84px }
-  .hero-grid{ display:grid; grid-template-columns:1.04fr 0.96fr; gap:64px; align-items:center }
-  .hero-logo{ height:78px; width:auto; margin-bottom:34px }
-  .hero p.lead{ font-size:17.5px; line-height:1.6; margin:26px 0 34px; max-width:560px }
-
-  .plate{
-    position:relative; border:1px solid var(--line); border-radius:var(--r-2);
-    background:linear-gradient(180deg, var(--s1), var(--ink));
-    min-height:530px; overflow:hidden;
-    display:flex; align-items:flex-end; justify-content:center;
-    padding:52px 24px 0;
-  }
-  .plate::before{
-    content:''; position:absolute; inset:0;
-    background:
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 36px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 36px);
-    -webkit-mask-image: radial-gradient(75% 68% at 50% 42%, #000, transparent);
-    mask-image: radial-gradient(75% 68% at 50% 42%, #000, transparent);
-  }
-  .device{
-    position:relative; z-index:1; width:238px; flex:0 0 auto;
-    border-radius:34px; background:#000; padding:6px;
-    border:1px solid rgba(255,255,255,0.16);
-    box-shadow: 0 40px 70px -24px rgba(0,0,0,0.9), 0 0 0 1px rgba(0,0,0,0.6);
-  }
-  .device img{ width:100%; border-radius:28px; display:block }
-  .device.ghost{
-    position:absolute; right:26px; bottom:-56px; width:176px; z-index:0;
-    opacity:0.42; filter:grayscale(0.35);
-  }
-
-
-
-  /* ---------- EKSPLORATOR MODUŁÓW ---------- */
-  .explorer{ border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden; background:var(--s1) }
-  .explorer.js{ display:grid; grid-template-columns:352px 1fr }
-  .mod-rail{ display:none; border-right:1px solid var(--line); background:rgba(0,0,0,0.24) }
-  .explorer.js .mod-rail{ display:block }
-  .mod-rail button{
-    display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:baseline;
-    width:100%; text-align:left; padding:15px 22px;
-    border-bottom:1px solid var(--line); position:relative; transition:background .18s;
-  }
-  .mod-rail button:last-child{ border-bottom:0 }
-  .mod-rail button .i{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--mu-2); transition:color .18s }
-  .mod-rail button .l{ font-size:14.5px; font-weight:500; color:var(--mu); transition:color .18s }
-  .mod-rail button:hover{ background:rgba(255,255,255,0.03) }
-  .mod-rail button:hover .l{ color:var(--tx) }
-  .mod-rail button.on{ background:rgba(255,255,255,0.055) }
-  .mod-rail button.on::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--sig) }
-  .mod-rail button.on .l{ color:var(--tx); font-weight:600 }
-  .mod-rail button.on .i{ color:var(--sig) }
-
-  .mod-panels{ min-width:0 }
-  .explorer.js .mod-panels{ min-height:588px; display:flex; align-items:center }
-  .mod{
-    display:grid; grid-template-columns:1fr auto; gap:52px; align-items:center;
-    padding:48px 52px; width:100%;
-  }
-  .explorer.js .mod{ display:none }
-  .explorer.js .mod.on{ display:grid }
-  .explorer:not(.js) .mod{ border-top:1px solid var(--line) }
-  .explorer:not(.js) .mod:first-child{ border-top:0 }
-  .mod h3{ font-size:clamp(24px, 2.3vw, 31px); margin:0 0 14px; letter-spacing:-0.03em; line-height:1.1 }
-  .mod > .mod-copy > p{ font-size:15.5px; line-height:1.62; max-width:470px }
-  .mod ul{ margin-top:24px; display:flex; flex-direction:column; gap:11px }
-  .mod ul li{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--mu); line-height:1.5 }
-  .mod ul li::before{
-    content:''; flex:0 0 auto; width:5px; height:5px; margin-top:8px; border-radius:1px;
-    background:var(--sig); opacity:.85;
-  }
-  .mod ul li strong{ color:var(--tx); font-weight:600 }
-  .mod-shot{ display:flex; gap:18px; align-items:center; flex:0 0 auto }
-  .mod-shot .device{ width:214px }
-  .mod-shot.two .device{ width:174px }
-  .mod-shot .device.tab{ width:400px; border-radius:20px; padding:8px }
-  .mod-shot .device.tab img{ border-radius:14px }
-
-
-  /* ---------- OPINIE ---------- */
-  .quotes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:34px 40px; padding:12px 0 26px }
-  .q{
-    background:var(--s3); border:1px solid var(--line-2); border-radius:var(--r-2);
-    padding:28px 30px; box-shadow:0 26px 44px -30px rgba(0,0,0,0.95);
-    transition:transform .3s ease, border-color .3s ease;
-  }
-  .q:nth-child(1){ transform:rotate(-1.7deg) translate(-6px, 6px) }
-  .q:nth-child(2){ transform:rotate(1.4deg) translate(12px, -16px) }
-  .q:nth-child(3){ transform:rotate(1deg) translate(-10px, 14px) }
-  .q:nth-child(4){ transform:rotate(-2.2deg) translate(8px, -4px) }
-  .q:hover{ transform:rotate(0deg) translate(0, 0); border-color:var(--line-3) }
-  .q .bar{ width:24px; height:2px; background:var(--sig); margin-bottom:18px }
-  .q p{ font-size:15.5px; line-height:1.62; color:var(--tx) }
-  .q .who{ margin-top:20px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--mu-2) }
-  /* ---------- MODELE ---------- */
-  .models{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px }
-  .model{
-    border:1px solid var(--line); border-radius:var(--r-2); background:var(--s1);
-    padding:32px 30px; display:flex; flex-direction:column;
-    transition:border-color .25s ease;
-  }
-  .model:hover{ border-color:var(--line-2) }
-  .model h3{ margin:0 0 12px; font-size:22px }
-  .model > p{ font-size:14.5px; line-height:1.6 }
-  .model ul{ margin-top:22px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:11px }
-  .model ul li{ display:flex; gap:11px; align-items:flex-start; font-size:13.5px; color:var(--mu); line-height:1.5 }
-  .model ul li::before{ content:''; flex:0 0 auto; width:5px; height:5px; margin-top:7px; border-radius:1px; background:var(--line-3) }
-
-  /* ---------- FAQ ---------- */
-  .faq-list{ border-top:1px solid var(--line) }
-  .faq{ border-bottom:1px solid var(--line) }
-  .faq summary{
-    list-style:none; cursor:pointer; padding:22px 40px 22px 0; position:relative;
-    font-size:16.5px; font-weight:600; letter-spacing:-0.018em;
-    font-family:'Inter Tight', sans-serif; transition:color .18s;
-  }
-  .faq summary::-webkit-details-marker{ display:none }
-  .faq summary:hover{ color:#fff }
-  .faq summary::after{
-    content:''; position:absolute; right:6px; top:50%; width:11px; height:11px;
-    border-right:1.5px solid var(--mu); border-bottom:1.5px solid var(--mu);
-    transform:translateY(-70%) rotate(45deg); transition:transform .2s;
-  }
-  .faq[open] summary::after{ transform:translateY(-30%) rotate(-135deg) }
-  .faq .ans{ padding:0 60px 26px 0; font-size:15px; color:var(--mu); line-height:1.65; max-width:820px }
-
-  /* ---------- ZAMKNIĘCIE / KONTAKT ---------- */
-  .close-box{
-    border:1px solid var(--line-2); border-radius:var(--r-2); overflow:hidden;
-    background:linear-gradient(180deg, var(--s2), var(--s1));
-  }
-  .close-top{ padding:56px 56px 48px; display:grid; grid-template-columns:1fr auto; gap:44px; align-items:center }
-  .close-top .logo{ height:56px; width:auto; margin-bottom:24px }
-  .close-top h2{ max-width:520px }
-  .close-top p{ font-size:16px; margin-top:16px; max-width:520px }
-  .close-actions{ display:flex; flex-direction:column; gap:11px; min-width:250px }
-  .close-actions .btn{ width:100% }
-  .close-grid{ display:grid; grid-template-columns:repeat(3, 1fr); border-top:1px solid var(--line) }
-  .close-cell{ padding:24px 30px; border-left:1px solid var(--line) }
-  .close-cell:first-child{ border-left:0 }
-  .close-cell .k{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--mu-2) }
-  .close-cell .v{ font-size:15.5px; font-weight:600; margin-top:7px; display:block }
-  a.close-cell:hover .v{ color:#fff }
-
-  /* ---------- STOPKA ---------- */
-  footer{ border-top:1px solid var(--line); padding:34px 0 44px; margin-top:96px }
-  .foot{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap }
-  .foot p, .foot a{ font-size:13px; color:var(--mu-2) }
-  .foot a:hover{ color:var(--tx) }
-  .foot-links{ display:flex; gap:22px; flex-wrap:wrap }
-
-  /* ---------- WEJŚCIE W WIDOK ---------- */
-  .rv{ opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease }
-  .rv.in{ opacity:1; transform:none }
-  @media (prefers-reduced-motion: reduce){
-    .rv{ opacity:1; transform:none; transition:none }
-    html{ scroll-behavior:auto }
-  }
-
-  /* ---------- RESPONSYWNOŚĆ ---------- */
-  @media (max-width: 1080px){
-    .explorer.js{ grid-template-columns:300px 1fr }
-    .mod{ padding:40px 36px; gap:36px }
-    .mod-shot .device{ width:186px }
-    .mod-shot.two .device{ width:146px }
-    .mod-shot .device.tab{ width:330px }
-  }
-  @media (max-width: 900px){
-    .sec{ padding:72px 0 }
-    .hero{ padding:52px 0 64px }
-    .hero-grid{ grid-template-columns:1fr; gap:52px }
-    .plate{ min-height:0; padding:44px 20px 0 }
-    .device.ghost{ display:none }
-    /* eksplorator: bez szyny, wszystko rozwinięte */
-    .explorer.js{ display:block }
-    .explorer.js .mod-rail{ display:none }
-    .explorer.js .mod-panels{ min-height:0; display:block }
-    .explorer.js .mod{ display:grid }
-    .explorer .mod{ border-top:1px solid var(--line); grid-template-columns:1fr; gap:30px; padding:34px 26px }
-    .explorer .mod:first-child{ border-top:0 }
-    .mod-shot{ justify-content:flex-start }
-    .mod-shot .device{ width:206px }
-    .mod-shot.two .device{ width:150px }
-    .mod-shot .device.tab{ width:100% ; max-width:420px}
-    .quotes{ grid-template-columns:1fr; gap:20px; padding:6px 0 12px }
-    .q{ padding:24px 22px }
-    .q:nth-child(1){ transform:rotate(-1deg) }
-    .q:nth-child(2){ transform:rotate(1.1deg) }
-    .q:nth-child(3){ transform:rotate(0.8deg) }
-    .q:nth-child(4){ transform:rotate(-1.2deg) }
-    .models{ grid-template-columns:1fr }
-    .close-top{ grid-template-columns:1fr; padding:40px 28px 34px; gap:30px }
-    .close-actions{ min-width:0 }
-    .close-grid{ grid-template-columns:1fr }
-    .close-cell{ border-left:0; border-top:1px solid var(--line) }
-    .close-cell:first-child{ border-top:0 }
-  }
-  @media (max-width: 560px){
-    /* na wąskich ekranach zrzuty skalują się do szerokości karty, zamiast ją rozpychać */
-    .explorer .mod{ grid-template-columns:minmax(0, 1fr); padding:30px 20px }
-    .mod-copy{ min-width:0 }
-    .mod-shot{ width:100%; gap:10px }
-    .mod-shot .device{ width:auto; flex:1 1 0; min-width:0; max-width:212px }
-    .mod-shot .device.tab{ width:auto; max-width:none }
-    .hero-logo{ height:58px; margin-bottom:26px }
-    .btn-row .btn{ width:100% }
-    .mod-shot.two{ gap:12px }
-  }
-</style>
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="assets/logo-192.png">
+<link rel="apple-touch-icon" href="assets/logo-192.png">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="biz">
 
-<div class="topbar">
-  <div class="wrap">
-    <div class="tools">
-      <div class="lang" role="group" aria-label="Język">
-        <button class="on" data-lang="pl">PL</button>
-        <button data-lang="en">EN</button>
+<header class="site-header">
+  <nav class="wrap" aria-label="Główna nawigacja">
+    <a href="#start" class="brand">
+      <img src="assets/logo-192.png" alt="" width="30" height="30">
+      <span>Moventa<small>for Business</small></span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#korzysci" data-i18n="b.nav.value">Korzyści</a>
+        <a href="#moduly" data-i18n="b.nav.modules">Moduły</a>
+        <a href="#wdrozenie" data-i18n="b.nav.rollout">Wdrożenie</a>
+        <a href="#wspolpraca" data-i18n="b.nav.models">Współpraca</a>
+        <a href="#faq" data-i18n="b.nav.faq">FAQ</a>
       </div>
-      <a href="index.html" class="back-link">
-        <span data-i18n="b.top.back">Strona dla trenerów</span>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <a href="index.html" class="nav-biz" data-i18n="b.top.back">Strona dla trenerów</a>
+      <div class="langs" role="group" aria-label="Język">
+        <button type="button" class="on" data-lang="pl">PL</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="#kontakt" class="nav-cta" data-i18n="b.nav.cta">Umów prezentację</a>
     </div>
-  </div>
-</div>
+  </nav>
+</header>
 
 <main>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <img class="hero-logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
-      <h1 data-i18n="b.hero.title" data-i18n-html="true">Wasi trenerzy.<br>Jeden system.</h1>
+<section class="biz-hero" id="start">
+  <div class="wrap biz-hero-grid">
+    <div class="biz-hero-copy">
+      <span class="eyebrow" data-i18n="b.hero.eyebrow">Dla sieci fitness, klubów i studiów treningowych</span>
+      <h1 data-i18n="b.hero.title" data-i18n-html="true">Wasi trenerzy.<br><span class="b">Jeden system.</span></h1>
       <p class="lead" data-i18n="b.hero.lead">Moventa to gotowe narzędzie pracy trenera personalnego — grafik, karnety, finanse, plany treningowe, pomiary i raporty w jednej aplikacji. Trener przestaje prowadzić klientów w zeszycie i Excelu, a podopieczny widzi swoje efekty czarno na białym.</p>
-      <div class="btn-row">
-        <a href="#kontakt" class="btn btn-p">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <span data-i18n="b.hero.cta">Umów prezentację</span>
-        </a>
-        <a href="#moduly" class="btn btn-s"><span data-i18n="b.hero.see">Poznaj wszystkie moduły</span></a>
+      <div class="ctas">
+        <a href="#kontakt" class="btn btn-p"><span data-i18n="b.hero.cta">Umów prezentację</span></a>
+        <a href="#moduly" class="more"><span data-i18n="b.hero.see">Poznaj wszystkie moduły</span> ›</a>
       </div>
     </div>
+    <div class="duo">
+      <div class="device tab"><img src="assets/business/tablet.webp" alt="Moventa na iPadzie" width="980" height="1410" fetchpriority="high"></div>
+      <div class="device"><img src="assets/business/panel.webp" alt="Panel trenera na iPhonie" width="640" height="1391"></div>
+    </div>
+  </div>
+</section>
 
-    <div class="plate">
-      <div class="device ghost">
-        <img src="assets/business/kalendarz.webp" alt="" width="640" height="1391" loading="lazy">
+<section class="facts-band band" aria-label="Najważniejsze fakty" data-i18n="b.facts.label" data-i18n-attr="aria-label">
+  <div class="wrap facts">
+    <div><b>12</b><span data-i18n="b.facts.1">modułów w jednej aplikacji</span></div>
+    <div><b>0</b><span data-i18n="b.facts.2">integracji po stronie IT</span></div>
+    <div><b>iPhone i iPad</b><span data-i18n="b.facts.3">z synchronizacją, iOS 17+</span></div>
+    <div><b data-i18n="b.facts.4n">Pilotaż</b><span data-i18n="b.facts.4">bez zobowiązań dla całej sieci</span></div>
+  </div>
+</section>
+
+<section class="sec" id="korzysci">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.value.h" data-i18n-html="true">Co zyskuje<br><span class="b">Wasza sieć.</span></h2>
+    </div>
+    <div class="cols3 rv">
+      <div>
+        <h3 data-i18n="b.value.1.t">Wyższa retencja podopiecznych</h3>
+        <p data-i18n="b.value.1.p">Klient widzi swoje efekty czarno na białym: rekordy, wykresy i raport PDF. To najmocniejszy argument za przedłużeniem współpracy.</p>
       </div>
-      <div class="device">
-        <img src="assets/business/panel.webp" alt="Panel trenera w aplikacji Moventa" width="640" height="1391">
+      <div>
+        <h3 data-i18n="b.value.2.t">Jeden standard pracy</h3>
+        <p data-i18n="b.value.2.p">Wszyscy trenerzy w sieci prowadzą klientów w ten sam sposób, zamiast w zeszytach, arkuszach i komunikatorach.</p>
+      </div>
+      <div>
+        <h3 data-i18n="b.value.3.t">Zero wdrożenia IT</h3>
+        <p data-i18n="b.value.3.p">Moventa jest niezależną aplikacją z App Store. Nie wymaga integracji z systemem członkowskim ani kartami wejść.</p>
       </div>
     </div>
   </div>
-
 </section>
 
 
 <!-- ===================== 02 · MODUŁY ===================== -->
-<section class="sec" id="moduly">
+<section class="sec band" id="moduly">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2 data-i18n="b.feat.h" data-i18n-html="true">Wszystko, co trener robi<br>poza samym treningiem.</h2>
+      <h2 data-i18n="b.feat.h" data-i18n-html="true">Wszystko, co trener robi<br><span class="b">poza samym treningiem.</span></h2>
       <p data-i18n="b.feat.p">Dwanaście modułów, które razem zastępują zeszyt, arkusz kalkulacyjny, komunikator i kalendarz. Wybierzcie moduł z listy, żeby zobaczyć ekran z aplikacji.</p>
     </div>
 
-    <div class="explorer rv" id="explorer">
-      <div class="mod-rail" role="tablist" aria-label="Moduły aplikacji">
-        <button type="button" data-mod="01"><span class="i">01</span><span class="l" data-i18n="b.f01.k">Panel trenera</span></button>
-        <button type="button" data-mod="02"><span class="i">02</span><span class="l" data-i18n="b.f02.k">Kalendarz tygodnia</span></button>
-        <button type="button" data-mod="03"><span class="i">03</span><span class="l" data-i18n="b.f03.k">Panel podopiecznego</span></button>
-        <button type="button" data-mod="04"><span class="i">04</span><span class="l" data-i18n="b.f04.k">Zapis treningu</span></button>
-        <button type="button" data-mod="05"><span class="i">05</span><span class="l" data-i18n="b.f05.k">Baza ćwiczeń</span></button>
-        <button type="button" data-mod="06"><span class="i">06</span><span class="l" data-i18n="b.f06.k">Finanse</span></button>
-        <button type="button" data-mod="07"><span class="i">07</span><span class="l" data-i18n="b.f07.k">Karnety</span></button>
-        <button type="button" data-mod="08"><span class="i">08</span><span class="l" data-i18n="b.f08.k">Pomiary i progres</span></button>
-        <button type="button" data-mod="09"><span class="i">09</span><span class="l" data-i18n="b.f09.k">Raport PDF</span></button>
-        <button type="button" data-mod="10"><span class="i">10</span><span class="l" data-i18n="b.f10.k">Własne ćwiczenia</span></button>
-        <button type="button" data-mod="11"><span class="i">11</span><span class="l" data-i18n="b.f11.k">Plany treningowe</span></button>
-        <button type="button" data-mod="12"><span class="i">12</span><span class="l" data-i18n="b.f12.k">Synchronizacja</span></button>
+    <div class="explorer rv">
+      <div class="mod-rail" role="tablist" aria-label="Moduły aplikacji" data-i18n="b.feat.rail" data-i18n-attr="aria-label">
+        <span class="mod-group" role="presentation" data-i18n="b.g1">Organizacja pracy</span>
+        <button type="button" data-mod="01" data-i18n="b.f01.k">Panel trenera</button>
+        <button type="button" data-mod="02" data-i18n="b.f02.k">Kalendarz tygodnia</button>
+        <button type="button" data-mod="12" data-i18n="b.f12.k">Synchronizacja</button>
+        <span class="mod-group" role="presentation" data-i18n="b.g2">Trening</span>
+        <button type="button" data-mod="04" data-i18n="b.f04.k">Zapis treningu</button>
+        <button type="button" data-mod="05" data-i18n="b.f05.k">Baza ćwiczeń</button>
+        <button type="button" data-mod="10" data-i18n="b.f10.k">Własne ćwiczenia</button>
+        <button type="button" data-mod="11" data-i18n="b.f11.k">Plany treningowe</button>
+        <span class="mod-group" role="presentation" data-i18n="b.g3">Wyniki klienta</span>
+        <button type="button" data-mod="03" data-i18n="b.f03.k">Panel podopiecznego</button>
+        <button type="button" data-mod="08" data-i18n="b.f08.k">Pomiary i progres</button>
+        <button type="button" data-mod="09" data-i18n="b.f09.k">Raport PDF</button>
+        <span class="mod-group" role="presentation" data-i18n="b.g4">Rozliczenia</span>
+        <button type="button" data-mod="06" data-i18n="b.f06.k">Finanse</button>
+        <button type="button" data-mod="07" data-i18n="b.f07.k">Karnety</button>
       </div>
 
       <div class="mod-panels">
@@ -565,32 +304,27 @@
 
 
 <!-- ===================== 04 · OPINIE ===================== -->
-<section class="sec" id="opinie">
+<section class="sec" id="wdrozenie">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2 data-i18n="b.testi.h">Co mówią trenerzy, którzy już z niej pracują.</h2>
-      <p data-i18n="b.testi.p">Wiadomości od trenerów personalnych korzystających z Moventy na co dzień.</p>
+      <h2 data-i18n="b.roll.h" data-i18n-html="true">Od prezentacji<br><span class="b">do całej sieci.</span></h2>
+      <p data-i18n="b.roll.p">Zaczynacie od małej grupy. Decyzję o całej sieci podejmujecie dopiero, gdy zobaczycie, że narzędzie się przyjęło.</p>
     </div>
-    <div class="quotes rv">
-      <div class="q">
-        <div class="bar"></div>
-        <p data-i18n="b.testi.1">Super, fajnie że rozwijacie aplikację — ja generalnie bardzo dużo korzystam z samej funkcji wrzucania planów treningowych i tych raportów. Bardzo prosto się tego wszystkiego używa, bo są te funkcje, które są faktycznie potrzebne 💪</p>
-        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+    <div class="cols3 rv">
+      <div>
+        <span class="step" data-i18n="b.roll.1.k">Krok 1</span>
+        <h3 data-i18n="b.roll.1.t">Prezentacja</h3>
+        <p data-i18n="b.roll.1.p">Pokazujemy aplikację i omawiamy, jak pracują Wasi trenerzy oraz który model współpracy pasuje do Waszej sieci.</p>
       </div>
-      <div class="q">
-        <div class="bar"></div>
-        <p data-i18n="b.testi.2">Siemka, mega zmiana na plus 😎 naprawdę doceniam za wzięcie moich uwag i wprowadzenie ich do aplikacji. Dzięki wielkie 🙌 Będę informował i proponował kolejne zmiany, aby aplikacja była jeszcze lepsza!</p>
-        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      <div>
+        <span class="step" data-i18n="b.roll.2.k">Krok 2</span>
+        <h3 data-i18n="b.roll.2.t">Pilotaż w jednym klubie</h3>
+        <p data-i18n="b.roll.2.p">Grupa trenerów pracuje w Movencie na co dzień. W kilka tygodni widać, czy narzędzie się przyjmuje, bez zobowiązania dla całej sieci.</p>
       </div>
-      <div class="q">
-        <div class="bar"></div>
-        <p data-i18n="b.testi.3">Generalnie przeleciałem już dużo aplikacji dla trenerów i chyba przy tej trzymam się póki co najdłużej 😄😎</p>
-        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
-      </div>
-      <div class="q">
-        <div class="bar"></div>
-        <p data-i18n="b.testi.4">Hej 🙂 używam aplikacji Moventa, bardzo usprawnia mi pracę. I mega, że tak szybko reagujecie na uwagi 😊 dodawanie własnych filmików do ćwiczeń bardzo mi się przyda 💪</p>
-        <div class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</div>
+      <div>
+        <span class="step" data-i18n="b.roll.3.k">Krok 3</span>
+        <h3 data-i18n="b.roll.3.t">Rozszerzenie na sieć</h3>
+        <p data-i18n="b.roll.3.p">Przygotowujemy materiały do stref trenerskich i recepcji oraz komunikację dla zespołu. Trenerzy pobierają aplikację i zaczynają pracę.</p>
       </div>
     </div>
   </div>
@@ -598,10 +332,10 @@
 
 
 <!-- ===================== 06 · MODELE ===================== -->
-<section class="sec" id="wspolpraca">
+<section class="sec band" id="wspolpraca">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2 data-i18n="b.models.h" data-i18n-html="true">Trzy modele.<br>Można je łączyć.</h2>
+      <h2 data-i18n="b.models.h" data-i18n-html="true">Trzy modele.<br><span class="b">Można je łączyć.</span></h2>
       <p data-i18n="b.models.p">Dopasowujemy się do tego, jak działa Wasza sieć — od zera kosztu po Waszej stronie po pełny benefit dla zespołu.</p>
     </div>
     <div class="models rv">
@@ -636,9 +370,32 @@
   </div>
 </section>
 
-<!-- ===================== 07 · FAQ ===================== -->
-<section class="sec" id="faq">
+<section class="sec" id="opinie">
   <div class="wrap">
+    <div class="sec-head rv">
+      <h2 data-i18n="b.testi.h">Co mówią trenerzy, którzy już z niej pracują.</h2>
+      <p data-i18n="b.testi.p">Fragmenty wiadomości od trenerów personalnych korzystających z Moventy na co dzień.</p>
+    </div>
+    <div class="quotes rv">
+      <figure class="q">
+        <p data-i18n="b.testi.1">Bardzo prosto się tego wszystkiego używa, bo są te funkcje, które są faktycznie potrzebne.</p>
+        <figcaption class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</figcaption>
+      </figure>
+      <figure class="q">
+        <p data-i18n="b.testi.3">Generalnie przeleciałem już dużo aplikacji dla trenerów i chyba przy tej trzymam się póki co najdłużej.</p>
+        <figcaption class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</figcaption>
+      </figure>
+      <figure class="q">
+        <p data-i18n="b.testi.4">Używam aplikacji Moventa, bardzo usprawnia mi pracę.</p>
+        <figcaption class="who" data-i18n="b.testi.who">Trener personalny · użytkownik Moventy</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 · FAQ ===================== -->
+<section class="sec band" id="faq">
+  <div class="wrap split">
     <div class="sec-head rv">
       <h2 data-i18n="b.faq.h">O co pytają kluby.</h2>
     </div>
@@ -681,46 +438,27 @@
 
 <!-- ===================== KONTAKT ===================== -->
 <section class="sec" id="kontakt">
-  <div class="wrap">
-    <div class="close-box rv">
-      <div class="close-top">
-        <div>
-          <img class="logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305">
-          <h2 data-i18n="b.contact.h">Skontaktuj się z nami</h2>
-        </div>
-        <div class="close-actions">
-          <a href="mailto:support@moventa.pl?subject=Moventa%20for%20Business%20%E2%80%94%20prezentacja" class="btn btn-p">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span data-i18n="b.cta.mail">Umów prezentację</span>
-          </a>
-          <a href="tel:+48669669629" class="btn btn-s"><span data-i18n="b.cta.call">Zadzwoń: +48 669 669 629</span></a>
-          <a href="https://apps.apple.com/pl/app/moventa-personal-trainer-app/id6754777415" class="btn btn-s">
-            <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-            <span data-i18n="b.contact.card.cta">Zobaczcie ją sami w App Store</span>
-          </a>
-        </div>
-      </div>
-      <div class="close-grid">
-        <a class="close-cell" href="mailto:support@moventa.pl?subject=Moventa%20for%20Business">
-          <div class="k" data-i18n="b.contact.email">E-mail</div>
-          <span class="v">support@moventa.pl</span>
-        </a>
-        <a class="close-cell" href="tel:+48669669629">
-          <div class="k" data-i18n="b.contact.phone">Telefon</div>
-          <span class="v">+48 669 669 629</span>
-        </a>
-        <div class="close-cell">
-          <div class="k" data-i18n="b.contact.hours">Godziny</div>
-          <span class="v" data-i18n="b.contact.hours-v">Pon — pt · 8:00 — 18:00</span>
-        </div>
+  <div class="wrap split even rv">
+    <div class="contact-lead">
+      <img class="logo" src="assets/business/logo-business.png" alt="Moventa for Business" width="940" height="305" loading="lazy">
+      <h2 data-i18n="b.contact.h">Porozmawiajmy o Waszej sieci.</h2>
+      <p data-i18n="b.contact.p">Pokażemy aplikację i dobierzemy model współpracy, zaczynając od pilotażu w jednym klubie.</p>
+      <div class="ctas">
+        <a href="mailto:support@moventa.pl?subject=Moventa%20for%20Business%20%E2%80%94%20prezentacja" class="btn btn-p"><span data-i18n="b.cta.mail">Umów prezentację</span></a>
+        <a href="https://apps.apple.com/pl/app/moventa-personal-trainer-app/id6754777415" class="more"><span data-i18n="b.contact.card.cta">Zobaczcie ją w App Store</span> ›</a>
       </div>
     </div>
+    <dl class="kv">
+      <div><dt data-i18n="b.contact.email">E-mail</dt><dd><a href="mailto:support@moventa.pl?subject=Moventa%20for%20Business">support@moventa.pl</a></dd></div>
+      <div><dt data-i18n="b.contact.phone">Telefon</dt><dd><a href="tel:+48669669629">+48 669 669 629</a></dd></div>
+      <div><dt data-i18n="b.contact.hours">Godziny</dt><dd data-i18n="b.contact.hours-v">Pon — pt · 8:00 — 18:00</dd></div>
+    </dl>
   </div>
 </section>
 
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="wrap foot">
     <p>© <span id="year">2026</span> Moventa · <span data-i18n="b.foot.tag">Narzędzie pracy trenera personalnego. Stworzone w Polsce.</span></p>
     <div class="foot-links">
@@ -732,51 +470,27 @@
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  /* --- wejście sekcji w widok --- */
-  const io = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.06 });
-  document.querySelectorAll('.rv').forEach(el => io.observe(el));
-
-  /* --- eksplorator modułów: szyna + panel (bez JS wszystko po prostu leci w pionie) --- */
-  (function(){
-    const ex = document.getElementById('explorer');
-    if (!ex) return;
-    const tabs = [...ex.querySelectorAll('.mod-rail button')];
-    const mods = [...ex.querySelectorAll('.mod')];
-    if (!tabs.length) return;
-    ex.classList.add('js');
-    function show(id){
-      tabs.forEach(t => t.classList.toggle('on', t.dataset.mod === id));
-      mods.forEach(m => m.classList.toggle('on', m.dataset.mod === id));
-      mods.forEach(m => { if (m.dataset.mod === id) m.querySelectorAll('img[loading="lazy"]').forEach(i => i.loading = 'eager'); });
-    }
-    tabs.forEach((t, i) => {
-      t.addEventListener('click', () => show(t.dataset.mod));
-      t.addEventListener('keydown', (e) => {
-        const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
-        if (!d) return;
-        e.preventDefault();
-        const n = tabs[(i + d + tabs.length) % tabs.length];
-        n.focus(); show(n.dataset.mod);
-      });
-    });
-    show(tabs[0].dataset.mod);
-  })();
-
-  /* --- PL / EN --- */
   const WHO = 'Personal trainer · Moventa user';
-  const dict = {
-    pl: {},
+  window.I18N = {
     en: {
+      'b.nav.value':'Benefits','b.nav.modules':'Modules','b.nav.rollout':'Rollout','b.nav.models':'Partnership','b.nav.faq':'FAQ','b.nav.cta':'Book a demo',
       'b.hero.eyebrow':'For fitness chains, clubs and training studios',
-      'b.hero.title':'Your trainers.<br>One <em>system</em>.',
+      'b.facts.label':'Key facts','b.facts.1':'modules in one app','b.facts.2':'integrations for your IT','b.facts.3':'in sync, iOS 17+','b.facts.4n':'Pilot','b.facts.4':'with no commitment for the whole chain',
+      'b.value.h':'What your<br><span class="b">chain gains.</span>',
+      'b.value.1.t':'Higher client retention','b.value.1.p':'Clients see their results in black and white: records, charts and a PDF report. It is the strongest argument for extending the collaboration.',
+      'b.value.2.t':'One standard of work','b.value.2.p':'Every trainer in the chain runs clients the same way, instead of in notebooks, spreadsheets and messengers.',
+      'b.value.3.t':'Zero IT rollout','b.value.3.p':'Moventa is a standalone App Store app. It needs no integration with your membership system or entry cards.',
+      'b.g1':'Organising work','b.g2':'Training','b.g3':'Client results','b.g4':'Billing',
+      'b.roll.h':'From a demo<br><span class="b">to the whole chain.</span>','b.roll.p':'You start with a small group. The decision about the whole chain comes only once you see the tool has caught on.',
+      'b.roll.1.k':'Step 1','b.roll.1.t':'Demo','b.roll.1.p':'We show you the app and discuss how your trainers work and which partnership model suits your chain.',
+      'b.roll.2.k':'Step 2','b.roll.2.t':'Pilot in one club','b.roll.2.p':'A group of trainers works in Moventa day to day. Within weeks you can see whether the tool catches on, with no commitment for the whole chain.',
+      'b.roll.3.k':'Step 3','b.roll.3.t':'Rollout across the chain','b.roll.3.p':'We prepare materials for trainer zones and reception desks, plus communication for the team. Trainers download the app and start working.',
+      'b.feat.rail':'App modules',
+      'b.hero.title':'Your trainers.<br><span class="b">One system.</span>',
       'b.hero.lead':'Moventa is a ready-made working tool for personal trainers — schedule, passes, finances, training plans, measurements and reports in one app. Trainers stop running clients out of a notebook and a spreadsheet, and clients see their results in black and white.',
       'b.hero.cta':'Book a demo',
       'b.hero.see':'Explore all modules',
-      'b.feat.h':'Everything a trainer does<br>besides the training itself.',
+      'b.feat.h':'Everything a trainer does<br><span class="b">besides the training itself.</span>',
       'b.feat.p':'Twelve modules that together replace a notebook, a spreadsheet, a messenger and a calendar. Pick a module from the list to see the screen from the app.',
       'b.f01.k':'Trainer dashboard',
       'b.f01.t':'The whole day on one screen',
@@ -852,13 +566,12 @@
       'b.f12.b2':'<strong>Changes appear instantly</strong> on both screens',
       'b.f12.b3':'<strong>A bigger screen for the client conversation</strong> — charts and measurements readable from across the desk',
       'b.testi.h':'What trainers already working with it say.',
-      'b.testi.p':'Messages from personal trainers using Moventa day to day.',
-      'b.testi.1':'Great that you keep developing the app — I personally use the training-plan upload and the reports a lot. It is all very simple to use, because these are the features that are actually needed 💪',
-      'b.testi.2':'Hey, a massive change for the better 😎 I really appreciate you taking my remarks on board and putting them into the app. Thanks a lot 🙌 I will keep reporting and suggesting further changes to make it even better!',
-      'b.testi.3':'I have been through plenty of trainer apps by now, and this is the one I have stuck with the longest so far 😄😎',
-      'b.testi.4':'Hi 🙂 I use Moventa and it makes my work a lot smoother. And it is great how fast you react to feedback 😊 adding my own exercise videos will come in really handy 💪',
+      'b.testi.p':'Excerpts from messages sent by personal trainers using Moventa day to day.',
+      'b.testi.1':'It is all very simple to use, because these are the features that are actually needed.',
+      'b.testi.3':'I have been through plenty of trainer apps by now, and this is the one I have stuck with the longest so far.',
+      'b.testi.4':'I use Moventa and it makes my work a lot smoother.',
       'b.testi.who':WHO,
-      'b.models.h':'Three models.<br>They can be combined.',
+      'b.models.h':'Three models.<br><span class="b">They can be combined.</span>',
       'b.models.p':'We adapt to how your chain works — from zero cash cost on your side to a full benefit for the team.',
       'b.models.1.t':'Referral programme',
       'b.models.1.p':'You recommend Moventa to your trainers — with a referral code or link — and we share the revenue from every subscription that comes out of it.',
@@ -893,13 +606,13 @@
       'b.faq.8.q':'Do we get materials for the clubs?',
       'b.faq.8.a':'Yes — we prepare materials for trainer zones and reception desks, plus communication for the team. In the referral model, putting them up in the clubs improves your terms.',
       'b.cta.mail':'Book a demo',
-      'b.cta.call':'Call: +48 669 669 629',
-      'b.contact.h':'Get in touch',
+      'b.contact.h':'Let’s talk about your chain.',
+      'b.contact.p':'We will show you the app and find the right partnership model, starting with a pilot in one club.',
       'b.contact.email':'Email',
       'b.contact.phone':'Phone',
       'b.contact.hours':'Hours',
       'b.contact.hours-v':'Mon — Fri · 8:00 — 18:00',
-      'b.contact.card.cta':'See it yourself on the App Store',
+      'b.contact.card.cta':'See it on the App Store',
       'b.foot.tag':'A working tool for personal trainers. Made in Poland.',
       'b.foot.main':'Site for trainers',
       'b.foot.privacy':'Privacy policy',
@@ -907,38 +620,8 @@
       'b.top.back':'Site for trainers',
     }
   };
-
-  const snapshot = {};
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const html = el.getAttribute('data-i18n-html') === 'true';
-    if (!(key in snapshot)) snapshot[key] = html ? el.innerHTML : el.textContent;
-  });
-
-  function setLang(lang){
-    document.documentElement.lang = lang;
-    document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const html = el.getAttribute('data-i18n-html') === 'true';
-      const val = lang === 'pl' ? snapshot[key] : (dict.en[key] || snapshot[key]);
-      if (html) el.innerHTML = val; else el.textContent = val;
-    });
-    try { localStorage.setItem('moventa-lang', lang); } catch(e){}
-  }
-
-  document.querySelectorAll('.lang button').forEach(b => {
-    b.addEventListener('click', () => setLang(b.dataset.lang));
-  });
-
-  let initial = 'pl';
-  try {
-    const saved = localStorage.getItem('moventa-lang');
-    if (saved === 'pl' || saved === 'en') initial = saved;
-    else if ((navigator.language || '').toLowerCase().startsWith('en')) initial = 'en';
-  } catch(e){}
-  if (initial === 'en') setLang('en');
 </script>
+<script src="app.js"></script>
 
 </body>
 </html>
